@@ -1,6 +1,107 @@
 {
-  "generatedAt": "2026-06-17T00:55:07.846Z",
+  "generatedAt": "2026-06-17T14:42:12.191Z",
   "categories": {
+    "play": [
+      {
+        "path": "content/life/play/README.md",
+        "slug": "play/readme",
+        "category": "play",
+        "title": "见天地计划池",
+        "date": "2026-06-01",
+        "city": "北京",
+        "place": "待定",
+        "rating": "",
+        "price": "",
+        "item": "待填",
+        "mood": "",
+        "summary": "这里先作为空白页面，未来可以记录旅行、城市漫游、展览和路上的判断。",
+        "tags": [
+          "见天地",
+          "计划池"
+        ],
+        "meta": {
+          "title": "见天地计划池",
+          "date": "2026-06-01",
+          "category": "play",
+          "city": "北京",
+          "place": "待定",
+          "item": "待填",
+          "rating": "",
+          "summary": "这里先作为空白页面，未来可以记录旅行、城市漫游、展览和路上的判断。",
+          "tags": [
+            "见天地",
+            "计划池"
+          ]
+        }
+      }
+    ],
+    "people": [
+      {
+        "path": "content/life/people/README.md",
+        "slug": "people/readme",
+        "category": "people",
+        "title": "见众生计划池",
+        "date": "2026-06-17",
+        "city": "",
+        "place": "",
+        "rating": "",
+        "price": "",
+        "item": "待填",
+        "mood": "",
+        "summary": "这里先作为人物短记的空白页面，未来可以记录对话片段、身边人的微光和一次相遇留下的判断。",
+        "tags": [
+          "见众生",
+          "计划池"
+        ],
+        "meta": {
+          "title": "见众生计划池",
+          "date": "2026-06-17",
+          "category": "people",
+          "city": "",
+          "place": "",
+          "item": "待填",
+          "rating": "",
+          "summary": "这里先作为人物短记的空白页面，未来可以记录对话片段、身边人的微光和一次相遇留下的判断。",
+          "tags": [
+            "见众生",
+            "计划池"
+          ]
+        }
+      }
+    ],
+    "diary": [
+      {
+        "path": "content/life/diary/2026-06-学期复盘.md",
+        "slug": "diary/2026-06-学期复盘",
+        "category": "diary",
+        "title": "2026 年 6 月学期复盘",
+        "date": "2026-06-10",
+        "city": "",
+        "place": "",
+        "rating": "",
+        "price": "",
+        "item": "",
+        "mood": "清醒",
+        "summary": "这个学期最大的变化是开始把课程、项目和生活记录合并到同一个系统里。",
+        "tags": [
+          "日记",
+          "学期复盘",
+          "长期主义"
+        ],
+        "meta": {
+          "title": "2026 年 6 月学期复盘",
+          "date": "2026-06-10",
+          "category": "diary",
+          "mood": "清醒",
+          "tags": [
+            "日记",
+            "学期复盘",
+            "长期主义"
+          ],
+          "summary": "这个学期最大的变化是开始把课程、项目和生活记录合并到同一个系统里。"
+        }
+      }
+    ],
     "eat": [
       {
         "path": "content/life/eat/北京-学院路-牛肉面.md",
@@ -142,71 +243,6 @@
             "小样",
             "风味坐标"
           ]
-        }
-      }
-    ],
-    "play": [
-      {
-        "path": "content/life/play/README.md",
-        "slug": "play/readme",
-        "category": "play",
-        "title": "玩的计划池",
-        "date": "2026-06-01",
-        "city": "北京",
-        "place": "待定",
-        "rating": "",
-        "price": "",
-        "item": "待填",
-        "mood": "",
-        "summary": "这里先作为空白页面，未来可以记录展览、短途旅行、运动、密室、桌游或城市漫游。",
-        "tags": [
-          "计划池"
-        ],
-        "meta": {
-          "title": "玩的计划池",
-          "date": "2026-06-01",
-          "category": "play",
-          "city": "北京",
-          "place": "待定",
-          "item": "待填",
-          "rating": "",
-          "summary": "这里先作为空白页面，未来可以记录展览、短途旅行、运动、密室、桌游或城市漫游。",
-          "tags": [
-            "计划池"
-          ]
-        }
-      }
-    ],
-    "diary": [
-      {
-        "path": "content/life/diary/2026-06-学期复盘.md",
-        "slug": "diary/2026-06-学期复盘",
-        "category": "diary",
-        "title": "2026 年 6 月学期复盘",
-        "date": "2026-06-10",
-        "city": "",
-        "place": "",
-        "rating": "",
-        "price": "",
-        "item": "",
-        "mood": "清醒",
-        "summary": "这个学期最大的变化是开始把课程、项目和生活记录合并到同一个系统里。",
-        "tags": [
-          "日记",
-          "学期复盘",
-          "长期主义"
-        ],
-        "meta": {
-          "title": "2026 年 6 月学期复盘",
-          "date": "2026-06-10",
-          "category": "diary",
-          "mood": "清醒",
-          "tags": [
-            "日记",
-            "学期复盘",
-            "长期主义"
-          ],
-          "summary": "这个学期最大的变化是开始把课程、项目和生活记录合并到同一个系统里。"
         }
       }
     ]

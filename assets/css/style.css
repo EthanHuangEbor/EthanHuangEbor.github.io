@@ -191,6 +191,10 @@ code {
   display: none;
 }
 
+.mobile-nav {
+  display: none;
+}
+
 .app-shell {
   min-height: 100vh;
   margin-left: var(--sidebar);
@@ -200,6 +204,7 @@ code {
 .page {
   max-width: 1160px;
   margin: 0 auto;
+  min-width: 0;
   animation: pageIn 0.24s ease both;
 }
 
@@ -389,10 +394,14 @@ code {
 
 .profile-row {
   display: grid;
-  grid-template-columns: 78px 1fr;
+  grid-template-columns: 78px minmax(0, 1fr);
   gap: 12px;
   padding: 11px 0;
   border-bottom: 1px solid var(--line);
+}
+
+.profile-row > * {
+  min-width: 0;
 }
 
 .profile-row:last-child {
@@ -409,6 +418,7 @@ code {
   color: var(--text);
   line-height: 1.55;
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .section-header {
@@ -445,6 +455,7 @@ code {
 .panel {
   padding: 22px;
   margin-bottom: 20px;
+  min-width: 0;
 }
 
 .panel p,
@@ -482,7 +493,12 @@ code {
   gap: 16px;
 }
 
-.project-grid,
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
 .module-grid,
 .workshop-grid {
   display: grid;
@@ -496,6 +512,27 @@ code {
 .module-card,
 .timeline-card {
   padding: 20px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.project-strip {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: start;
+}
+
+.project-time {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 780;
+  line-height: 1.4;
+}
+
+.project-content {
+  min-width: 0;
 }
 
 .note-card {
@@ -1011,8 +1048,10 @@ code {
     position: sticky;
     top: 0;
     z-index: 40;
-    display: flex;
-    justify-content: space-between;
+    width: 100%;
+    max-width: 100vw;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     align-items: center;
     min-height: 64px;
     padding: 10px 16px;
@@ -1027,7 +1066,33 @@ code {
     font-size: 19px;
   }
 
+  .mobile-brand {
+    min-width: 0;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .mobile-nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 32px;
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text-soft);
+    font-size: 13px;
+    font-weight: 680;
+  }
+
   .menu-button {
+    display: none;
     border: 1px solid var(--line-strong);
     border-radius: var(--radius-sm);
     color: var(--ink);
@@ -1046,6 +1111,8 @@ code {
   .app-shell {
     margin-left: 0;
     padding-top: 26px;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 }
 
@@ -1090,6 +1157,22 @@ code {
 
   .section-header {
     display: block;
+  }
+
+  .profile-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .profile-row strong,
+  .profile-row a {
+    display: block;
+    width: 100%;
+  }
+
+  .project-strip {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .life-toolbar,

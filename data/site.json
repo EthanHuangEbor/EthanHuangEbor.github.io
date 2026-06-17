@@ -4,170 +4,186 @@
     "handle": "@EthanHuangEbor",
     "avatarText": "航",
     "title": "北航 · 飞行器动力工程 · 大二",
-    "tagline": "把飞行动力学习、工程项目和长期复盘整理成可维护的知识花园。",
+    "tagline": "科研经历优先呈现，知识花园长期生长，生活记录给朋友慢慢翻。",
     "location": "Beijing / BUAA",
-    "email": "",
+    "email": "24376333@buaa.edu.cn",
     "github": "https://github.com/EthanHuangEbor",
     "repo": "https://github.com/EthanHuangEbor/EthanHuangEbor.github.io",
     "cvPdf": "#",
-    "status": "正在建立个人知识系统：航空发动机 / 工程计算 / 阅读笔记 / 项目复盘"
+    "status": "飞行动力 / ML / Robotics"
   },
   "heroStats": [
     {
-      "label": "Knowledge Nodes",
-      "value": "auto",
-      "hint": "由 Markdown 自动生成"
+      "label": "Project Repos",
+      "value": "4",
+      "hint": "已整理到 GitHub"
     },
     {
-      "label": "Focus",
+      "label": "Primary Focus",
       "value": "Propulsion",
-      "hint": "飞行器动力工程"
+      "hint": "飞行动力与工程计算"
     },
     {
-      "label": "Update Mode",
-      "value": "Markdown",
-      "hint": "Push 即发布"
+      "label": "Garden Nodes",
+      "value": "auto",
+      "hint": "Markdown 自动索引"
     }
   ],
   "principles": [
-    "每个项目都要写清：问题、约束、方法、结果、复盘。",
-    "每篇笔记至少建立一个链接：课程、论文、项目或个人经验。",
-    "生活记录不追求流水账，追求可检索的审美与判断。"
+    "导师第一眼能看到：我做过什么问题、用了什么方法、得到什么结果。",
+    "每个项目都保留边界：哪些是复现 baseline，哪些是概念仿真，哪些仍在迭代。",
+    "生活内容独立成页：给朋友看见口腹、旅行和审美，但不抢科研主线。"
   ],
   "skills": [
     {
-      "group": "工程基础",
+      "group": "工程与科研",
       "items": [
+        "飞行器动力基础",
         "工程热力学",
         "流体力学",
-        "传热学",
         "航空发动机原理",
-        "实验数据处理"
+        "科研复现与对照实验"
       ]
     },
     {
-      "group": "计算工具",
+      "group": "计算与建模",
       "items": [
         "Python",
         "MATLAB",
-        "C / C++",
-        "数值计算",
-        "可视化"
+        "数值仿真",
+        "数据处理",
+        "可视化与报告生成"
       ]
     },
     {
-      "group": "长期系统",
+      "group": "机器学习与控制",
       "items": [
-        "Markdown",
-        "知识图谱",
-        "项目复盘",
-        "阅读卡片",
-        "时间线管理"
+        "LSTM 时序建模",
+        "视觉 SLAM baseline",
+        "误差评估",
+        "轨迹 / 运动学分析",
+        "实验复盘"
       ]
     }
   ],
   "projects": [
     {
-      "name": "Turbofan Cycle Notebook",
-      "type": "课程/工程计算",
-      "status": "prototype",
-      "problem": "航空发动机循环计算的公式分散在课本和讲义中，参数变化对推力、耗油率和效率的影响不够直观。",
-      "solution": "把压气机压比、涡轮前温度、部件效率、飞行马赫数等变量封装为可复现实验脚本，输出循环状态表和敏感性曲线。",
-      "result": "可用于课程复盘、参数扫掠和后续小型可视化工具扩展。",
+      "time": "2026.06",
+      "name": "MTA-VHEP 变循环混合电推进概念设计",
+      "type": "航空发动机总体设计 / 概念仿真",
+      "status": "V0.2 completed",
+      "problem": "面向中型运输机任务，探索三涵道变循环涡扇与短时混合电推进组合的总体设计可行性，需要在概念设计阶段保持假设、物理趋势和输出表格可追溯。",
+      "solution": "搭建从构型、标准大气、燃油 / 气动、发动机代理模型、混合电系统、航程任务求解到约束检查和敏感性分析的 Python 仿真链路。",
+      "result": "完成端到端概念链和 225 组敏感性分析，可生成报告级表格与图像，用于说明设计变量对任务与推进指标的影响。",
       "stack": [
         "Python",
-        "NumPy",
-        "Matplotlib",
-        "Thermodynamics"
+        "YAML",
+        "Mission Solver",
+        "Propulsion",
+        "Sensitivity Study"
       ],
-      "repo": "https://github.com/EthanHuangEbor?tab=repositories"
+      "repo": "https://github.com/EthanHuangEbor/AeroEngineDesign_BasedOnAI"
     },
     {
-      "name": "Aero-Notes Knowledge Graph",
-      "type": "个人知识系统",
+      "time": "2026.06",
+      "name": "AutoDoc 项目书自动填写系统",
+      "type": "工程工具 / 本地 Web 应用",
       "status": "active",
-      "problem": "专业课、论文、阅读和思考散落在不同文件夹里，复习时难以看见概念之间的连接。",
-      "solution": "使用 Markdown front matter 与 [[双链]] 建立节点关系，由构建脚本生成目录树和图谱索引。",
-      "result": "本主页即为第一版实现，后续可迁移 Obsidian 笔记库。",
+      "problem": "中文项目书、合作培养项目书和表格类文档存在大量重复填写、模板维护和历史信息复用问题，普通用户也不适合直接接触命令行或 JSON 配置。",
+      "solution": "实现本地 Web 工作台：以向导式流程采集项目信息，生成草稿，人工编辑字段，导出 Word，并把确认后的终稿内容沉淀到本地记忆库。",
+      "result": "支持模板管理、历史记录、Word 导出和本地安全边界；默认绑定 127.0.0.1，数据保存在用户本机，适合作为面向真实用户的工程工具项目展示。",
       "stack": [
-        "Markdown",
-        "JavaScript",
-        "Canvas",
-        "GitHub Pages"
+        "Python",
+        "Streamlit",
+        "DOCX",
+        "Local Memory",
+        "Windows Launcher"
       ],
-      "repo": "https://github.com/EthanHuangEbor?tab=repositories"
+      "repo": "https://github.com/EthanHuangEbor/AutoDoc"
     },
     {
-      "name": "MATLAB Lab Toolkit",
-      "type": "实验数据处理",
-      "status": "planned",
-      "problem": "实验课常见的数据清洗、误差计算、曲线拟合和图表排版重复性高。",
-      "solution": "沉淀为脚本模板：导入 CSV、异常点检查、最小二乘拟合、误差传播、自动生成图表。",
-      "result": "减少重复劳动，并把每次实验的处理过程留下可追溯记录。",
+      "time": "2026.05",
+      "name": "KITTI ORB / DSO / SVO Python SLAM Baselines",
+      "type": "机器学习 / 视觉 SLAM",
+      "status": "research baseline",
+      "problem": "课程和研究场景中需要对 ORB、DSO、SVO 三类视觉 SLAM / VO 方法做可复现比较，但官方级 C++ 实现不适合作为轻量实验 baseline 直接展开。",
+      "solution": "基于 KITTI Odometry stereo 数据集整理 Python baseline，包含 benchmark、ablation、误差评估、轨迹绘图与多算法 profile。",
+      "result": "形成可运行的视觉 SLAM 比较框架，并明确边界：这是研究 baseline，不声称达到官方论文级系统性能。",
       "stack": [
-        "MATLAB",
-        "Data Processing",
-        "Regression"
+        "Python",
+        "KITTI",
+        "ORB",
+        "DSO",
+        "SVO",
+        "Benchmark"
       ],
-      "repo": "https://github.com/EthanHuangEbor?tab=repositories"
+      "repo": "https://github.com/EthanHuangEbor/MachineLearning"
     },
     {
-      "name": "Campus Taste Atlas",
-      "type": "生活数据化",
-      "status": "active",
-      "problem": "生活判断通常只停留在印象里，时间一长无法复盘口味、价格、场景和推荐度。",
-      "solution": "用 Markdown 卡片记录地点、物品、评分、价格、适合场景和复访意愿，并在站内按标签筛选。",
-      "result": "形成一组隐藏的 field notes，不占据主页第一层身份。",
+      "time": "2026.04",
+      "name": "Consistency-Driven Dual LSTM Soft Robot",
+      "type": "科研复现 / 软体机器人控制",
+      "status": "baseline reproduction",
+      "problem": "可穿戴气动软体机械臂存在滞后和逆解一对多问题，需要验证 forward / inverse 双 LSTM 与 cycle consistency 对可执行压力序列的作用。",
+      "solution": "整理论文复现仓库、传统 baseline 与消融对照：forward 模型学习压力历史到位姿，inverse 模型学习目标条件下的压力序列，并用一致性损失约束。",
+      "result": "复现实验结论：加入 consistency loss 能提升物理可执行性；仓库保留数据流程、模型训练与 baseline 对比记录。",
       "stack": [
-        "Markdown",
-        "Rating Schema",
-        "Static Site"
+        "Python",
+        "LSTM",
+        "Soft Robotics",
+        "Kinematics",
+        "Ablation Study"
       ],
-      "repo": "https://github.com/EthanHuangEbor?tab=repositories"
+      "repo": "https://github.com/EthanHuangEbor/Dual_LSTM_SoftRobot"
     }
   ],
   "candidateSections": [
     {
-      "title": "动力工坊",
-      "reason": "和飞行器动力工程身份强绑定，能展示工程感而不是单纯个人博客。",
-      "implementation": "标准大气、马赫数、理想布雷顿循环效率、单位换算、公式卡片。"
+      "title": "科研经历",
+      "reason": "导师需要先看到清楚的问题、方法、结果和项目边界。",
+      "implementation": "继续把 GitHub 仓库、README、实验图表和复盘文字互相连接。"
     },
     {
-      "title": "课程航迹",
-      "reason": "从大二开始持续积累，毕业时会自然变成一份专业成长曲线。",
-      "implementation": "每门课建立节点：核心概念、作业项目、实验复盘、推荐资料。"
+      "title": "知识花园",
+      "reason": "把课程、论文、项目和长期思考整理成可检索的节点。",
+      "implementation": "每篇 Markdown 笔记保留领域、标签、摘要和双链。"
     },
     {
-      "title": "论文与书架",
-      "reason": "把阅读记录从摘抄升级为可检索的研究问题库。",
-      "implementation": "每篇论文/书用一张 Markdown 卡片：问题、方法、结论、可迁移工具。"
+      "title": "见天地",
+      "reason": "旅行和城市漫游可以成为长期视野变化的记录。",
+      "implementation": "记录地点、同行、路线、观察和一段真正的感受。"
     },
     {
-      "title": "航迹时间线",
-      "reason": "个人主页需要让访问者快速理解你在何处、做过什么、下一步去哪。",
-      "implementation": "按学期记录课程、项目、比赛、实习准备和关键复盘。"
+      "title": "见众生",
+      "reason": "人物短记可以保存身边人的具体处境、语言和选择。",
+      "implementation": "记录人物或角色、相遇场景、记得住的话和它改变的判断。"
     },
     {
-      "title": "Field Notes",
-      "reason": "保留生活记录与审美判断，但不让它们抢占工程主页的第一印象。",
-      "implementation": "继续写在 content/life 下，从 About 页保留低调入口。"
+      "title": "见自己",
+      "reason": "个人成长和阶段复盘决定长期选择，需要被认真保存。",
+      "implementation": "记录阶段问题、当时判断、做法变化和下一个行动。"
+    },
+    {
+      "title": "致谢",
+      "reason": "朋友访问时可以看到更具体、更有人味的吃喝记录。",
+      "implementation": "分成好吃的和好喝的，记录地点、风味、价格和复访意愿。"
     }
   ],
   "timeline": [
     {
       "time": "2025 Autumn",
-      "title": "建立工程计算习惯",
-      "detail": "把热力学、流体力学、数学建模相关脚本沉淀为可复用模板。"
+      "title": "建立工程计算基础",
+      "detail": "把热力学、流体力学和数学建模相关练习沉淀为可复用的计算与复盘习惯。"
     },
     {
       "time": "2026 Spring",
-      "title": "搭建知识图谱主页",
-      "detail": "将专业笔记、阅读记录、生活卡片统一为 Markdown 数据源。"
+      "title": "展开机器学习与机器人控制 baseline 复现",
+      "detail": "整理视觉 SLAM 对比框架与 Dual LSTM 软体机器人控制复现，强调边界、误差和对照。"
     },
     {
       "time": "2026 Summer",
-      "title": "形成第一个公开项目",
-      "detail": "完成一个有 README、示例数据、图表和复盘的工程向 repo。"
+      "title": "整理航发概念设计与公开主页",
+      "detail": "把变循环混合电推进概念设计、知识花园和个人项目卡片合并成可展示的公开主页。"
     }
   ]
 }

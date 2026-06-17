@@ -7,40 +7,48 @@ const state = {
 };
 
 const routes = {
-  home: { label: 'Home' },
-  cv: { label: 'CV / 项目' },
-  knowledge: { label: 'Knowledge' },
-  eat: { label: 'Field / Eat' },
-  drink: { label: 'Field / Drink' },
-  play: { label: 'Field / Play' },
-  diary: { label: 'Field / Diary' },
+  home: { label: '首页' },
+  cv: { label: '科研经历' },
+  knowledge: { label: '知识花园' },
+  life: { label: '生活' },
+  play: { label: '见天地' },
+  people: { label: '见众生' },
+  diary: { label: '见自己' },
+  eat: { label: '好吃的' },
+  drink: { label: '好喝的' },
   workshop: { label: 'Future Lab' },
   about: { label: 'About' }
 };
 
 const categoryInfo = {
   eat: {
-    title: 'Field Notes / Eat',
-    eyebrow: 'Private-but-public',
-    description: '一些关于味觉、地点和判断的小记录。它们不放在主导航里，但仍然保留在这个站点的暗处。',
+    title: '好吃的',
+    eyebrow: '致谢',
+    description: '感谢那些确实让人恢复能量的饭、店、菜和当时的心情。',
     empty: '还没有吃的记录。向 content/life/eat/ 添加 Markdown 即可。'
   },
   drink: {
-    title: 'Field Notes / Drink',
-    eyebrow: 'Private-but-public',
-    description: '饮品和风味坐标。这里更像个人观察，而不是主页的第一层身份。',
+    title: '好喝的',
+    eyebrow: '致谢',
+    description: '感谢咖啡、酒、茶和其他饮品在具体时刻提供的风味、陪伴和松弛。',
     empty: '还没有喝的记录。向 content/life/drink/ 添加 Markdown 即可。'
   },
   play: {
-    title: 'Field Notes / Play',
-    eyebrow: 'Private-but-public',
-    description: '恢复能量的计划池。它应该被发现，而不是被推销。',
-    empty: '这里暂时留空。你可以先把想玩的清单写进 content/life/play/。'
+    title: '见天地',
+    eyebrow: 'Travel Notes',
+    description: '旅行、城市漫游、展览和路上的判断。它不追求打卡密度，更关心一个地方怎样改变了视野。',
+    empty: '这里暂时留空。你可以先把旅行和城市漫游写进 content/life/play/。'
+  },
+  people: {
+    title: '见众生',
+    eyebrow: 'People Notes',
+    description: '人物短记、对话片段和身边人的微小亮光。重点不是传记，而是一次相遇留下了什么判断。',
+    empty: '这里暂时留空。你可以把人物短记写进 content/life/people/。'
   },
   diary: {
-    title: 'Field Notes / Diary',
-    eyebrow: 'Private-but-public',
-    description: '日记、复盘和恢复力。它们是知识花园的地下水系。',
+    title: '见自己',
+    eyebrow: 'Growth Notes',
+    description: '个人成长、日记、复盘和恢复力。它们是知识花园的地下水系。',
     empty: '还没有日记。向 content/life/diary/ 添加 Markdown 即可。'
   }
 };
@@ -126,20 +134,22 @@ function renderCurrentRoute() {
   if (route === 'home') renderHome();
   else if (route === 'cv') renderCv();
   else if (route === 'knowledge') renderKnowledge();
-  else if (['eat', 'drink', 'play', 'diary'].includes(route)) renderLife(route);
+  else if (route === 'life') renderLifeHub();
+  else if (['play', 'people', 'diary', 'eat', 'drink'].includes(route)) renderLife(route);
   else if (route === 'workshop') renderWorkshop();
   else if (route === 'about') renderAbout();
   app.focus({ preventScroll: true });
 }
 
 function setActiveNav(route) {
+  const navRoute = ['play', 'people', 'diary', 'eat', 'drink'].includes(route) ? 'life' : route;
   document.querySelectorAll('.nav a').forEach(link => {
-    link.classList.toggle('active', link.dataset.route === route);
+    link.classList.toggle('active', link.dataset.route === navRoute);
   });
 }
 
 function renderHome() {
-  const { profile, heroStats, principles, candidateSections } = state.site;
+  const { profile, heroStats, principles, projects } = state.site;
   const stats = heroStats.map(stat => ({
     ...stat,
     value: stat.value === 'auto' ? String(state.knowledge.stats.nodes) : stat.value
@@ -147,17 +157,19 @@ function renderHome() {
   const recentNotes = [...state.knowledge.records]
     .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
     .slice(0, 4);
+  const researchProjects = projects.slice(0, 4);
 
   app.innerHTML = `
     <section class="page hero">
       <div class="hero-main">
         <div>
-          <p class="eyebrow">Engineering Garden</p>
-          <h1 class="hero-title">飞行动力、项目复盘与可生长的知识节点。</h1>
-          <p class="hero-subtitle">我是 ${escapeHtml(profile.name)}，${escapeHtml(profile.title)}。这个站点用来沉淀专业学习、工程项目和长期复盘：少一点装饰，多一点可追溯的判断。</p>
+          <p class="eyebrow">Research-first Homepage</p>
+          <h1 class="hero-title">科研经历、工程复现与可生长的知识花园。</h1>
+          <p class="hero-subtitle">我是 ${escapeHtml(profile.name)}，${escapeHtml(profile.title)}。这个主页优先给导师快速判断我的科研兴趣、项目经历和工程能力；生活记录留给愿意多翻两页的朋友。</p>
           <div class="hero-actions">
-            <a class="button primary" href="#/knowledge">进入知识花园</a>
-            <a class="button" href="#/cv">查看项目与 CV</a>
+            <a class="button primary" href="#/cv">查看科研经历</a>
+            <a class="button" href="#/knowledge">进入知识花园</a>
+            <a class="button ghost" href="#/life">生活记录</a>
           </div>
         </div>
         <div class="hero-footer">
@@ -179,7 +191,7 @@ function renderHome() {
         <div class="profile-list">
           ${profileRow('身份', profile.title)}
           ${profileRow('位置', profile.location)}
-          ${profileRow('状态', profile.status)}
+          ${profileRow('邮箱', profile.email)}
           ${profileRow('GitHub', `<a href="${escapeAttr(profile.github)}" target="_blank" rel="noreferrer">${escapeHtml(profile.handle || profile.github)}</a>`, true)}
         </div>
       </aside>
@@ -189,8 +201,8 @@ function renderHome() {
       <div class="section-header">
         <div>
           <p class="eyebrow">Garden Structure</p>
-          <h2>公开层只放三件事</h2>
-          <p>项目经历、知识节点、成长轨迹。其他生活记录仍然存在，但不抢占第一层身份。</p>
+          <h2>导师第一眼先看到三件事</h2>
+          <p>做过什么问题、采用什么方法、得到什么结果。生活部分保留入口，但不抢占科研主线。</p>
         </div>
       </div>
       <div class="grid-3">
@@ -200,6 +212,17 @@ function renderHome() {
             <p>${escapeHtml(item)}</p>
           </div>
         `).join('')}
+      </div>
+
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Research Evidence</p>
+          <h2>当前可展示的项目经历</h2>
+          <p>项目来自公开 GitHub 仓库，按问题、方法、结果和边界组织，便于导师快速浏览。</p>
+        </div>
+      </div>
+      <div class="project-grid">
+        ${researchProjects.map(projectCard).join('')}
       </div>
 
       <div class="section-header">
@@ -218,17 +241,7 @@ function renderHome() {
           </a>
         `).join('')}
       </div>
-
-      <div class="section-header">
-        <div>
-          <p class="eyebrow">Future System</p>
-          <h2>后续扩展方向</h2>
-        </div>
-      </div>
-      <div class="module-grid">
-        ${candidateSections.filter(module => !['灵感档案', 'Field Notes'].includes(module.title)).slice(0, 4).map(moduleCard).join('')}
-      </div>
-      <p class="footer-note">有些内容不在主导航里。若你知道自己在找什么，可以从 <a href="#/about">About</a> 往深处走。</p>
+      <p class="footer-note">生活页现在分成“见天地 / 见众生 / 见自己 / 致谢”：它给朋友看，也给长期记忆留一个不打扰科研主线的位置。</p>
     </section>
   `;
 
@@ -246,13 +259,13 @@ function renderCv() {
     <section class="page">
       <div class="section-header">
         <div>
-          <p class="eyebrow">Curriculum Vitae</p>
-          <h1>CV 与项目经历</h1>
-          <p>每个项目都按“问题—方法—结果—repo”组织。这样访问者不用猜项目价值，也方便你后续把课程作业、实验脚本和研究尝试逐步纳入。</p>
+          <p class="eyebrow">Research Experience</p>
+          <h1>科研经历与项目证据</h1>
+          <p>这一页服务导师快速浏览：每个项目都按“问题—方法—结果—边界”组织，仓库链接保留在项目卡片里，避免把站点维护信息放到第一层。</p>
         </div>
         <div class="action-row">
           <a class="button" href="${escapeAttr(profile.github)}" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="button ghost" href="${escapeAttr(profile.cvPdf)}">CV PDF</a>
+          <a class="button ghost" href="mailto:${escapeAttr(profile.email)}">Email</a>
         </div>
       </div>
 
@@ -260,11 +273,11 @@ function renderCv() {
         <div class="panel">
           <p class="card-kicker">Profile</p>
           <h2 style="position: relative; font-family: var(--font-serif); margin: 10px 0;">${escapeHtml(profile.name)}</h2>
-          <p style="position: relative; color: var(--text-soft); line-height: 1.85;">${escapeHtml(profile.title)}。当前主页重点展示：工程计算能力、知识组织能力、项目复盘能力，以及可持续更新的生活记录系统。</p>
+          <p style="position: relative; color: var(--text-soft); line-height: 1.85;">${escapeHtml(profile.title)}。当前主页重点展示：飞行器动力方向的概念设计、机器学习 baseline 复现、软体机器人控制复现、真实用户工程工具，以及把实验边界写清楚的工程表达能力。</p>
           <div class="profile-list" style="position: relative; margin-top: 14px;">
             ${profileRow('邮箱', profile.email)}
             ${profileRow('GitHub', `<a href="${escapeAttr(profile.github)}" target="_blank" rel="noreferrer">${escapeHtml(profile.github)}</a>`, true)}
-            ${profileRow('主页仓库', `<a href="${escapeAttr(profile.repo)}" target="_blank" rel="noreferrer">${escapeHtml(profile.repo)}</a>`, true)}
+            ${profileRow('方向', profile.status)}
           </div>
         </div>
         <div class="panel skill-list">
@@ -281,7 +294,7 @@ function renderCv() {
       <div class="section-header" style="margin-top: 34px;">
         <div>
           <p class="eyebrow">Projects</p>
-          <h2>项目卡片</h2>
+          <h2>公开项目卡片</h2>
         </div>
       </div>
       <div class="project-grid">
@@ -304,6 +317,66 @@ function renderCv() {
             </div>
           </div>
         `).join('')}
+      </div>
+    </section>
+  `;
+}
+
+function renderLifeHub() {
+  const categories = state.life.categories;
+  const travelCount = categories.play?.length || 0;
+  const peopleCount = categories.people?.length || 0;
+  const selfCount = categories.diary?.length || 0;
+  const eatCount = categories.eat?.length || 0;
+  const drinkCount = categories.drink?.length || 0;
+
+  app.innerHTML = `
+    <section class="page">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Life Notes</p>
+          <h1>生活：见天地，见众生，见自己</h1>
+          <p>这里面向广义朋友。前三个栏目记录旅行所感、人物短记和个人成长；致谢部分留给那些确实值得感谢的好吃的和好喝的。</p>
+        </div>
+      </div>
+
+      <div class="module-grid">
+        <div class="panel">
+          <p class="card-kicker">Travel Notes</p>
+          <h2>见天地</h2>
+          <p>记录旅行、展览、短途出行和城市漫游。重点不是到此一游，而是一个地方怎样改变判断和心情。</p>
+          <div class="field-links">
+            <a href="#/play">进入见天地 · ${travelCount}</a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <p class="card-kicker">People Notes</p>
+          <h2>见众生</h2>
+          <p>记录人物短记、对话片段和相遇时刻。让生活里具体的人留下名字、动作和一点判断。</p>
+          <div class="field-links">
+            <a href="#/people">进入见众生 · ${peopleCount}</a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <p class="card-kicker">Growth Notes</p>
+          <h2>见自己</h2>
+          <p>记录个人成长、阶段复盘和心理能量的变化。它更安静，但会影响长期选择。</p>
+          <div class="field-links">
+            <a href="#/diary">进入见自己 · ${selfCount}</a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <p class="card-kicker">Thanks</p>
+          <h2>致谢</h2>
+          <p>感谢那些让一天变好的味道：好吃的、好喝的、适合被朋友问起的具体地点。</p>
+          <div class="field-links">
+            <a href="#/eat">好吃的 · ${eatCount}</a>
+            <a href="#/drink">好喝的 · ${drinkCount}</a>
+          </div>
+        </div>
       </div>
     </section>
   `;
@@ -481,78 +554,18 @@ function renderWorkshop() {
 }
 
 function renderAbout() {
-  const { candidateSections } = state.site;
   app.innerHTML = `
     <section class="page">
       <div class="section-header">
         <div>
-          <p class="eyebrow">About This Site</p>
-          <h1>一个清爽的工程知识花园</h1>
-          <p>公开层聚焦工程能力、项目复盘和知识节点；生活娱乐内容被降到第二层，保留一点可探索性。</p>
+          <p class="eyebrow">About</p>
+          <h1>这里不再作为公开说明页</h1>
+          <p>主页信息已经拆到三个更清晰的入口：科研经历、知识花园和生活记录。</p>
         </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="panel">
-          <p class="card-kicker">Design Direction</p>
-          <h2>清爽工程感 + 个人知识花园</h2>
-          <ul class="clean-list vertical">
-            <li>浅色底、细网格、低饱和强调色，优先服务阅读和可信感。</li>
-            <li>首页只放身份、工程方向、项目入口和最近知识节点。</li>
-            <li>保留一点个人气味，但不让娱乐内容抢掉专业第一印象。</li>
-          </ul>
+        <div class="action-row">
+          <a class="button primary" href="#/cv">科研经历</a>
+          <a class="button" href="#/life">生活记录</a>
         </div>
-        <div class="panel">
-          <p class="card-kicker">Update Protocol</p>
-          <h2>推荐更新协议</h2>
-          <ul class="clean-list vertical">
-            <li>项目：更新 <span class="inline-code">data/site.json</span> 的 projects 字段。</li>
-            <li>知识：向 <span class="inline-code">content/knowledge/领域/标题.md</span> 添加笔记，并使用 <span class="inline-code">[[双链]]</span> 连接旧笔记。</li>
-            <li>隐藏生活记录：继续写在 <span class="inline-code">content/life</span>，但不放入主导航。</li>
-            <li>发布：push 到 GitHub 后，由 Actions 运行脚本并部署到 Pages。</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="section-header">
-        <div>
-          <p class="eyebrow">Future Extensions</p>
-          <h2>后续补充方向</h2>
-        </div>
-      </div>
-      <div class="module-grid">
-        ${candidateSections.filter(module => !['灵感档案', 'Field Notes'].includes(module.title)).map(moduleCard).join('')}
-      </div>
-
-      <div class="field-notes panel">
-        <p class="card-kicker">Field Notes</p>
-        <h2>一点藏起来的生活记录</h2>
-        <p>如果有人真的翻到这里，可以继续往下看。</p>
-        <div class="field-links">
-          <a href="#/eat">eat</a>
-          <a href="#/drink">drink</a>
-          <a href="#/play">play</a>
-          <a href="#/diary">diary</a>
-        </div>
-      </div>
-
-      <div class="panel">
-        <p class="card-kicker">Repository Structure</p>
-        <pre><code>.
-├── index.html
-├── assets/
-│   ├── css/style.css
-│   ├── js/app.js
-│   └── img/sigil.svg
-├── data/
-│   ├── site.json                  # 个人信息、项目、技能、时间线
-│   ├── knowledge-index.json        # 自动生成
-│   └── life-index.json             # 自动生成
-├── content/
-│   ├── knowledge/                  # 专业、阅读、成长类 Markdown
-│   └── life/                       # 吃 / 喝 / 玩 / 乐
-├── scripts/build-index.mjs         # 扫描 Markdown 并生成索引
-└── .github/workflows/pages.yml     # GitHub Pages 自动部署</code></pre>
       </div>
     </section>
   `;
@@ -569,13 +582,16 @@ function profileRow(label, value, raw = false) {
 
 function projectCard(project) {
   return `
-    <article class="project-card">
-      <p class="card-kicker">${escapeHtml(project.type)} · ${escapeHtml(project.status)}</p>
-      <h3>${escapeHtml(project.name)}</h3>
-      <p class="problem"><strong>问题：</strong>${escapeHtml(project.problem)}</p>
-      <p class="solution"><strong>方法：</strong>${escapeHtml(project.solution)}</p>
-      <p><strong>结果：</strong>${escapeHtml(project.result)}</p>
-      <div class="project-meta">${project.stack.map(item => `<span class="tag">${escapeHtml(item)}</span>`).join('')}</div>
+    <article class="project-card project-strip">
+      <div class="project-time">${escapeHtml(project.time || '时间待补充')}</div>
+      <div class="project-content">
+        <p class="card-kicker">${escapeHtml(project.type)} · ${escapeHtml(project.status)}</p>
+        <h3>${escapeHtml(project.name)}</h3>
+        <p class="problem"><strong>问题：</strong>${escapeHtml(project.problem)}</p>
+        <p class="solution"><strong>方法：</strong>${escapeHtml(project.solution)}</p>
+        <p><strong>结果：</strong>${escapeHtml(project.result)}</p>
+        <div class="project-meta">${project.stack.map(item => `<span class="tag">${escapeHtml(item)}</span>`).join('')}</div>
+      </div>
       <a class="repo-link" href="${escapeAttr(project.repo)}" target="_blank" rel="noreferrer">Repo ↗</a>
     </article>
   `;

@@ -250,7 +250,7 @@ async function buildKnowledge() {
 }
 
 async function buildLife() {
-  const categories = ['eat', 'drink', 'play', 'diary'];
+  const categories = ['play', 'people', 'diary', 'eat', 'drink'];
   const output = { generatedAt: new Date().toISOString(), categories: {} };
 
   for (const category of categories) {
