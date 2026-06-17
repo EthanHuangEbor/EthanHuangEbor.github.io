@@ -189,7 +189,7 @@ function renderHome() {
       <aside class="hero-side">
         <figure class="portrait-card">
           <img class="profile-photo" src="${escapeAttr(profile.photo)}" alt="${escapeAttr(profile.photoAlt || `${profile.name} profile photo`)}" />
-          <figcaption>近期旅行照。现在头发略长一点。</figcaption>
+          ${profile.photoCaption ? `<figcaption>${escapeHtml(profile.photoCaption)}</figcaption>` : ''}
         </figure>
         <div class="profile-seal">
           <div class="sigil-large"><img src="${escapeAttr(profile.avatarImage || 'assets/img/dog-avatar.png')}" alt="${escapeAttr(profile.avatarAlt || '小狗头像')}" /></div>
