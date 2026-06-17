@@ -1,0 +1,12 @@
+{
+  "name": "aether-archive",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-index.mjs",
+    "serve": "python3 -m http.server 8000"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

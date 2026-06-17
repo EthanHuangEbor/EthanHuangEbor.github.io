@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="北航飞行器动力工程学生的个人主页：CV、项目经历、知识图谱、阅读记录、味觉地图与日记。" />
+  <title>Aether Archive · 个人主页</title>
+  <link rel="icon" href="assets/img/sigil.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="grain"></div>
+
+  <aside class="sidebar" aria-label="主导航">
+    <a class="brand" href="#/home" aria-label="回到首页">
+      <span class="brand-mark" id="brandAvatar">航</span>
+      <span>
+        <strong id="brandName">Aether Archive</strong>
+        <small id="brandTitle">BUAA · Propulsion</small>
+      </span>
+    </a>
+
+    <nav class="nav" id="mainNav">
+      <a href="#/home" data-route="home">星塔入口</a>
+      <a href="#/cv" data-route="cv">CV / 项目</a>
+      <a href="#/knowledge" data-route="knowledge">知识图谱</a>
+      <a href="#/eat" data-route="eat">吃</a>
+      <a href="#/drink" data-route="drink">喝</a>
+      <a href="#/play" data-route="play">玩</a>
+      <a href="#/diary" data-route="diary">乐 / 日记</a>
+      <a href="#/workshop" data-route="workshop">动力工坊</a>
+      <a href="#/about" data-route="about">设计说明</a>
+    </nav>
+
+    <div class="sidebar-note">
+      <span class="note-kicker">更新方式</span>
+      <p>向 <code>content/</code> 添加 Markdown，运行构建脚本或直接 push，索引会自动刷新。</p>
+    </div>
+  </aside>
+
+  <header class="mobile-bar">
+    <a class="mobile-brand" href="#/home"><span class="brand-mark">航</span><strong>Aether Archive</strong></a>
+    <button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="mainNav">目录</button>
+  </header>
+
+  <main class="app-shell" id="app" tabindex="-1">
+    <section class="loading-card">
+      <div class="orb"></div>
+      <p>正在展开星图与卷轴……</p>
+    </section>
+  </main>
+
+  <template id="articleTemplate">
+    <article class="article-panel">
+      <header class="article-header">
+        <p class="eyebrow"></p>
+        <h1></h1>
+        <p class="summary"></p>
+        <div class="tag-row"></div>
+      </header>
+      <div class="article-body prose"></div>
+    </article>
+  </template>
+
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>

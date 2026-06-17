@@ -1,0 +1,173 @@
+{
+  "profile": {
+    "name": "Ethan Huang",
+    "handle": "@EthanHuangEbor",
+    "avatarText": "航",
+    "title": "北航 · 飞行器动力工程 · 大二",
+    "tagline": "把推力、阅读、生活审美和长期主义收束进同一张星图。",
+    "location": "Beijing / BUAA",
+    "email": "",
+    "github": "https://github.com/EthanHuangEbor",
+    "repo": "https://github.com/EthanHuangEbor/EthanHuangEbor.github.io",
+    "cvPdf": "#",
+    "status": "正在建立个人知识系统：航空发动机 / 工程计算 / 阅读笔记 / 味觉地图"
+  },
+  "heroStats": [
+    {
+      "label": "Knowledge Nodes",
+      "value": "auto",
+      "hint": "由 Markdown 自动生成"
+    },
+    {
+      "label": "Focus",
+      "value": "Propulsion",
+      "hint": "飞行器动力工程"
+    },
+    {
+      "label": "Update Mode",
+      "value": "Markdown",
+      "hint": "Push 即发布"
+    }
+  ],
+  "principles": [
+    "每个项目都要写清：问题、约束、方法、结果、复盘。",
+    "每篇笔记至少建立一个链接：课程、论文、项目或个人经验。",
+    "生活记录不追求流水账，追求可检索的审美与判断。"
+  ],
+  "skills": [
+    {
+      "group": "工程基础",
+      "items": [
+        "工程热力学",
+        "流体力学",
+        "传热学",
+        "航空发动机原理",
+        "实验数据处理"
+      ]
+    },
+    {
+      "group": "计算工具",
+      "items": [
+        "Python",
+        "MATLAB",
+        "C / C++",
+        "数值计算",
+        "可视化"
+      ]
+    },
+    {
+      "group": "长期系统",
+      "items": [
+        "Markdown",
+        "知识图谱",
+        "项目复盘",
+        "阅读卡片",
+        "时间线管理"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Turbofan Cycle Notebook",
+      "type": "课程/工程计算",
+      "status": "prototype",
+      "problem": "航空发动机循环计算的公式分散在课本和讲义中，参数变化对推力、耗油率和效率的影响不够直观。",
+      "solution": "把压气机压比、涡轮前温度、部件效率、飞行马赫数等变量封装为可复现实验脚本，输出循环状态表和敏感性曲线。",
+      "result": "可用于课程复盘、参数扫掠和后续小型可视化工具扩展。",
+      "stack": [
+        "Python",
+        "NumPy",
+        "Matplotlib",
+        "Thermodynamics"
+      ],
+      "repo": "https://github.com/EthanHuangEbor?tab=repositories"
+    },
+    {
+      "name": "Aero-Notes Knowledge Graph",
+      "type": "个人知识系统",
+      "status": "active",
+      "problem": "专业课、论文、阅读和思考散落在不同文件夹里，复习时难以看见概念之间的连接。",
+      "solution": "使用 Markdown front matter 与 [[双链]] 建立节点关系，由构建脚本生成目录树和图谱索引。",
+      "result": "本主页即为第一版实现，后续可迁移 Obsidian 笔记库。",
+      "stack": [
+        "Markdown",
+        "JavaScript",
+        "Canvas",
+        "GitHub Pages"
+      ],
+      "repo": "https://github.com/EthanHuangEbor?tab=repositories"
+    },
+    {
+      "name": "MATLAB Lab Toolkit",
+      "type": "实验数据处理",
+      "status": "planned",
+      "problem": "实验课常见的数据清洗、误差计算、曲线拟合和图表排版重复性高。",
+      "solution": "沉淀为脚本模板：导入 CSV、异常点检查、最小二乘拟合、误差传播、自动生成图表。",
+      "result": "减少重复劳动，并把每次实验的处理过程留下可追溯记录。",
+      "stack": [
+        "MATLAB",
+        "Data Processing",
+        "Regression"
+      ],
+      "repo": "https://github.com/EthanHuangEbor?tab=repositories"
+    },
+    {
+      "name": "Campus Taste Atlas",
+      "type": "生活数据化",
+      "status": "active",
+      "problem": "吃喝体验通常只停留在印象里，时间一长无法复盘口味、价格、场景和推荐度。",
+      "solution": "用 Markdown 卡片记录地点、菜品、评分、价格、适合场景和复访意愿，并在站内按标签筛选。",
+      "result": "形成个人味觉地图，也给朋友推荐时提供依据。",
+      "stack": [
+        "Markdown",
+        "Rating Schema",
+        "Static Site"
+      ],
+      "repo": "https://github.com/EthanHuangEbor?tab=repositories"
+    }
+  ],
+  "candidateSections": [
+    {
+      "title": "动力工坊",
+      "reason": "和飞行器动力工程身份强绑定，能展示工程感而不是单纯个人博客。",
+      "implementation": "标准大气、马赫数、理想布雷顿循环效率、单位换算、公式卡片。"
+    },
+    {
+      "title": "课程航迹",
+      "reason": "从大二开始持续积累，毕业时会自然变成一份专业成长曲线。",
+      "implementation": "每门课建立节点：核心概念、作业项目、实验复盘、推荐资料。"
+    },
+    {
+      "title": "论文与书架",
+      "reason": "把阅读记录从摘抄升级为可检索的研究问题库。",
+      "implementation": "每篇论文/书用一张 Markdown 卡片：问题、方法、结论、可迁移工具。"
+    },
+    {
+      "title": "航迹时间线",
+      "reason": "个人主页需要让访问者快速理解你在何处、做过什么、下一步去哪。",
+      "implementation": "按学期记录课程、项目、比赛、实习准备和关键复盘。"
+    },
+    {
+      "title": "灵感档案",
+      "reason": "保留哈利波特式奇幻审美与中式纹样偏好，形成稳定个人视觉语言。",
+      "implementation": "收集配色、字体、版式、纹样、展板参考，服务简历和作品集。"
+    }
+  ],
+  "timeline": [
+    {
+      "time": "2025 Autumn",
+      "title": "建立工程计算习惯",
+      "detail": "把热力学、流体力学、数学建模相关脚本沉淀为可复用模板。"
+    },
+    {
+      "time": "2026 Spring",
+      "title": "搭建知识图谱主页",
+      "detail": "将专业笔记、阅读记录、生活卡片统一为 Markdown 数据源。"
+    },
+    {
+      "time": "2026 Summer",
+      "title": "形成第一个公开项目",
+      "detail": "完成一个有 README、示例数据、图表和复盘的工程向 repo。"
+    }
+  ]
+}

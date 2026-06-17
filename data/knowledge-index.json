@@ -1,0 +1,509 @@
+{
+  "generatedAt": "2026-06-17T00:55:07.839Z",
+  "stats": {
+    "nodes": 6,
+    "links": 13,
+    "unresolved": 0,
+    "domains": 5,
+    "tags": 15
+  },
+  "records": [
+    {
+      "path": "content/knowledge/个人成长/长期主义与反馈回路.md",
+      "folderPath": "个人成长",
+      "fileName": "长期主义与反馈回路.md",
+      "slug": "个人成长/长期主义与反馈回路",
+      "title": "长期主义与反馈回路",
+      "date": "2026-05-30",
+      "updated": "",
+      "status": "active",
+      "domain": "个人成长",
+      "tags": [
+        "个人成长",
+        "复盘",
+        "长期主义"
+      ],
+      "summary": "长期主义不是慢，而是把目标切成能持续校正的短反馈回路。",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "长期主义与反馈回路"
+        },
+        {
+          "depth": 2,
+          "text": "三个系统"
+        },
+        {
+          "depth": 2,
+          "text": "主页中的落点"
+        }
+      ],
+      "wikilinks": [
+        "刻意练习",
+        "工程热力学复盘"
+      ],
+      "wordCount": 234
+    },
+    {
+      "path": "content/knowledge/工程工具/标准大气模型.md",
+      "folderPath": "工程工具",
+      "fileName": "标准大气模型.md",
+      "slug": "工程工具/标准大气模型",
+      "title": "标准大气模型",
+      "date": "2026-06-05",
+      "updated": "",
+      "status": "active",
+      "domain": "工程工具",
+      "tags": [
+        "工程计算",
+        "飞行性能",
+        "Python"
+      ],
+      "summary": "用高度估算温度、压力、密度和声速，是飞行器动力计算的入口条件。",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "标准大气模型"
+        },
+        {
+          "depth": 2,
+          "text": "常用输出"
+        },
+        {
+          "depth": 2,
+          "text": "站内实现"
+        },
+        {
+          "depth": 2,
+          "text": "关联"
+        }
+      ],
+      "wikilinks": [
+        "布雷顿循环",
+        "工程热力学复盘"
+      ],
+      "wordCount": 206
+    },
+    {
+      "path": "content/knowledge/航空发动机/布雷顿循环.md",
+      "folderPath": "航空发动机",
+      "fileName": "布雷顿循环.md",
+      "slug": "航空发动机/布雷顿循环",
+      "title": "布雷顿循环",
+      "date": "2026-06-01",
+      "updated": "",
+      "status": "evergreen",
+      "domain": "航空发动机",
+      "tags": [
+        "热力学",
+        "航空发动机",
+        "循环分析"
+      ],
+      "summary": "航空燃气涡轮发动机的基础热力循环，用于理解压气、燃烧、膨胀和排气做功的能量链条。",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "布雷顿循环"
+        },
+        {
+          "depth": 2,
+          "text": "我需要掌握的问题"
+        },
+        {
+          "depth": 2,
+          "text": "关联概念"
+        },
+        {
+          "depth": 2,
+          "text": "项目化想法"
+        },
+        {
+          "depth": 2,
+          "text": "复盘模板"
+        }
+      ],
+      "wikilinks": [
+        "工程热力学复盘",
+        "标准大气模型",
+        "压气机喘振"
+      ],
+      "wordCount": 354
+    },
+    {
+      "path": "content/knowledge/航空发动机/压气机喘振.md",
+      "folderPath": "航空发动机",
+      "fileName": "压气机喘振.md",
+      "slug": "航空发动机/压气机喘振",
+      "title": "压气机喘振",
+      "date": "2026-06-03",
+      "updated": "",
+      "status": "seed",
+      "domain": "航空发动机",
+      "tags": [
+        "航空发动机",
+        "稳定性",
+        "流动分离"
+      ],
+      "summary": "压气机在非设计工况下可能进入不稳定工作状态，表现为大尺度流量和压力振荡。",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "压气机喘振"
+        },
+        {
+          "depth": 2,
+          "text": "需要建立的直觉"
+        },
+        {
+          "depth": 2,
+          "text": "和其他笔记的关系"
+        },
+        {
+          "depth": 2,
+          "text": "可以做成的展示"
+        }
+      ],
+      "wikilinks": [
+        "布雷顿循环",
+        "标准大气模型"
+      ],
+      "wordCount": 294
+    },
+    {
+      "path": "content/knowledge/课程/工程热力学复盘.md",
+      "folderPath": "课程",
+      "fileName": "工程热力学复盘.md",
+      "slug": "课程/工程热力学复盘",
+      "title": "工程热力学复盘",
+      "date": "2026-06-08",
+      "updated": "",
+      "status": "active",
+      "domain": "课程",
+      "tags": [
+        "课程",
+        "热力学",
+        "复盘"
+      ],
+      "summary": "把热力学从公式记忆转化为状态量、过程、边界和能量账本。",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "工程热力学复盘"
+        },
+        {
+          "depth": 2,
+          "text": "复习框架"
+        },
+        {
+          "depth": 2,
+          "text": "和航空发动机的关系"
+        },
+        {
+          "depth": 2,
+          "text": "期末复盘问题"
+        }
+      ],
+      "wikilinks": [
+        "布雷顿循环",
+        "标准大气模型"
+      ],
+      "wordCount": 214
+    },
+    {
+      "path": "content/knowledge/阅读/刻意练习.md",
+      "folderPath": "阅读",
+      "fileName": "刻意练习.md",
+      "slug": "阅读/刻意练习",
+      "title": "刻意练习",
+      "date": "2026-05-21",
+      "updated": "",
+      "status": "evergreen",
+      "domain": "阅读",
+      "tags": [
+        "阅读",
+        "成长",
+        "方法论"
+      ],
+      "summary": "把能力拆成可反馈的小环节，在舒适区边缘重复训练，并持续获得校正。",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "刻意练习"
+        },
+        {
+          "depth": 2,
+          "text": "可执行版本"
+        },
+        {
+          "depth": 2,
+          "text": "与专业学习的关系"
+        }
+      ],
+      "wikilinks": [
+        "工程热力学复盘",
+        "长期主义与反馈回路"
+      ],
+      "wordCount": 207
+    }
+  ],
+  "links": [
+    {
+      "source": "content/knowledge/个人成长/长期主义与反馈回路.md",
+      "target": "content/knowledge/阅读/刻意练习.md",
+      "label": "刻意练习"
+    },
+    {
+      "source": "content/knowledge/个人成长/长期主义与反馈回路.md",
+      "target": "content/knowledge/课程/工程热力学复盘.md",
+      "label": "工程热力学复盘"
+    },
+    {
+      "source": "content/knowledge/工程工具/标准大气模型.md",
+      "target": "content/knowledge/航空发动机/布雷顿循环.md",
+      "label": "布雷顿循环"
+    },
+    {
+      "source": "content/knowledge/工程工具/标准大气模型.md",
+      "target": "content/knowledge/课程/工程热力学复盘.md",
+      "label": "工程热力学复盘"
+    },
+    {
+      "source": "content/knowledge/航空发动机/布雷顿循环.md",
+      "target": "content/knowledge/课程/工程热力学复盘.md",
+      "label": "工程热力学复盘"
+    },
+    {
+      "source": "content/knowledge/航空发动机/布雷顿循环.md",
+      "target": "content/knowledge/工程工具/标准大气模型.md",
+      "label": "标准大气模型"
+    },
+    {
+      "source": "content/knowledge/航空发动机/布雷顿循环.md",
+      "target": "content/knowledge/航空发动机/压气机喘振.md",
+      "label": "压气机喘振"
+    },
+    {
+      "source": "content/knowledge/航空发动机/压气机喘振.md",
+      "target": "content/knowledge/航空发动机/布雷顿循环.md",
+      "label": "布雷顿循环"
+    },
+    {
+      "source": "content/knowledge/航空发动机/压气机喘振.md",
+      "target": "content/knowledge/工程工具/标准大气模型.md",
+      "label": "标准大气模型"
+    },
+    {
+      "source": "content/knowledge/课程/工程热力学复盘.md",
+      "target": "content/knowledge/航空发动机/布雷顿循环.md",
+      "label": "布雷顿循环"
+    },
+    {
+      "source": "content/knowledge/课程/工程热力学复盘.md",
+      "target": "content/knowledge/工程工具/标准大气模型.md",
+      "label": "标准大气模型"
+    },
+    {
+      "source": "content/knowledge/阅读/刻意练习.md",
+      "target": "content/knowledge/课程/工程热力学复盘.md",
+      "label": "工程热力学复盘"
+    },
+    {
+      "source": "content/knowledge/阅读/刻意练习.md",
+      "target": "content/knowledge/个人成长/长期主义与反馈回路.md",
+      "label": "长期主义与反馈回路"
+    }
+  ],
+  "unresolved": [],
+  "tree": {
+    "type": "folder",
+    "name": "knowledge",
+    "children": [
+      {
+        "type": "folder",
+        "name": "个人成长",
+        "children": [
+          {
+            "type": "file",
+            "name": "长期主义与反馈回路.md",
+            "title": "长期主义与反馈回路",
+            "path": "content/knowledge/个人成长/长期主义与反馈回路.md",
+            "tags": [
+              "个人成长",
+              "复盘",
+              "长期主义"
+            ],
+            "domain": "个人成长"
+          }
+        ]
+      },
+      {
+        "type": "folder",
+        "name": "工程工具",
+        "children": [
+          {
+            "type": "file",
+            "name": "标准大气模型.md",
+            "title": "标准大气模型",
+            "path": "content/knowledge/工程工具/标准大气模型.md",
+            "tags": [
+              "工程计算",
+              "飞行性能",
+              "Python"
+            ],
+            "domain": "工程工具"
+          }
+        ]
+      },
+      {
+        "type": "folder",
+        "name": "航空发动机",
+        "children": [
+          {
+            "type": "file",
+            "name": "布雷顿循环.md",
+            "title": "布雷顿循环",
+            "path": "content/knowledge/航空发动机/布雷顿循环.md",
+            "tags": [
+              "热力学",
+              "航空发动机",
+              "循环分析"
+            ],
+            "domain": "航空发动机"
+          },
+          {
+            "type": "file",
+            "name": "压气机喘振.md",
+            "title": "压气机喘振",
+            "path": "content/knowledge/航空发动机/压气机喘振.md",
+            "tags": [
+              "航空发动机",
+              "稳定性",
+              "流动分离"
+            ],
+            "domain": "航空发动机"
+          }
+        ]
+      },
+      {
+        "type": "folder",
+        "name": "课程",
+        "children": [
+          {
+            "type": "file",
+            "name": "工程热力学复盘.md",
+            "title": "工程热力学复盘",
+            "path": "content/knowledge/课程/工程热力学复盘.md",
+            "tags": [
+              "课程",
+              "热力学",
+              "复盘"
+            ],
+            "domain": "课程"
+          }
+        ]
+      },
+      {
+        "type": "folder",
+        "name": "阅读",
+        "children": [
+          {
+            "type": "file",
+            "name": "刻意练习.md",
+            "title": "刻意练习",
+            "path": "content/knowledge/阅读/刻意练习.md",
+            "tags": [
+              "阅读",
+              "成长",
+              "方法论"
+            ],
+            "domain": "阅读"
+          }
+        ]
+      }
+    ]
+  },
+  "tags": [
+    {
+      "name": "复盘",
+      "count": 2
+    },
+    {
+      "name": "热力学",
+      "count": 2
+    },
+    {
+      "name": "航空发动机",
+      "count": 2
+    },
+    {
+      "name": "个人成长",
+      "count": 1
+    },
+    {
+      "name": "长期主义",
+      "count": 1
+    },
+    {
+      "name": "工程计算",
+      "count": 1
+    },
+    {
+      "name": "飞行性能",
+      "count": 1
+    },
+    {
+      "name": "Python",
+      "count": 1
+    },
+    {
+      "name": "循环分析",
+      "count": 1
+    },
+    {
+      "name": "稳定性",
+      "count": 1
+    },
+    {
+      "name": "流动分离",
+      "count": 1
+    },
+    {
+      "name": "课程",
+      "count": 1
+    },
+    {
+      "name": "阅读",
+      "count": 1
+    },
+    {
+      "name": "成长",
+      "count": 1
+    },
+    {
+      "name": "方法论",
+      "count": 1
+    }
+  ],
+  "domains": [
+    {
+      "name": "航空发动机",
+      "count": 2
+    },
+    {
+      "name": "个人成长",
+      "count": 1
+    },
+    {
+      "name": "工程工具",
+      "count": 1
+    },
+    {
+      "name": "课程",
+      "count": 1
+    },
+    {
+      "name": "阅读",
+      "count": 1
+    }
+  ]
+}

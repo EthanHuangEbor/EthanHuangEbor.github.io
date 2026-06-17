@@ -1,0 +1,214 @@
+{
+  "generatedAt": "2026-06-17T00:55:07.846Z",
+  "categories": {
+    "eat": [
+      {
+        "path": "content/life/eat/北京-学院路-牛肉面.md",
+        "slug": "eat/北京-学院路-牛肉面",
+        "category": "eat",
+        "title": "学院路牛肉面",
+        "date": "2026-06-02",
+        "city": "北京",
+        "place": "学院路附近",
+        "rating": 4.3,
+        "price": "¥28",
+        "item": "牛肉面",
+        "mood": "",
+        "summary": "汤底清亮，肉量稳定，适合晚课后快速补能。缺点是高峰期排队明显。",
+        "tags": [
+          "面食",
+          "校园周边",
+          "高性价比"
+        ],
+        "meta": {
+          "title": "学院路牛肉面",
+          "date": "2026-06-02",
+          "category": "eat",
+          "city": "北京",
+          "place": "学院路附近",
+          "item": "牛肉面",
+          "rating": 4.3,
+          "price": "¥28",
+          "summary": "汤底清亮，肉量稳定，适合晚课后快速补能。缺点是高峰期排队明显。",
+          "tags": [
+            "面食",
+            "校园周边",
+            "高性价比"
+          ]
+        }
+      },
+      {
+        "path": "content/life/eat/北京-五道口-烤肉拌饭.md",
+        "slug": "eat/北京-五道口-烤肉拌饭",
+        "category": "eat",
+        "title": "五道口烤肉拌饭",
+        "date": "2026-05-18",
+        "city": "北京",
+        "place": "五道口",
+        "rating": 3.8,
+        "price": "¥32",
+        "item": "烤肉拌饭",
+        "mood": "",
+        "summary": "碳水快乐很直接，但油感偏强，适合作为偶尔奖励，不适合高频复访。",
+        "tags": [
+          "快餐",
+          "重口",
+          "五道口"
+        ],
+        "meta": {
+          "title": "五道口烤肉拌饭",
+          "date": "2026-05-18",
+          "category": "eat",
+          "city": "北京",
+          "place": "五道口",
+          "item": "烤肉拌饭",
+          "rating": 3.8,
+          "price": "¥32",
+          "summary": "碳水快乐很直接，但油感偏强，适合作为偶尔奖励，不适合高频复访。",
+          "tags": [
+            "快餐",
+            "重口",
+            "五道口"
+          ]
+        }
+      }
+    ],
+    "drink": [
+      {
+        "path": "content/life/drink/莫斯卡托气泡酒.md",
+        "slug": "drink/莫斯卡托气泡酒",
+        "category": "drink",
+        "title": "莫斯卡托气泡酒",
+        "date": "2026-05-25",
+        "city": "北京",
+        "place": "朋友聚餐",
+        "rating": 4.1,
+        "price": "¥90-140",
+        "item": "Moscato d'Asti",
+        "mood": "",
+        "summary": "甜感明显，酒精度低，香气以葡萄、白花和蜂蜜为主，适合轻松聚餐。",
+        "tags": [
+          "葡萄酒",
+          "甜型",
+          "低酒精度"
+        ],
+        "meta": {
+          "title": "莫斯卡托气泡酒",
+          "date": "2026-05-25",
+          "category": "drink",
+          "city": "北京",
+          "place": "朋友聚餐",
+          "item": "Moscato d'Asti",
+          "rating": 4.1,
+          "price": "¥90-140",
+          "summary": "甜感明显，酒精度低，香气以葡萄、白花和蜂蜜为主，适合轻松聚餐。",
+          "tags": [
+            "葡萄酒",
+            "甜型",
+            "低酒精度"
+          ]
+        }
+      },
+      {
+        "path": "content/life/drink/入门威士忌记录.md",
+        "slug": "drink/入门威士忌记录",
+        "category": "drink",
+        "title": "入门威士忌记录",
+        "date": "2026-04-29",
+        "city": "北京",
+        "place": "家中小样",
+        "rating": 3.6,
+        "price": "小样",
+        "item": "Highland Single Malt Sample",
+        "mood": "",
+        "summary": "香草和麦芽香明显，烟熏不重。作为了解威士忌风味坐标的入门样本。",
+        "tags": [
+          "威士忌",
+          "小样",
+          "风味坐标"
+        ],
+        "meta": {
+          "title": "入门威士忌记录",
+          "date": "2026-04-29",
+          "category": "drink",
+          "city": "北京",
+          "place": "家中小样",
+          "item": "Highland Single Malt Sample",
+          "rating": 3.6,
+          "price": "小样",
+          "summary": "香草和麦芽香明显，烟熏不重。作为了解威士忌风味坐标的入门样本。",
+          "tags": [
+            "威士忌",
+            "小样",
+            "风味坐标"
+          ]
+        }
+      }
+    ],
+    "play": [
+      {
+        "path": "content/life/play/README.md",
+        "slug": "play/readme",
+        "category": "play",
+        "title": "玩的计划池",
+        "date": "2026-06-01",
+        "city": "北京",
+        "place": "待定",
+        "rating": "",
+        "price": "",
+        "item": "待填",
+        "mood": "",
+        "summary": "这里先作为空白页面，未来可以记录展览、短途旅行、运动、密室、桌游或城市漫游。",
+        "tags": [
+          "计划池"
+        ],
+        "meta": {
+          "title": "玩的计划池",
+          "date": "2026-06-01",
+          "category": "play",
+          "city": "北京",
+          "place": "待定",
+          "item": "待填",
+          "rating": "",
+          "summary": "这里先作为空白页面，未来可以记录展览、短途旅行、运动、密室、桌游或城市漫游。",
+          "tags": [
+            "计划池"
+          ]
+        }
+      }
+    ],
+    "diary": [
+      {
+        "path": "content/life/diary/2026-06-学期复盘.md",
+        "slug": "diary/2026-06-学期复盘",
+        "category": "diary",
+        "title": "2026 年 6 月学期复盘",
+        "date": "2026-06-10",
+        "city": "",
+        "place": "",
+        "rating": "",
+        "price": "",
+        "item": "",
+        "mood": "清醒",
+        "summary": "这个学期最大的变化是开始把课程、项目和生活记录合并到同一个系统里。",
+        "tags": [
+          "日记",
+          "学期复盘",
+          "长期主义"
+        ],
+        "meta": {
+          "title": "2026 年 6 月学期复盘",
+          "date": "2026-06-10",
+          "category": "diary",
+          "mood": "清醒",
+          "tags": [
+            "日记",
+            "学期复盘",
+            "长期主义"
+          ],
+          "summary": "这个学期最大的变化是开始把课程、项目和生活记录合并到同一个系统里。"
+        }
+      }
+    ]
+  }
+}
