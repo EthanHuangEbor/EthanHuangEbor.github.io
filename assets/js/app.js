@@ -106,7 +106,10 @@ function bindGlobalEvents() {
 function hydrateChrome() {
   const profile = state.site.profile;
   document.title = `${profile.name} · Engineering Garden`;
-  document.getElementById('brandAvatar').textContent = profile.avatarText || '航';
+  const brandAvatar = document.getElementById('brandAvatar');
+  if (brandAvatar) {
+    brandAvatar.innerHTML = `<img src="${escapeAttr(profile.avatarImage || 'assets/img/dog-avatar.png')}" alt="${escapeAttr(profile.avatarAlt || '小狗头像')}" />`;
+  }
   document.getElementById('brandName').textContent = profile.name || 'Ethan Huang';
   document.getElementById('brandTitle').textContent = profile.title || 'BUAA · Propulsion';
 }
@@ -149,7 +152,7 @@ function setActiveNav(route) {
 }
 
 function renderHome() {
-  const { profile, heroStats, principles, projects } = state.site;
+  const { profile, heroStats, projects } = state.site;
   const stats = heroStats.map(stat => ({
     ...stat,
     value: stat.value === 'auto' ? String(state.knowledge.stats.nodes) : stat.value
@@ -163,9 +166,9 @@ function renderHome() {
     <section class="page hero">
       <div class="hero-main">
         <div>
-          <p class="eyebrow">Research-first Homepage</p>
+          <p class="eyebrow">Ethan Huang</p>
           <h1 class="hero-title">科研经历、工程复现与可生长的知识花园。</h1>
-          <p class="hero-subtitle">我是 ${escapeHtml(profile.name)}，${escapeHtml(profile.title)}。这个主页优先给导师快速判断我的科研兴趣、项目经历和工程能力；生活记录留给愿意多翻两页的朋友。</p>
+          <p class="hero-subtitle">${escapeHtml(profile.name)}，${escapeHtml(profile.title)}。项目经历、学习笔记、生活记录。</p>
           <div class="hero-actions">
             <a class="button primary" href="#/cv">查看科研经历</a>
             <a class="button" href="#/knowledge">进入知识花园</a>
@@ -189,7 +192,7 @@ function renderHome() {
           <figcaption>近期旅行照。现在头发略长一点。</figcaption>
         </figure>
         <div class="profile-seal">
-          <div class="sigil-large">${escapeHtml(profile.avatarText || '航')}</div>
+          <div class="sigil-large"><img src="${escapeAttr(profile.avatarImage || 'assets/img/dog-avatar.png')}" alt="${escapeAttr(profile.avatarAlt || '小狗头像')}" /></div>
           <p>BUAA / Flight Propulsion</p>
         </div>
         <div class="profile-list">
@@ -208,25 +211,9 @@ function renderHome() {
     <section class="page section-stack">
       <div class="section-header">
         <div>
-          <p class="eyebrow">Garden Structure</p>
-          <h2>导师第一眼先看到三件事</h2>
-          <p>做过什么问题、采用什么方法、得到什么结果。生活部分保留入口，但不抢占科研主线。</p>
-        </div>
-      </div>
-      <div class="grid-3">
-        ${principles.map((item, index) => `
-          <div class="panel">
-            <p class="card-kicker">Principle ${String(index + 1).padStart(2, '0')}</p>
-            <p>${escapeHtml(item)}</p>
-          </div>
-        `).join('')}
-      </div>
-
-      <div class="section-header">
-        <div>
           <p class="eyebrow">Research Evidence</p>
-          <h2>当前可展示的项目经历</h2>
-          <p>项目来自公开 GitHub 仓库，按问题、方法、结果和边界组织，便于导师快速浏览。</p>
+          <h2>项目经历</h2>
+          <p>按时间、问题、方法、结果和边界整理。</p>
         </div>
       </div>
       <div class="project-grid">
@@ -249,7 +236,6 @@ function renderHome() {
           </a>
         `).join('')}
       </div>
-      <p class="footer-note">生活页现在分成“见天地 / 见众生 / 见自己 / 致谢”：它给朋友看，也给长期记忆留一个不打扰科研主线的位置。</p>
     </section>
   `;
 
@@ -269,7 +255,7 @@ function renderCv() {
         <div>
           <p class="eyebrow">Research Experience</p>
           <h1>科研经历与项目证据</h1>
-          <p>这一页服务导师快速浏览：每个项目都按“问题—方法—结果—边界”组织，仓库链接保留在项目卡片里，避免把站点维护信息放到第一层。</p>
+          <p>每个项目按“时间—问题—方法—结果—边界”组织，仓库链接保留在项目卡片里。</p>
         </div>
         <div class="action-row">
           <a class="button" href="${escapeAttr(profile.github)}" target="_blank" rel="noreferrer">GitHub</a>
@@ -302,7 +288,7 @@ function renderCv() {
       <div class="section-header" style="margin-top: 34px;">
         <div>
           <p class="eyebrow">Projects</p>
-          <h2>公开项目卡片</h2>
+          <h2>项目经历</h2>
         </div>
       </div>
       <div class="project-grid">
@@ -344,7 +330,7 @@ function renderLifeHub() {
         <div>
           <p class="eyebrow">Life Notes</p>
           <h1>生活：见天地，见众生，见自己</h1>
-          <p>这里面向广义朋友。前三个栏目记录旅行所感、人物短记和个人成长；致谢部分留给那些确实值得感谢的好吃的和好喝的。</p>
+          <p>见天地记录旅行所感，见众生记录人物短记，见自己记录个人成长；致谢记录好吃的和好喝的。</p>
         </div>
       </div>
 
@@ -379,7 +365,7 @@ function renderLifeHub() {
         <div class="panel">
           <p class="card-kicker">Thanks</p>
           <h2>致谢</h2>
-          <p>感谢那些让一天变好的味道：好吃的、好喝的、适合被朋友问起的具体地点。</p>
+          <p>好吃的、好喝的、具体地点和当时的味道。</p>
           <div class="field-links">
             <a href="#/eat">好吃的 · ${eatCount}</a>
             <a href="#/drink">好喝的 · ${drinkCount}</a>

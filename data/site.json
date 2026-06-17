@@ -2,11 +2,13 @@
   "profile": {
     "name": "Ethan Huang",
     "handle": "@EthanHuangEbor",
-    "avatarText": "航",
+    "avatarText": "",
+    "avatarImage": "assets/img/dog-avatar.png",
+    "avatarAlt": "小狗头像",
     "photo": "assets/img/profile-bruges.jpg",
     "photoAlt": "Ethan Huang 在布鲁日河边的照片",
     "title": "北航 · 飞行器动力工程 · 大二",
-    "tagline": "科研经历优先呈现，知识花园长期生长，生活记录给朋友慢慢翻。",
+    "tagline": "项目经历、学习笔记、生活记录。",
     "location": "Beijing / BUAA",
     "email": "24376333@buaa.edu.cn",
     "github": "https://github.com/EthanHuangEbor",
@@ -31,11 +33,7 @@
       "hint": "Markdown 自动索引"
     }
   ],
-  "principles": [
-    "导师第一眼能看到：我做过什么问题、用了什么方法、得到什么结果。",
-    "每个项目都保留边界：哪些是复现 baseline，哪些是概念仿真，哪些仍在迭代。",
-    "生活内容独立成页：给朋友看见口腹、旅行和审美，但不抢科研主线。"
-  ],
+  "principles": [],
   "skills": [
     {
       "group": "工程与科研",
@@ -142,7 +140,7 @@
   "candidateSections": [
     {
       "title": "科研经历",
-      "reason": "导师需要先看到清楚的问题、方法、结果和项目边界。",
+      "reason": "记录清楚的问题、方法、结果和项目边界。",
       "implementation": "继续把 GitHub 仓库、README、实验图表和复盘文字互相连接。"
     },
     {
@@ -167,7 +165,7 @@
     },
     {
       "title": "致谢",
-      "reason": "朋友访问时可以看到更具体、更有人味的吃喝记录。",
+      "reason": "保存具体的吃喝记录。",
       "implementation": "分成好吃的和好喝的，记录地点、风味、价格和复访意愿。"
     }
   ],
@@ -189,7 +187,7 @@
     },
     {
       "stage": "04 Publish",
-      "title": "按周公开一小批可展示内容",
+      "title": "按周整理一小批正式内容",
       "detail": "每周挑 1-3 张最清楚的卡片发布到主页：删掉私密过程，保留问题、方法、结论和可复用代码/图表。"
     }
   ],
@@ -207,7 +205,7 @@
     {
       "time": "2026 Summer",
       "title": "整理航发概念设计与公开主页",
-      "detail": "把变循环混合电推进概念设计、知识花园和个人项目卡片合并成可展示的公开主页。"
+      "detail": "把变循环混合电推进概念设计、知识花园和个人项目卡片合并成公开主页。"
     }
   ]
 }
