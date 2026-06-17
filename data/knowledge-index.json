@@ -1,13 +1,63 @@
 {
-  "generatedAt": "2026-06-17T14:42:12.190Z",
+  "generatedAt": "2026-06-17T15:37:55.550Z",
   "stats": {
-    "nodes": 6,
-    "links": 13,
-    "unresolved": 0,
+    "nodes": 7,
+    "links": 16,
+    "unresolved": 1,
     "domains": 5,
-    "tags": 15
+    "tags": 18
   },
   "records": [
+    {
+      "path": "content/knowledge/个人成长/学习笔记沉淀流程.md",
+      "folderPath": "个人成长",
+      "fileName": "学习笔记沉淀流程.md",
+      "slug": "个人成长/学习笔记沉淀流程",
+      "title": "学习笔记沉淀流程",
+      "date": "2026-06-17",
+      "updated": "",
+      "status": "active",
+      "domain": "个人成长",
+      "tags": [
+        "知识管理",
+        "学习方法",
+        "个人主页"
+      ],
+      "summary": "把课堂、论文和项目调试记录从粗笔记转化为可检索、可展示、可复用的知识卡片。",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "学习笔记沉淀流程"
+        },
+        {
+          "depth": 2,
+          "text": "1. Inbox：先收集，不急着整理"
+        },
+        {
+          "depth": 2,
+          "text": "2. Card：一张卡只解决一个问题"
+        },
+        {
+          "depth": 2,
+          "text": "3. Link：用双链连接旧知识"
+        },
+        {
+          "depth": 2,
+          "text": "4. Publish：每周公开一小批"
+        },
+        {
+          "depth": 2,
+          "text": "5. Review：每月做一次知识花园体检"
+        }
+      ],
+      "wikilinks": [
+        "双链",
+        "布雷顿循环",
+        "标准大气模型",
+        "工程热力学复盘"
+      ],
+      "wordCount": 719
+    },
     {
       "path": "content/knowledge/个人成长/长期主义与反馈回路.md",
       "folderPath": "个人成长",
@@ -248,6 +298,21 @@
   ],
   "links": [
     {
+      "source": "content/knowledge/个人成长/学习笔记沉淀流程.md",
+      "target": "content/knowledge/航空发动机/布雷顿循环.md",
+      "label": "布雷顿循环"
+    },
+    {
+      "source": "content/knowledge/个人成长/学习笔记沉淀流程.md",
+      "target": "content/knowledge/工程工具/标准大气模型.md",
+      "label": "标准大气模型"
+    },
+    {
+      "source": "content/knowledge/个人成长/学习笔记沉淀流程.md",
+      "target": "content/knowledge/课程/工程热力学复盘.md",
+      "label": "工程热力学复盘"
+    },
+    {
       "source": "content/knowledge/个人成长/长期主义与反馈回路.md",
       "target": "content/knowledge/阅读/刻意练习.md",
       "label": "刻意练习"
@@ -313,7 +378,12 @@
       "label": "长期主义与反馈回路"
     }
   ],
-  "unresolved": [],
+  "unresolved": [
+    {
+      "source": "content/knowledge/个人成长/学习笔记沉淀流程.md",
+      "target": "双链"
+    }
+  ],
   "tree": {
     "type": "folder",
     "name": "knowledge",
@@ -322,6 +392,18 @@
         "type": "folder",
         "name": "个人成长",
         "children": [
+          {
+            "type": "file",
+            "name": "学习笔记沉淀流程.md",
+            "title": "学习笔记沉淀流程",
+            "path": "content/knowledge/个人成长/学习笔记沉淀流程.md",
+            "tags": [
+              "知识管理",
+              "学习方法",
+              "个人主页"
+            ],
+            "domain": "个人成长"
+          },
           {
             "type": "file",
             "name": "长期主义与反馈回路.md",
@@ -436,6 +518,18 @@
       "count": 2
     },
     {
+      "name": "知识管理",
+      "count": 1
+    },
+    {
+      "name": "学习方法",
+      "count": 1
+    },
+    {
+      "name": "个人主页",
+      "count": 1
+    },
+    {
       "name": "个人成长",
       "count": 1
     },
@@ -486,12 +580,12 @@
   ],
   "domains": [
     {
-      "name": "航空发动机",
+      "name": "个人成长",
       "count": 2
     },
     {
-      "name": "个人成长",
-      "count": 1
+      "name": "航空发动机",
+      "count": 2
     },
     {
       "name": "工程工具",

@@ -184,6 +184,10 @@ function renderHome() {
       </div>
 
       <aside class="hero-side">
+        <figure class="portrait-card">
+          <img class="profile-photo" src="${escapeAttr(profile.photo)}" alt="${escapeAttr(profile.photoAlt || `${profile.name} profile photo`)}" />
+          <figcaption>近期旅行照。现在头发略长一点。</figcaption>
+        </figure>
         <div class="profile-seal">
           <div class="sigil-large">${escapeHtml(profile.avatarText || '航')}</div>
           <p>BUAA / Flight Propulsion</p>
@@ -193,6 +197,10 @@ function renderHome() {
           ${profileRow('位置', profile.location)}
           ${profileRow('邮箱', profile.email)}
           ${profileRow('GitHub', `<a href="${escapeAttr(profile.github)}" target="_blank" rel="noreferrer">${escapeHtml(profile.handle || profile.github)}</a>`, true)}
+        </div>
+        <div class="companion-mini">
+          <img src="assets/img/pet-companions.svg" alt="猫猫狗狗陪读小插画" />
+          <p>猫猫狗狗负责提醒：做研究也要晒太阳。</p>
         </div>
       </aside>
     </section>
@@ -384,6 +392,7 @@ function renderLifeHub() {
 
 function renderKnowledge() {
   const index = state.knowledge;
+  const noteWorkflow = state.site.noteWorkflow || [];
   const firstRecord = index.records.find(record => ['航空发动机', '工程工具', '课程'].includes(record.domain)) || index.records[0];
   app.innerHTML = `
     <section class="page">
@@ -398,6 +407,24 @@ function renderKnowledge() {
           <span class="pill">${index.stats.links} links</span>
           <span class="pill">${index.stats.domains} domains</span>
         </div>
+      </div>
+
+      <div class="workflow-panel">
+        <div>
+          <p class="card-kicker">Study Note Pipeline</p>
+          <h2>学习笔记沉淀路线</h2>
+          <p>先把课堂、论文和项目调试记录收进 inbox，再提炼成单概念卡片，最后用双链和项目页面连接起来。</p>
+        </div>
+        <img src="assets/img/pet-companions.svg" alt="猫猫狗狗陪读小插画" />
+      </div>
+      <div class="workflow-grid">
+        ${noteWorkflow.map(step => `
+          <article class="workflow-step">
+            <p class="card-kicker">${escapeHtml(step.stage)}</p>
+            <h3>${escapeHtml(step.title)}</h3>
+            <p>${escapeHtml(step.detail)}</p>
+          </article>
+        `).join('')}
       </div>
 
       <div class="knowledge-layout">

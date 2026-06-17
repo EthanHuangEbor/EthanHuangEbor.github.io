@@ -245,6 +245,7 @@ code {
   line-height: 1.08;
   letter-spacing: 0;
   font-weight: 820;
+  overflow-wrap: anywhere;
 }
 
 .hero-title span {
@@ -258,6 +259,7 @@ code {
   font-size: clamp(16px, 1.8vw, 19px);
   line-height: 1.9;
   margin: 0 0 28px;
+  overflow-wrap: anywhere;
 }
 
 .hero-actions,
@@ -358,6 +360,28 @@ code {
   gap: 18px;
 }
 
+.portrait-card {
+  margin: 0;
+}
+
+.profile-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 58%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-soft);
+}
+
+.portrait-card figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
 .profile-seal {
   display: grid;
   gap: 12px;
@@ -419,6 +443,30 @@ code {
   line-height: 1.55;
   overflow-wrap: anywhere;
   word-break: break-word;
+}
+
+.companion-mini {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.companion-mini img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.companion-mini p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 13px;
+  line-height: 1.6;
 }
 
 .section-header {
@@ -651,6 +699,66 @@ code {
   grid-template-columns: 300px minmax(0, 1fr);
   gap: 18px;
   align-items: start;
+}
+
+.workflow-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 252, 0.92);
+  box-shadow: var(--shadow);
+}
+
+.workflow-panel h2 {
+  margin: 8px 0 0;
+  color: var(--ink);
+  font-size: 28px;
+  line-height: 1.15;
+}
+
+.workflow-panel p {
+  max-width: 720px;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+.workflow-panel img {
+  width: 100%;
+  height: auto;
+}
+
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.workflow-step {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 252, 0.92);
+}
+
+.workflow-step h3 {
+  margin: 8px 0;
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.workflow-step p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 13px;
+  line-height: 1.72;
 }
 
 .index-panel,
@@ -1120,6 +1228,7 @@ code {
   .hero,
   .cv-intro,
   .knowledge-layout,
+  .workflow-panel,
   .grid-2 {
     grid-template-columns: 1fr;
   }
@@ -1136,6 +1245,7 @@ code {
   .project-grid,
   .life-grid,
   .grid-3,
+  .workflow-grid,
   .module-grid,
   .workshop-grid {
     grid-template-columns: 1fr;
@@ -1152,7 +1262,7 @@ code {
   }
 
   .hero-title {
-    font-size: clamp(32px, 10vw, 48px);
+    font-size: clamp(30px, 9vw, 40px);
   }
 
   .section-header {
@@ -1173,6 +1283,10 @@ code {
   .project-strip {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .companion-mini {
+    grid-template-columns: 1fr;
   }
 
   .life-toolbar,

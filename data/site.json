@@ -3,6 +3,8 @@
     "name": "Ethan Huang",
     "handle": "@EthanHuangEbor",
     "avatarText": "航",
+    "photo": "assets/img/profile-bruges.jpg",
+    "photoAlt": "Ethan Huang 在布鲁日河边的照片",
     "title": "北航 · 飞行器动力工程 · 大二",
     "tagline": "科研经历优先呈现，知识花园长期生长，生活记录给朋友慢慢翻。",
     "location": "Beijing / BUAA",
@@ -167,6 +169,28 @@
       "title": "致谢",
       "reason": "朋友访问时可以看到更具体、更有人味的吃喝记录。",
       "implementation": "分成好吃的和好喝的，记录地点、风味、价格和复访意愿。"
+    }
+  ],
+  "noteWorkflow": [
+    {
+      "stage": "01 Capture",
+      "title": "先把原始材料收进 inbox",
+      "detail": "每节课、每篇论文、每次项目调试先只做一张粗笔记：来源、问题、关键词、3 条事实、1 个疑问。不要一开始追求排版。"
+    },
+    {
+      "stage": "02 Distill",
+      "title": "48 小时内提炼成知识卡片",
+      "detail": "把粗笔记改写成一个明确问题：它解决什么、假设是什么、公式或代码如何使用、有什么边界。每张卡只讲一个概念。"
+    },
+    {
+      "stage": "03 Link",
+      "title": "用双链连接课程、项目和论文",
+      "detail": "每篇卡片至少链接 2 个旧节点，例如 [[布雷顿循环]]、[[标准大气模型]]。链接不是装饰，而是提醒自己这个知识将来在哪里复用。"
+    },
+    {
+      "stage": "04 Publish",
+      "title": "按周公开一小批可展示内容",
+      "detail": "每周挑 1-3 张最清楚的卡片发布到主页：删掉私密过程，保留问题、方法、结论和可复用代码/图表。"
     }
   ],
   "timeline": [

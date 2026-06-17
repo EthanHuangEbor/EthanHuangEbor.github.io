@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 220" role="img" aria-labelledby="title desc">
+  <title id="title">Cat and dog companions</title>
+  <desc id="desc">A quiet line illustration of a cat and a dog sitting beside study notes.</desc>
+  <rect x="8" y="8" width="504" height="204" rx="8" fill="#fffffc" stroke="#d4ddd3" stroke-width="2"/>
+  <path d="M40 174h440" stroke="#d4ddd3" stroke-width="2" stroke-linecap="round"/>
+  <g fill="none" stroke="#246a73" stroke-linecap="round" stroke-linejoin="round" stroke-width="6">
+    <path d="M125 83l-26-30-14 44"/>
+    <path d="M142 82l26-30 14 44"/>
+    <path d="M82 119c0-38 25-63 60-63s60 25 60 63c0 34-23 57-60 57s-60-23-60-57z"/>
+    <path d="M112 120h.1M172 120h.1"/>
+    <path d="M134 138c6 6 10 6 16 0"/>
+    <path d="M80 136c-20 2-35 10-48 22"/>
+    <path d="M85 152c-19 9-30 20-39 35"/>
+    <path d="M204 136c20 2 35 10 48 22"/>
+    <path d="M199 152c19 9 30 20 39 35"/>
+  </g>
+  <g fill="none" stroke="#9f4f43" stroke-linecap="round" stroke-linejoin="round" stroke-width="6">
+    <path d="M316 84c10-21 32-32 58-30 31 3 54 28 54 64 0 35-25 58-66 58-39 0-66-23-66-58 0-15 5-27 14-37"/>
+    <path d="M321 84c-18-17-42-8-40 16 1 20 21 26 38 12"/>
+    <path d="M379 78c18-22 47-16 47 14"/>
+    <path d="M327 118h.1M394 118h.1"/>
+    <path d="M353 137c8 8 18 8 26 0"/>
+    <path d="M302 158c-20 1-34 10-45 25"/>
+    <path d="M415 158c20 1 34 10 45 25"/>
+  </g>
+  <g fill="none" stroke="#7a6a36" stroke-linecap="round" stroke-linejoin="round" stroke-width="5">
+    <path d="M228 70h54v82h-54z"/>
+    <path d="M242 92h26M242 112h26M242 132h18"/>
+  </g>
+</svg>
