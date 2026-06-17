@@ -7,40 +7,40 @@ const state = {
 };
 
 const routes = {
-  home: { label: '星塔入口' },
+  home: { label: 'Home' },
   cv: { label: 'CV / 项目' },
-  knowledge: { label: '知识图谱' },
-  eat: { label: '吃' },
-  drink: { label: '喝' },
-  play: { label: '玩' },
-  diary: { label: '乐 / 日记' },
-  workshop: { label: '动力工坊' },
-  about: { label: '设计说明' }
+  knowledge: { label: 'Knowledge' },
+  eat: { label: 'Field / Eat' },
+  drink: { label: 'Field / Drink' },
+  play: { label: 'Field / Play' },
+  diary: { label: 'Field / Diary' },
+  workshop: { label: 'Future Lab' },
+  about: { label: 'About' }
 };
 
 const categoryInfo = {
   eat: {
-    title: '吃 · 味觉地图',
-    eyebrow: 'Taste Atlas',
-    description: '记录地点、菜品、价格、评分和复访条件。目标不是写美食流水账，而是建立自己的味觉判断。',
+    title: 'Field Notes / Eat',
+    eyebrow: 'Private-but-public',
+    description: '一些关于味觉、地点和判断的小记录。它们不放在主导航里，但仍然保留在这个站点的暗处。',
     empty: '还没有吃的记录。向 content/life/eat/ 添加 Markdown 即可。'
   },
   drink: {
-    title: '喝 · 风味坐标',
-    eyebrow: 'Flavor Notes',
-    description: '记录酒、茶、咖啡或其他饮品的风味坐标。这里更重视香气、口感、场景和复盘，不鼓励过量饮酒。',
+    title: 'Field Notes / Drink',
+    eyebrow: 'Private-but-public',
+    description: '饮品和风味坐标。这里更像个人观察，而不是主页的第一层身份。',
     empty: '还没有喝的记录。向 content/life/drink/ 添加 Markdown 即可。'
   },
   play: {
-    title: '玩 · 恢复能量的计划池',
-    eyebrow: 'Playground',
-    description: '可记录展览、运动、短途旅行、桌游、城市漫游。先保留为空白，未来按体验质量补充。',
+    title: 'Field Notes / Play',
+    eyebrow: 'Private-but-public',
+    description: '恢复能量的计划池。它应该被发现，而不是被推销。',
     empty: '这里暂时留空。你可以先把想玩的清单写进 content/life/play/。'
   },
   diary: {
-    title: '乐 · 日记与复盘',
-    eyebrow: 'Diary',
-    description: '“乐”不是单纯快乐，而是记录情绪、判断、复盘和恢复力。适合写周记、月记和学期复盘。',
+    title: 'Field Notes / Diary',
+    eyebrow: 'Private-but-public',
+    description: '日记、复盘和恢复力。它们是知识花园的地下水系。',
     empty: '还没有日记。向 content/life/diary/ 添加 Markdown 即可。'
   }
 };
@@ -97,9 +97,9 @@ function bindGlobalEvents() {
 
 function hydrateChrome() {
   const profile = state.site.profile;
-  document.title = `${profile.name} · Aether Archive`;
+  document.title = `${profile.name} · Engineering Garden`;
   document.getElementById('brandAvatar').textContent = profile.avatarText || '航';
-  document.getElementById('brandName').textContent = profile.name || 'Aether Archive';
+  document.getElementById('brandName').textContent = profile.name || 'Ethan Huang';
   document.getElementById('brandTitle').textContent = profile.title || 'BUAA · Propulsion';
 }
 
@@ -144,18 +144,20 @@ function renderHome() {
     ...stat,
     value: stat.value === 'auto' ? String(state.knowledge.stats.nodes) : stat.value
   }));
+  const recentNotes = [...state.knowledge.records]
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
+    .slice(0, 4);
 
   app.innerHTML = `
     <section class="page hero">
       <div class="hero-main">
         <div>
-          <p class="eyebrow">Aether Archive / Personal Observatory</p>
-          <h1 class="hero-title">${escapeHtml(profile.name)}<span>的星塔档案</span></h1>
-          <p class="hero-subtitle">${escapeHtml(profile.tagline)}</p>
+          <p class="eyebrow">Engineering Garden</p>
+          <h1 class="hero-title">飞行动力、项目复盘与可生长的知识节点。</h1>
+          <p class="hero-subtitle">我是 ${escapeHtml(profile.name)}，${escapeHtml(profile.title)}。这个站点用来沉淀专业学习、工程项目和长期复盘：少一点装饰，多一点可追溯的判断。</p>
           <div class="hero-actions">
-            <a class="button primary" href="#/knowledge">打开知识图谱</a>
-            <a class="button" href="#/cv">查看 CV 与项目</a>
-            <a class="button ghost" href="#/workshop">进入动力工坊</a>
+            <a class="button primary" href="#/knowledge">进入知识花园</a>
+            <a class="button" href="#/cv">查看项目与 CV</a>
           </div>
         </div>
         <div class="hero-footer">
@@ -170,7 +172,10 @@ function renderHome() {
       </div>
 
       <aside class="hero-side">
-        <div class="profile-seal"><div class="sigil-large">${escapeHtml(profile.avatarText || '航')}</div></div>
+        <div class="profile-seal">
+          <div class="sigil-large">${escapeHtml(profile.avatarText || '航')}</div>
+          <p>BUAA / Flight Propulsion</p>
+        </div>
         <div class="profile-list">
           ${profileRow('身份', profile.title)}
           ${profileRow('位置', profile.location)}
@@ -180,34 +185,59 @@ function renderHome() {
       </aside>
     </section>
 
-    <section class="page" style="margin-top: 24px;">
+    <section class="page section-stack">
       <div class="section-header">
         <div>
-          <p class="eyebrow">Operating Principles</p>
-          <h2>主页的底层规则</h2>
-          <p>它不是一次性作品集，而是一个长期更新的个人操作系统：项目要能追溯，笔记要能连接，生活要能复盘。</p>
+          <p class="eyebrow">Garden Structure</p>
+          <h2>公开层只放三件事</h2>
+          <p>项目经历、知识节点、成长轨迹。其他生活记录仍然存在，但不抢占第一层身份。</p>
         </div>
       </div>
       <div class="grid-3">
         ${principles.map((item, index) => `
           <div class="panel">
-            <p class="card-kicker">Rule ${String(index + 1).padStart(2, '0')}</p>
-            <p style="position: relative; color: var(--text-soft); line-height: 1.85; font-size: 16px;">${escapeHtml(item)}</p>
+            <p class="card-kicker">Principle ${String(index + 1).padStart(2, '0')}</p>
+            <p>${escapeHtml(item)}</p>
           </div>
         `).join('')}
       </div>
-      <div class="section-header" style="margin-top: 34px;">
+
+      <div class="section-header">
         <div>
-          <p class="eyebrow">Next Sections</p>
-          <h2>后续可扩展模块</h2>
+          <p class="eyebrow">Recent Nodes</p>
+          <h2>最近的知识节点</h2>
+          <p>这些节点来自 <code>content/knowledge</code>，由脚本自动生成索引。</p>
         </div>
       </div>
       <div class="module-grid">
-        ${candidateSections.slice(0, 4).map(module => moduleCard(module)).join('')}
+        ${recentNotes.map(note => `
+          <a class="module-card note-card" href="#/knowledge" data-note-path="${escapeAttr(note.path)}">
+            <p class="card-kicker">${escapeHtml(note.domain || 'Note')} / ${escapeHtml(note.date || 'undated')}</p>
+            <h3>${escapeHtml(note.title)}</h3>
+            <p>${escapeHtml(note.summary || 'No summary yet.')}</p>
+          </a>
+        `).join('')}
       </div>
-      <p class="footer-note">视觉方向采用“魔法学院式卷轴 + 中式印章 + 航空星图”的混合语言，没有使用任何第三方图片素材。</p>
+
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Future System</p>
+          <h2>后续扩展方向</h2>
+        </div>
+      </div>
+      <div class="module-grid">
+        ${candidateSections.filter(module => !['灵感档案', 'Field Notes'].includes(module.title)).slice(0, 4).map(moduleCard).join('')}
+      </div>
+      <p class="footer-note">有些内容不在主导航里。若你知道自己在找什么，可以从 <a href="#/about">About</a> 往深处走。</p>
     </section>
   `;
+
+  document.querySelectorAll('[data-note-path]').forEach(link => {
+    link.addEventListener('click', () => {
+      const path = link.dataset.notePath;
+      setTimeout(() => openKnowledgeArticle(path), 120);
+    });
+  });
 }
 
 function renderCv() {
@@ -281,14 +311,14 @@ function renderCv() {
 
 function renderKnowledge() {
   const index = state.knowledge;
-  const firstRecord = index.records[0];
+  const firstRecord = index.records.find(record => ['航空发动机', '工程工具', '课程'].includes(record.domain)) || index.records[0];
   app.innerHTML = `
     <section class="page">
       <div class="section-header">
         <div>
-          <p class="eyebrow">Obsidian-like Graph</p>
-          <h1>知识图谱</h1>
-          <p>Markdown 文件仍按文件夹保存；构建脚本会抽取标题、标签、摘要和 <code>[[双链]]</code>，前端显示目录树和可点击的节点图谱。</p>
+          <p class="eyebrow">Knowledge Garden</p>
+          <h1>知识花园</h1>
+          <p>Markdown 文件按领域保存；构建脚本抽取标题、标签、摘要和 <code>[[双链]]</code>，形成可搜索的目录和轻量图谱。</p>
         </div>
         <div class="action-row">
           <span class="pill">${index.stats.nodes} nodes</span>
@@ -299,8 +329,8 @@ function renderKnowledge() {
 
       <div class="knowledge-layout">
         <aside class="index-panel">
-          <p class="card-kicker">Archive Tree</p>
-          <h2 style="position: relative; margin: 10px 0 14px; font-family: var(--font-serif);">文件层级</h2>
+          <p class="card-kicker">Archive</p>
+          <h2>文件层级</h2>
           <input class="search-input" id="treeSearch" placeholder="搜索标题、标签、文件夹" />
           <div class="tree" id="knowledgeTree"></div>
         </aside>
@@ -309,8 +339,8 @@ function renderKnowledge() {
           <section class="graph-wrap">
             <div class="graph-toolbar">
               <div>
-                <p class="card-kicker">Graph View</p>
-                <h2 style="position: relative; margin: 8px 0 0; font-family: var(--font-serif);">节点星图</h2>
+                <p class="card-kicker">Graph</p>
+                <h2>节点关系</h2>
               </div>
               <div class="action-row">
                 <input class="search-input" id="graphSearch" placeholder="筛选节点" />
@@ -322,12 +352,12 @@ function renderKnowledge() {
             </div>
             <div class="graph-canvas-box">
               <canvas id="knowledgeCanvas"></canvas>
-              <div class="graph-hint">拖动鼠标查看节点；点击节点打开笔记。节点连线来自 Markdown 中的 [[双链]]。</div>
+              <div class="graph-hint">点击节点打开笔记；连线来自 Markdown 双链。</div>
             </div>
           </section>
 
           <section class="reader-panel" id="readerPanel">
-            <div class="blank-slate"><h3>选择一篇笔记</h3><p>从左侧目录或上方图谱打开。</p></div>
+            <div class="blank-slate"><h3>选择一篇笔记</h3><p>从目录或图谱打开。</p></div>
           </section>
         </div>
       </div>
@@ -422,63 +452,32 @@ function renderWorkshop() {
     <section class="page">
       <div class="section-header">
         <div>
-          <p class="eyebrow">Propulsion Workshop</p>
-          <h1>动力工坊</h1>
-          <p>这是为飞行器动力工程身份新增的模块：把专业学习沉淀为可演示工具。当前先放三个轻量计算器，未来可以扩展成完整循环计算与实验数据处理页面。</p>
+          <p class="eyebrow">Future Lab</p>
+          <h1>工程小工具暂存区</h1>
+          <p>这一页先不放交互计算器。后续等需求明确后，再把标准大气、循环计算、实验数据处理等工具做成独立模块。</p>
         </div>
       </div>
 
-      <div class="workshop-grid">
-        <section class="tool-card">
-          <p class="card-kicker">ISA</p>
-          <h3>标准大气计算器</h3>
-          <p>输入高度，估算 0—20 km 范围内的温度、压力、密度和声速。</p>
-          <div class="calc-form" id="isaCalc">
-            <label>高度 h / m <input class="calc-input" type="number" value="5000" min="0" max="20000" step="100" data-isa-alt /></label>
-            <div class="calc-output" data-isa-output></div>
-          </div>
-        </section>
-
-        <section class="tool-card">
-          <p class="card-kicker">Mach</p>
-          <h3>马赫数估算</h3>
-          <p>输入速度和环境温度，估算马赫数。适合把飞行条件快速转化为无量纲量。</p>
-          <div class="calc-form" id="machCalc">
-            <div class="calc-row">
-              <label>速度 V / m·s⁻¹ <input class="calc-input" type="number" value="250" min="0" step="1" data-mach-v /></label>
-              <label>温度 T / ℃ <input class="calc-input" type="number" value="15" step="1" data-mach-t /></label>
-            </div>
-            <div class="calc-output" data-mach-output></div>
-          </div>
-        </section>
-
-        <section class="tool-card">
-          <p class="card-kicker">Brayton</p>
-          <h3>理想布雷顿循环效率</h3>
-          <p>输入压比和比热比，估算理想循环热效率。真实发动机还需要考虑部件效率和总压损失。</p>
-          <div class="calc-form" id="braytonCalc">
-            <div class="calc-row">
-              <label>压比 πc <input class="calc-input" type="number" value="12" min="1.01" step="0.1" data-brayton-pr /></label>
-              <label>比热比 γ <input class="calc-input" type="number" value="1.4" min="1.1" max="1.67" step="0.01" data-brayton-gamma /></label>
-            </div>
-            <div class="calc-output" data-brayton-output></div>
-          </div>
-        </section>
-
+      <div class="module-grid">
         <section class="tool-card">
           <p class="card-kicker">Roadmap</p>
           <h3>后续工程小工具</h3>
-          <ul class="clean-list vertical" style="position: relative;">
+          <ul class="clean-list vertical">
             <li>涡喷/涡扇循环状态表与 T-s 示意图。</li>
             <li>压气机工作点与喘振裕度示意。</li>
             <li>实验 CSV 自动拟合、误差传播和图表导出。</li>
             <li>课程公式卡：输入变量、单位、适用条件、常见误区。</li>
           </ul>
         </section>
+        <section class="tool-card">
+          <p class="card-kicker">Policy</p>
+          <h3>先写清需求，再做交互</h3>
+          <p>每个工具上线前先写一篇说明笔记：输入是什么、输出是什么、公式来源是什么、适用边界在哪里。这样工具不会变成漂亮但不可信的小玩具。</p>
+          <a class="repo-link" href="#/knowledge">回到知识花园</a>
+        </section>
       </div>
     </section>
   `;
-  bindWorkshopCalculators();
 }
 
 function renderAbout() {
@@ -487,47 +486,59 @@ function renderAbout() {
     <section class="page">
       <div class="section-header">
         <div>
-          <p class="eyebrow">Design System</p>
-          <h1>设计说明与更新组织</h1>
-          <p>这版主页按“公开展示层 + Markdown 内容层 + 自动索引层”组织。你平时只需要写内容；展示、目录和图谱由脚本生成。</p>
+          <p class="eyebrow">About This Site</p>
+          <h1>一个清爽的工程知识花园</h1>
+          <p>公开层聚焦工程能力、项目复盘和知识节点；生活娱乐内容被降到第二层，保留一点可探索性。</p>
         </div>
       </div>
 
       <div class="grid-2">
         <div class="panel">
-          <p class="card-kicker">Visual Direction</p>
-          <h2 style="position: relative; font-family: var(--font-serif);">魔法学院式卷轴 × 中式印章 × 航空星图</h2>
-          <ul class="clean-list vertical" style="position: relative;">
-            <li>哈利波特式氛围只取“卷轴、星图、学院档案、符文边框”的抽象质感，不使用官方素材。</li>
-            <li>中式部分落在金石印章、墨色层次、玉色点缀和卷册感。</li>
-            <li>专业身份落在节点图谱、工程计算器、项目问题意识和航迹时间线。</li>
+          <p class="card-kicker">Design Direction</p>
+          <h2>清爽工程感 + 个人知识花园</h2>
+          <ul class="clean-list vertical">
+            <li>浅色底、细网格、低饱和强调色，优先服务阅读和可信感。</li>
+            <li>首页只放身份、工程方向、项目入口和最近知识节点。</li>
+            <li>保留一点个人气味，但不让娱乐内容抢掉专业第一印象。</li>
           </ul>
         </div>
         <div class="panel">
           <p class="card-kicker">Update Protocol</p>
-          <h2 style="position: relative; font-family: var(--font-serif);">推荐更新协议</h2>
-          <ul class="clean-list vertical" style="position: relative;">
+          <h2>推荐更新协议</h2>
+          <ul class="clean-list vertical">
             <li>项目：更新 <span class="inline-code">data/site.json</span> 的 projects 字段。</li>
             <li>知识：向 <span class="inline-code">content/knowledge/领域/标题.md</span> 添加笔记，并使用 <span class="inline-code">[[双链]]</span> 连接旧笔记。</li>
-            <li>生活：向 <span class="inline-code">content/life/eat</span>、<span class="inline-code">drink</span>、<span class="inline-code">play</span>、<span class="inline-code">diary</span> 添加 Markdown。</li>
+            <li>隐藏生活记录：继续写在 <span class="inline-code">content/life</span>，但不放入主导航。</li>
             <li>发布：push 到 GitHub 后，由 Actions 运行脚本并部署到 Pages。</li>
           </ul>
         </div>
       </div>
 
-      <div class="section-header" style="margin-top: 34px;">
+      <div class="section-header">
         <div>
-          <p class="eyebrow">Concrete Extensions</p>
-          <h2>基于你身份推荐补充的模块</h2>
+          <p class="eyebrow">Future Extensions</p>
+          <h2>后续补充方向</h2>
         </div>
       </div>
       <div class="module-grid">
-        ${candidateSections.map(moduleCard).join('')}
+        ${candidateSections.filter(module => !['灵感档案', 'Field Notes'].includes(module.title)).map(moduleCard).join('')}
       </div>
 
-      <div class="panel" style="margin-top: 22px;">
+      <div class="field-notes panel">
+        <p class="card-kicker">Field Notes</p>
+        <h2>一点藏起来的生活记录</h2>
+        <p>如果有人真的翻到这里，可以继续往下看。</p>
+        <div class="field-links">
+          <a href="#/eat">eat</a>
+          <a href="#/drink">drink</a>
+          <a href="#/play">play</a>
+          <a href="#/diary">diary</a>
+        </div>
+      </div>
+
+      <div class="panel">
         <p class="card-kicker">Repository Structure</p>
-        <pre style="position: relative; white-space: pre-wrap; line-height: 1.7;"><code>.
+        <pre><code>.
 ├── index.html
 ├── assets/
 │   ├── css/style.css
@@ -990,7 +1001,7 @@ class KnowledgeGraph {
     this.selected = null;
     this.filter = { query: '', domain: '' };
     this.running = true;
-    this.colors = ['#d5b15f', '#74a99b', '#a87a67', '#668bb7', '#c9d18f', '#c48484', '#9f91c7'];
+    this.colors = ['#246a73', '#9f4f43', '#7a6a36', '#4f6f52', '#2f5f9e', '#6b6478', '#8a6f3a'];
     this.domainColor = new Map();
 
     this.nodes = records.map((record, index) => {
@@ -1146,8 +1157,8 @@ class KnowledgeGraph {
     const ctx = this.ctx;
     ctx.clearRect(0, 0, this.width, this.height);
     ctx.save();
-    ctx.globalAlpha = 0.22;
-    ctx.strokeStyle = 'rgba(241, 212, 131, 0.32)';
+    ctx.globalAlpha = 0.5;
+    ctx.strokeStyle = 'rgba(174, 189, 175, 0.34)';
     ctx.lineWidth = 1;
     for (let x = 20; x < this.width; x += 42) {
       ctx.beginPath();
@@ -1168,7 +1179,7 @@ class KnowledgeGraph {
       ctx.beginPath();
       ctx.moveTo(link.source.x, link.source.y);
       ctx.lineTo(link.target.x, link.target.y);
-      ctx.strokeStyle = `rgba(220, 190, 120, ${alpha})`;
+      ctx.strokeStyle = `rgba(36, 106, 115, ${alpha})`;
       ctx.lineWidth = 1;
       ctx.stroke();
     }
@@ -1179,18 +1190,18 @@ class KnowledgeGraph {
       ctx.globalAlpha = node.alpha;
       ctx.beginPath();
       ctx.arc(node.x, node.y, node.r + (isHot ? 5 : 0), 0, Math.PI * 2);
-      ctx.fillStyle = isHot ? 'rgba(241, 212, 131, 0.18)' : 'rgba(255, 255, 255, 0.05)';
+      ctx.fillStyle = isHot ? 'rgba(36, 106, 115, 0.14)' : 'rgba(255, 255, 252, 0.82)';
       ctx.fill();
       ctx.beginPath();
       ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
       ctx.fillStyle = node.color;
       ctx.fill();
       ctx.lineWidth = isHot ? 2.4 : 1.3;
-      ctx.strokeStyle = isHot ? '#fff2b5' : 'rgba(255, 255, 255, 0.58)';
+      ctx.strokeStyle = isHot ? '#17211d' : 'rgba(23, 33, 29, 0.42)';
       ctx.stroke();
       if (isHot || node.alpha > 0.85) {
         ctx.font = isHot ? '700 13px system-ui' : '12px system-ui';
-        ctx.fillStyle = isHot ? '#fff2b5' : 'rgba(248, 241, 220, 0.78)';
+        ctx.fillStyle = isHot ? '#17211d' : 'rgba(36, 48, 43, 0.76)';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         ctx.fillText(truncate(node.title, isHot ? 18 : 10), node.x, node.y + node.r + 7);
@@ -1210,12 +1221,12 @@ class KnowledgeGraph {
     const x = clamp(node.x + 16, 12, this.width - width - 12);
     const y = clamp(node.y - 42, 12, this.height - 56);
     ctx.save();
-    ctx.fillStyle = 'rgba(8, 10, 16, 0.92)';
-    ctx.strokeStyle = 'rgba(241, 212, 131, 0.46)';
+    ctx.fillStyle = 'rgba(255, 255, 252, 0.96)';
+    ctx.strokeStyle = 'rgba(36, 106, 115, 0.34)';
     roundedRect(ctx, x, y, width, 36, 12);
     ctx.fill();
     ctx.stroke();
-    ctx.fillStyle = '#f8f1dc';
+    ctx.fillStyle = '#17211d';
     ctx.font = '12px system-ui';
     ctx.textBaseline = 'middle';
     ctx.fillText(truncate(text, 34), x + 14, y + 18);

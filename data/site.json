@@ -4,13 +4,13 @@
     "handle": "@EthanHuangEbor",
     "avatarText": "航",
     "title": "北航 · 飞行器动力工程 · 大二",
-    "tagline": "把推力、阅读、生活审美和长期主义收束进同一张星图。",
+    "tagline": "把飞行动力学习、工程项目和长期复盘整理成可维护的知识花园。",
     "location": "Beijing / BUAA",
     "email": "",
     "github": "https://github.com/EthanHuangEbor",
     "repo": "https://github.com/EthanHuangEbor/EthanHuangEbor.github.io",
     "cvPdf": "#",
-    "status": "正在建立个人知识系统：航空发动机 / 工程计算 / 阅读笔记 / 味觉地图"
+    "status": "正在建立个人知识系统：航空发动机 / 工程计算 / 阅读笔记 / 项目复盘"
   },
   "heroStats": [
     {
@@ -115,9 +115,9 @@
       "name": "Campus Taste Atlas",
       "type": "生活数据化",
       "status": "active",
-      "problem": "吃喝体验通常只停留在印象里，时间一长无法复盘口味、价格、场景和推荐度。",
-      "solution": "用 Markdown 卡片记录地点、菜品、评分、价格、适合场景和复访意愿，并在站内按标签筛选。",
-      "result": "形成个人味觉地图，也给朋友推荐时提供依据。",
+      "problem": "生活判断通常只停留在印象里，时间一长无法复盘口味、价格、场景和推荐度。",
+      "solution": "用 Markdown 卡片记录地点、物品、评分、价格、适合场景和复访意愿，并在站内按标签筛选。",
+      "result": "形成一组隐藏的 field notes，不占据主页第一层身份。",
       "stack": [
         "Markdown",
         "Rating Schema",
@@ -148,9 +148,9 @@
       "implementation": "按学期记录课程、项目、比赛、实习准备和关键复盘。"
     },
     {
-      "title": "灵感档案",
-      "reason": "保留哈利波特式奇幻审美与中式纹样偏好，形成稳定个人视觉语言。",
-      "implementation": "收集配色、字体、版式、纹样、展板参考，服务简历和作品集。"
+      "title": "Field Notes",
+      "reason": "保留生活记录与审美判断，但不让它们抢占工程主页的第一印象。",
+      "implementation": "继续写在 content/life 下，从 About 页保留低调入口。"
     }
   ],
   "timeline": [

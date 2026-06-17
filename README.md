@@ -1,13 +1,13 @@
 # Ethan Huang · 个人主页
 
-这是一个面向 GitHub Pages 的静态个人主页，适合把 CV、项目经历、Markdown 知识库、吃喝玩乐记录和专业工程小工具放在同一个网站中。
+这是一个面向 GitHub Pages 的静态个人主页，主线是 CV、项目经历和 Markdown 知识花园；生活记录保留为隐藏的 field notes，工程小工具等需求明确后再逐步开发。
 
 ## 主要功能
 
 - CV / 项目：在 `data/site.json` 中维护项目卡片，每个项目包含问题、方法、结果和 repo 链接。
 - 知识图谱：在 `content/knowledge/` 中维护 Markdown 笔记，使用 `[[笔记标题]]` 建立双链。构建脚本会生成目录树和图谱索引。
-- 吃喝玩乐：在 `content/life/eat`、`drink`、`play`、`diary` 下添加 Markdown 卡片，前端自动显示为记录卡。
-- 动力工坊：内置标准大气、马赫数、理想布雷顿循环效率三个轻量计算器，后续可扩展为专业展示区。
+- Field notes：在 `content/life/eat`、`drink`、`play`、`diary` 下添加 Markdown 卡片；入口藏在 About 页。
+- 未来工程工具：标准大气、马赫数、布雷顿循环等交互工具先保留为路线图，后续按具体需求开发。
 - 自动部署：`.github/workflows/pages.yml` 会在 push 到 `main` 时生成索引并部署到 GitHub Pages。
 
 ## 本地预览
@@ -84,7 +84,7 @@ data/knowledge-index.json
 data/life-index.json
 ```
 
-## 添加吃喝玩乐记录
+## 添加隐藏生活记录
 
 例如新增一次吃的记录：
 
