@@ -1,6 +1,6 @@
 # Ethan Huang · 个人主页
 
-这是一个面向 GitHub Pages 的静态个人主页，主线是 CV、项目经历和 Markdown 知识花园；生活记录保留为隐藏的 field notes，工程小工具等需求明确后再逐步开发。
+这是一个面向 GitHub Pages 的静态个人主页，主线是 CV、项目经历和 Markdown 知识图谱；生活记录保留为隐藏的 field notes，工程小工具等需求明确后再逐步开发。
 
 ## 主要功能
 

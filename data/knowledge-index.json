@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-17T15:37:55.550Z",
+  "generatedAt": "2026-06-22T11:35:22.690Z",
   "stats": {
     "nodes": 7,
     "links": 16,
@@ -47,7 +47,7 @@
         },
         {
           "depth": 2,
-          "text": "5. Review：每月做一次知识花园体检"
+          "text": "5. Review：每月做一次知识图谱体检"
         }
       ],
       "wikilinks": [

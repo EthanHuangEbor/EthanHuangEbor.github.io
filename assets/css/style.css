@@ -210,6 +210,7 @@ code {
 }
 
 .page {
+  width: 100%;
   max-width: 1160px;
   margin: 0 auto;
   min-width: 0;
@@ -241,6 +242,7 @@ code {
 }
 
 .hero-main {
+  min-width: 0;
   padding: clamp(28px, 5vw, 58px) 0;
 }
 
@@ -362,6 +364,7 @@ code {
 }
 
 .hero-side {
+  min-width: 0;
   padding: 20px;
   display: grid;
   gap: 18px;
@@ -802,6 +805,40 @@ code {
 }
 
 .workflow-step p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 13px;
+  line-height: 1.72;
+}
+
+.compact-header {
+  margin-top: 24px;
+}
+
+.pkm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.pkm-card {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 252, 0.92);
+  box-shadow: var(--shadow);
+}
+
+.pkm-card h3 {
+  margin: 8px 0;
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.pkm-card p {
   margin: 0;
   color: var(--text-soft);
   font-size: 13px;
@@ -1274,6 +1311,7 @@ code {
   .life-grid,
   .grid-3,
   .workflow-grid,
+  .pkm-grid,
   .module-grid,
   .workshop-grid {
     grid-template-columns: 1fr;
@@ -1287,10 +1325,52 @@ code {
 @media (max-width: 640px) {
   .app-shell {
     padding-inline: 14px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .page,
+  .hero,
+  .hero-main,
+  .hero-side {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-main,
+  .hero-title,
+  .hero-subtitle,
+  .hero-actions,
+  .hero-footer,
+  .stat-card {
+    max-width: calc(100vw - 28px);
+  }
+
+  .hero {
+    display: block;
   }
 
   .hero-title {
     font-size: clamp(30px, 9vw, 40px);
+  }
+
+  .hero-subtitle {
+    max-width: 100%;
+    font-size: 16px;
+    line-height: 1.75;
+    word-break: break-all;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-actions .button {
+    width: 100%;
+    min-width: 0;
+    padding-inline: 10px;
+    white-space: normal;
   }
 
   .section-header {

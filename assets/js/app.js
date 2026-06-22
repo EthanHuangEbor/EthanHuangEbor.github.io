@@ -11,7 +11,7 @@ const routes = {
   cv: { label: '科研经历' },
   'student-work': { label: '学工经历' },
   awards: { label: '所获奖项' },
-  knowledge: { label: '知识花园' },
+  knowledge: { label: '知识图谱' },
   life: { label: '生活' },
   play: { label: '见天地' },
   people: { label: '见众生' },
@@ -50,7 +50,7 @@ const categoryInfo = {
   diary: {
     title: '见自己',
     eyebrow: 'Growth Notes',
-    description: '个人成长、日记、复盘和恢复力。它们是知识花园的地下水系。',
+    description: '个人成长、日记、复盘和恢复力。它们是知识图谱背后的长期语料。',
     empty: '还没有日记。向 content/life/diary/ 添加 Markdown 即可。'
   }
 };
@@ -107,7 +107,7 @@ function bindGlobalEvents() {
 
 function hydrateChrome() {
   const profile = state.site.profile;
-  document.title = `${profile.name} · Engineering Garden`;
+  document.title = 'HYB的个人主页';
   const brandAvatar = document.getElementById('brandAvatar');
   if (brandAvatar) {
     brandAvatar.innerHTML = `<img src="${escapeAttr(profile.avatarImage || 'assets/img/dog-avatar.png')}" alt="${escapeAttr(profile.avatarAlt || '小狗头像')}" />`;
@@ -156,7 +156,7 @@ function setActiveNav(route) {
 }
 
 function renderHome() {
-  const { profile, heroStats, projects } = state.site;
+  const { profile, heroStats, projects, siteReflections = [] } = state.site;
   const stats = heroStats.map(stat => ({
     ...stat,
     value: stat.value === 'auto' ? String(state.knowledge.stats.nodes) : stat.value
@@ -171,11 +171,12 @@ function renderHome() {
       <div class="hero-main">
         <div>
           <p class="eyebrow">Ethan Huang</p>
-          <h1 class="hero-title">科研经历、工程复现与可生长的知识花园。</h1>
+          <h1 class="hero-title">HYB的个人主页</h1>
           <p class="hero-subtitle">${escapeHtml(profile.name)}，${escapeHtml(profile.title)}。项目经历、学习笔记、生活记录。</p>
           <div class="hero-actions">
             <a class="button primary" href="#/cv">查看科研经历</a>
-            <a class="button" href="#/knowledge">进入知识花园</a>
+            <a class="button" href="${escapeAttr(profile.github)}" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="button" href="#/knowledge">进入知识图谱</a>
             <a class="button ghost" href="#/life">生活记录</a>
           </div>
         </div>
@@ -234,6 +235,23 @@ function renderHome() {
             <h3>${escapeHtml(note.title)}</h3>
             <p>${escapeHtml(note.summary || 'No summary yet.')}</p>
           </a>
+        `).join('')}
+      </div>
+
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Iteration Notes</p>
+          <h2>下一步主页迭代</h2>
+          <p>把公开主页继续做成科研证据、知识图谱和生活记录的长期入口。</p>
+        </div>
+      </div>
+      <div class="module-grid">
+        ${siteReflections.map(item => `
+          <article class="module-card">
+            <p class="card-kicker">Next</p>
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.detail)}</p>
+          </article>
         `).join('')}
       </div>
     </section>
@@ -409,14 +427,15 @@ function renderLifeHub() {
 function renderKnowledge() {
   const index = state.knowledge;
   const noteWorkflow = state.site.noteWorkflow || [];
+  const pkmRoutes = state.site.pkmRoutes || [];
   const firstRecord = index.records.find(record => ['航空发动机', '工程工具', '课程'].includes(record.domain)) || index.records[0];
   app.innerHTML = `
     <section class="page">
       <div class="section-header">
         <div>
-          <p class="eyebrow">Knowledge Garden</p>
-          <h1>知识花园</h1>
-          <p>Markdown 文件按领域保存；构建脚本抽取标题、标签、摘要和 <code>[[双链]]</code>，形成可搜索的目录和轻量图谱。</p>
+          <p class="eyebrow">Knowledge Graph</p>
+          <h1>知识图谱</h1>
+          <p>Markdown 文件按领域保存；构建脚本抽取标题、标签、摘要和 <code>[[双链]]</code>，形成可搜索的目录、阅读器和轻量图谱。</p>
         </div>
         <div class="action-row">
           <span class="pill">${index.stats.nodes} nodes</span>
@@ -429,7 +448,7 @@ function renderKnowledge() {
         <div>
           <p class="card-kicker">Study Note Pipeline</p>
           <h2>学习笔记沉淀路线</h2>
-          <p>先把课堂、论文和项目调试记录收进 inbox，再提炼成单概念卡片，最后用双链和项目页面连接起来。</p>
+          <p>先把课堂、论文、项目调试和手写材料收进 inbox，再按“可转写 / 难转写 / 只保留影像”分流，最后用双链和项目页面连接起来。</p>
         </div>
         <img src="assets/img/pet-companions.svg" alt="猫猫狗狗陪读小插画" />
       </div>
@@ -439,6 +458,23 @@ function renderKnowledge() {
             <p class="card-kicker">${escapeHtml(step.stage)}</p>
             <h3>${escapeHtml(step.title)}</h3>
             <p>${escapeHtml(step.detail)}</p>
+          </article>
+        `).join('')}
+      </div>
+
+      <div class="section-header compact-header">
+        <div>
+          <p class="eyebrow">PKM Cloud Path</p>
+          <h2>笔记上云路径</h2>
+          <p>手写笔记不强行一刀切：能转文字的变成可检索卡片，不方便转文字的保留影像证据，再用索引页和双链连接。</p>
+        </div>
+      </div>
+      <div class="pkm-grid">
+        ${pkmRoutes.map(route => `
+          <article class="pkm-card">
+            <p class="card-kicker">${escapeHtml(route.stage)}</p>
+            <h3>${escapeHtml(route.title)}</h3>
+            <p>${escapeHtml(route.detail)}</p>
           </article>
         `).join('')}
       </div>
@@ -589,7 +625,7 @@ function renderWorkshop() {
           <p class="card-kicker">Policy</p>
           <h3>先写清需求，再做交互</h3>
           <p>每个工具上线前先写一篇说明笔记：输入是什么、输出是什么、公式来源是什么、适用边界在哪里。这样工具不会变成漂亮但不可信的小玩具。</p>
-          <a class="repo-link" href="#/knowledge">回到知识花园</a>
+          <a class="repo-link" href="#/knowledge">回到知识图谱</a>
         </section>
       </div>
     </section>
@@ -603,7 +639,7 @@ function renderAbout() {
         <div>
           <p class="eyebrow">About</p>
           <h1>这里不再作为公开说明页</h1>
-          <p>主页信息已经拆到三个更清晰的入口：科研经历、知识花园和生活记录。</p>
+          <p>主页信息已经拆到三个更清晰的入口：科研经历、知识图谱和生活记录。</p>
         </div>
         <div class="action-row">
           <a class="button primary" href="#/cv">科研经历</a>
