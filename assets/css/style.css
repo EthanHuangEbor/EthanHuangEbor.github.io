@@ -383,8 +383,8 @@ code {
 }
 
 .sigil-large {
-  width: 92px;
-  height: 92px;
+  width: 104px;
+  height: 104px;
   border-radius: var(--radius-lg);
   display: grid;
   place-items: center;
@@ -571,6 +571,64 @@ code {
 
 .project-content {
   min-width: 0;
+}
+
+.work-card {
+  display: grid;
+  gap: 14px;
+  padding: 24px 26px;
+}
+
+.work-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.work-time {
+  margin: 0 0 10px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 820;
+  line-height: 1.35;
+}
+
+.work-org {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 720;
+  line-height: 1.5;
+}
+
+.work-role {
+  margin: 8px 0 0;
+  color: var(--ink);
+  font-size: 28px;
+  line-height: 1.18;
+  font-weight: 860;
+}
+
+.work-summary {
+  max-width: 1080px;
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 16px;
+  line-height: 1.86;
+}
+
+.work-status {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--accent);
+  border-color: #c8dbd3;
+  background: #edf6f2;
+}
+
+.work-tags {
+  margin: 2px 0 0;
 }
 
 .note-card {
@@ -1253,6 +1311,15 @@ code {
   .project-strip {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .work-card {
+    padding: 20px;
+  }
+
+  .work-card-head {
+    display: grid;
+    gap: 12px;
   }
 
   .companion-mini {

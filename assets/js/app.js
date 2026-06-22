@@ -193,7 +193,7 @@ function renderHome() {
       <aside class="hero-side">
         <div class="profile-seal">
           <div class="sigil-large"><img src="${escapeAttr(profile.avatarImage || 'assets/img/dog-avatar.png')}" alt="${escapeAttr(profile.avatarAlt || '小狗头像')}" /></div>
-          <p>BUAA / Flight Propulsion</p>
+          <p>BUAA / Flight Propulsion/修勾值班中</p>
         </div>
         <div class="profile-list">
           ${profileRow('身份', profile.title)}
@@ -641,31 +641,33 @@ function projectCard(project) {
 }
 
 function studentWorkCard(item) {
+  const summary = item.summary || [item.title, item.scope, item.work].filter(Boolean).join(' ');
+  const status = [item.level, item.status].filter(Boolean).join(' / ') || '待补充';
   return `
-    <article class="project-card project-strip">
-      <div class="project-time">${escapeHtml(item.time || '时间待补充')}</div>
-      <div class="project-content">
-        <p class="card-kicker">${escapeHtml(item.organization || '组织待补充')} · ${escapeHtml(item.role || '职务待补充')}</p>
-        <h3>${escapeHtml(item.title || '学工经历待补充')}</h3>
-        <p><strong>范围：</strong>${escapeHtml(item.scope || '待补充')}</p>
-        <p><strong>工作：</strong>${escapeHtml(item.work || '待补充')}</p>
-        <p><strong>材料：</strong>${escapeHtml(item.evidence || '待补充')}</p>
-        <div class="project-meta">${(item.tags || []).map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}</div>
+    <article class="project-card work-card">
+      <div class="work-card-head">
+        <div>
+          <p class="work-time">${escapeHtml(item.time || '时间待补充')}</p>
+          <p class="work-org">${escapeHtml(item.organization || '组织待补充')}</p>
+          <h3 class="work-role">${escapeHtml(item.role || '职务待补充')}</h3>
+        </div>
+        <span class="tag work-status">${escapeHtml(status)}</span>
       </div>
-      <span class="tag">${escapeHtml(item.status || '待补充')}</span>
+      <p class="work-summary">${escapeHtml(summary || '经历说明待补充。')}</p>
+      <div class="project-meta work-tags">${(item.tags || []).map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}</div>
     </article>
   `;
 }
 
 function awardCard(item) {
+  const description = item.description || item.summary || '奖项说明待补充。';
   return `
     <article class="project-card project-strip">
       <div class="project-time">${escapeHtml(item.time || '时间待补充')}</div>
       <div class="project-content">
         <p class="card-kicker">${escapeHtml(item.issuer || '颁发单位待补充')} · ${escapeHtml(item.level || '级别待补充')}</p>
         <h3>${escapeHtml(item.title || '奖项待补充')}</h3>
-        <p><strong>说明：</strong>${escapeHtml(item.description || '待补充')}</p>
-        <p><strong>对应材料：</strong>${escapeHtml(item.evidence || '待补充')}</p>
+        <p>${escapeHtml(description)}</p>
         <div class="project-meta">${(item.tags || []).map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}</div>
       </div>
       <span class="tag">${escapeHtml(item.status || '待补充')}</span>
