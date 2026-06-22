@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-22T11:35:22.690Z",
+  "generatedAt": "2026-06-22T15:58:03.206Z",
   "stats": {
-    "nodes": 7,
-    "links": 16,
+    "nodes": 8,
+    "links": 18,
     "unresolved": 1,
     "domains": 5,
-    "tags": 18
+    "tags": 22
   },
   "records": [
     {
@@ -220,6 +220,51 @@
       "wordCount": 294
     },
     {
+      "path": "content/knowledge/课程/概率统计前9章刷题记录.md",
+      "folderPath": "课程",
+      "fileName": "概率统计前9章刷题记录.md",
+      "slug": "课程/概率统计前9章刷题记录",
+      "title": "概率统计前9章刷题记录",
+      "date": "2026-06-22",
+      "updated": "",
+      "status": "active",
+      "domain": "课程",
+      "tags": [
+        "概率统计",
+        "刷题",
+        "错题复盘",
+        "PKM"
+      ],
+      "summary": "将概率统计前9章刷题 HTML 归档到个人主页，并建立后续错题分析与知识掌握度评估入口。",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "概率统计前9章刷题记录"
+        },
+        {
+          "depth": 2,
+          "text": "当前数据状态"
+        },
+        {
+          "depth": 2,
+          "text": "题库覆盖"
+        },
+        {
+          "depth": 2,
+          "text": "掌握度评分规则"
+        },
+        {
+          "depth": 2,
+          "text": "后续连接"
+        }
+      ],
+      "wikilinks": [
+        "学习笔记沉淀流程",
+        "工程热力学复盘"
+      ],
+      "wordCount": 1084
+    },
+    {
       "path": "content/knowledge/课程/工程热力学复盘.md",
       "folderPath": "课程",
       "fileName": "工程热力学复盘.md",
@@ -358,6 +403,16 @@
       "label": "标准大气模型"
     },
     {
+      "source": "content/knowledge/课程/概率统计前9章刷题记录.md",
+      "target": "content/knowledge/个人成长/学习笔记沉淀流程.md",
+      "label": "学习笔记沉淀流程"
+    },
+    {
+      "source": "content/knowledge/课程/概率统计前9章刷题记录.md",
+      "target": "content/knowledge/课程/工程热力学复盘.md",
+      "label": "工程热力学复盘"
+    },
+    {
       "source": "content/knowledge/课程/工程热力学复盘.md",
       "target": "content/knowledge/航空发动机/布雷顿循环.md",
       "label": "布雷顿循环"
@@ -472,6 +527,19 @@
         "children": [
           {
             "type": "file",
+            "name": "概率统计前9章刷题记录.md",
+            "title": "概率统计前9章刷题记录",
+            "path": "content/knowledge/课程/概率统计前9章刷题记录.md",
+            "tags": [
+              "概率统计",
+              "刷题",
+              "错题复盘",
+              "PKM"
+            ],
+            "domain": "课程"
+          },
+          {
+            "type": "file",
             "name": "工程热力学复盘.md",
             "title": "工程热力学复盘",
             "path": "content/knowledge/课程/工程热力学复盘.md",
@@ -562,6 +630,22 @@
       "count": 1
     },
     {
+      "name": "概率统计",
+      "count": 1
+    },
+    {
+      "name": "刷题",
+      "count": 1
+    },
+    {
+      "name": "错题复盘",
+      "count": 1
+    },
+    {
+      "name": "PKM",
+      "count": 1
+    },
+    {
       "name": "课程",
       "count": 1
     },
@@ -588,11 +672,11 @@
       "count": 2
     },
     {
-      "name": "工程工具",
-      "count": 1
+      "name": "课程",
+      "count": 2
     },
     {
-      "name": "课程",
+      "name": "工程工具",
       "count": 1
     },
     {
