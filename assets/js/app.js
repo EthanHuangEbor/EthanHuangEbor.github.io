@@ -306,7 +306,7 @@ function renderStudentWork() {
         <div>
           <p class="eyebrow">Student Work</p>
           <h1>学工经历</h1>
-          <p>学生工作、组织经历、活动记录和任职材料。</p>
+          <p>按组织任职、活动策划、材料审核、班团建设、社会实践和项目支持整理。</p>
         </div>
       </div>
 
