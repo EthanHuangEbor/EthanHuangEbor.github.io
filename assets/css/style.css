@@ -325,7 +325,6 @@ code {
 .graph-wrap,
 .index-panel,
 .reader-panel,
-.timeline-card,
 .module-card,
 .stat-card {
   border: 1px solid var(--line);
@@ -366,28 +365,6 @@ code {
   padding: 20px;
   display: grid;
   gap: 18px;
-}
-
-.portrait-card {
-  margin: 0;
-}
-
-.profile-photo {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: 50% 58%;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: var(--surface-soft);
-}
-
-.portrait-card figcaption {
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.6;
 }
 
 .profile-seal {
@@ -526,8 +503,7 @@ code {
 .module-card p,
 .project-card p,
 .life-card p,
-.tool-card p,
-.timeline-card p {
+.tool-card p {
   color: var(--text-soft);
   line-height: 1.76;
 }
@@ -538,8 +514,7 @@ code {
 .module-card h3,
 .project-card h3,
 .life-card h3,
-.tool-card h3,
-.timeline-card h3 {
+.tool-card h3 {
   color: var(--ink);
   font-family: var(--font-sans);
   letter-spacing: 0;
@@ -573,8 +548,7 @@ code {
 .project-card,
 .life-card,
 .tool-card,
-.module-card,
-.timeline-card {
+.module-card {
   padding: 20px;
   min-width: 0;
   overflow-wrap: anywhere;
@@ -606,8 +580,7 @@ code {
 .project-card h3,
 .life-card h3,
 .tool-card h3,
-.module-card h3,
-.timeline-card h3 {
+.module-card h3 {
   margin: 10px 0 10px;
   font-size: 21px;
   line-height: 1.25;
@@ -1072,25 +1045,6 @@ code {
   font-size: 26px;
 }
 
-.timeline {
-  display: grid;
-  gap: 12px;
-}
-
-.timeline-card {
-  display: grid;
-  grid-template-columns: 130px minmax(0, 1fr);
-  gap: 18px;
-  align-items: start;
-  box-shadow: none;
-}
-
-.timeline-time {
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-weight: 800;
-}
-
 .field-notes {
   margin-top: 32px;
   opacity: 0.74;
@@ -1305,8 +1259,7 @@ code {
     grid-template-columns: 1fr;
   }
 
-  .life-toolbar,
-  .timeline-card {
+  .life-toolbar {
     grid-template-columns: 1fr;
   }
 

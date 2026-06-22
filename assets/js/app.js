@@ -9,6 +9,8 @@ const state = {
 const routes = {
   home: { label: '首页' },
   cv: { label: '科研经历' },
+  'student-work': { label: '学工经历' },
+  awards: { label: '所获奖项' },
   knowledge: { label: '知识花园' },
   life: { label: '生活' },
   play: { label: '见天地' },
@@ -136,6 +138,8 @@ function renderCurrentRoute() {
 
   if (route === 'home') renderHome();
   else if (route === 'cv') renderCv();
+  else if (route === 'student-work') renderStudentWork();
+  else if (route === 'awards') renderAwards();
   else if (route === 'knowledge') renderKnowledge();
   else if (route === 'life') renderLifeHub();
   else if (['play', 'people', 'diary', 'eat', 'drink'].includes(route)) renderLife(route);
@@ -187,10 +191,6 @@ function renderHome() {
       </div>
 
       <aside class="hero-side">
-        <figure class="portrait-card">
-          <img class="profile-photo" src="${escapeAttr(profile.photo)}" alt="${escapeAttr(profile.photoAlt || `${profile.name} profile photo`)}" />
-          ${profile.photoCaption ? `<figcaption>${escapeHtml(profile.photoCaption)}</figcaption>` : ''}
-        </figure>
         <div class="profile-seal">
           <div class="sigil-large"><img src="${escapeAttr(profile.avatarImage || 'assets/img/dog-avatar.png')}" alt="${escapeAttr(profile.avatarAlt || '小狗头像')}" /></div>
           <p>BUAA / Flight Propulsion</p>
@@ -248,7 +248,7 @@ function renderHome() {
 }
 
 function renderCv() {
-  const { profile, skills, projects, timeline } = state.site;
+  const { profile, skills, projects } = state.site;
   app.innerHTML = `
     <section class="page">
       <div class="section-header">
@@ -294,23 +294,53 @@ function renderCv() {
       <div class="project-grid">
         ${projects.map(projectCard).join('')}
       </div>
+    </section>
+  `;
+}
 
-      <div class="section-header" style="margin-top: 34px;">
+function renderStudentWork() {
+  const records = state.site.studentWork || [];
+  app.innerHTML = `
+    <section class="page">
+      <div class="section-header">
         <div>
-          <p class="eyebrow">Trajectory</p>
-          <h2>航迹时间线</h2>
+          <p class="eyebrow">Student Work</p>
+          <h1>学工经历</h1>
+          <p>学生工作、组织经历、活动记录和任职材料。</p>
         </div>
       </div>
-      <div class="timeline">
-        ${timeline.map(item => `
-          <div class="timeline-card">
-            <div class="timeline-time">${escapeHtml(item.time)}</div>
-            <div>
-              <h3>${escapeHtml(item.title)}</h3>
-              <p>${escapeHtml(item.detail)}</p>
-            </div>
+
+      <div class="project-grid">
+        ${records.length ? records.map(studentWorkCard).join('') : `
+          <div class="blank-slate" style="grid-column: 1 / -1;">
+            <h3>暂无学工记录</h3>
+            <p>后续可以补充任职时间、组织名称、负责事项和证明材料。</p>
           </div>
-        `).join('')}
+        `}
+      </div>
+    </section>
+  `;
+}
+
+function renderAwards() {
+  const records = state.site.awards || [];
+  app.innerHTML = `
+    <section class="page">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Awards</p>
+          <h1>所获奖项</h1>
+          <p>竞赛奖项、荣誉证书、课程成果和可公开展示的证明材料。</p>
+        </div>
+      </div>
+
+      <div class="project-grid">
+        ${records.length ? records.map(awardCard).join('') : `
+          <div class="blank-slate" style="grid-column: 1 / -1;">
+            <h3>暂无奖项记录</h3>
+            <p>后续可以补充获奖时间、颁发单位、级别类别和证书链接。</p>
+          </div>
+        `}
       </div>
     </section>
   `;
@@ -606,6 +636,39 @@ function projectCard(project) {
         <div class="project-meta">${project.stack.map(item => `<span class="tag">${escapeHtml(item)}</span>`).join('')}</div>
       </div>
       <a class="repo-link" href="${escapeAttr(project.repo)}" target="_blank" rel="noreferrer">Repo ↗</a>
+    </article>
+  `;
+}
+
+function studentWorkCard(item) {
+  return `
+    <article class="project-card project-strip">
+      <div class="project-time">${escapeHtml(item.time || '时间待补充')}</div>
+      <div class="project-content">
+        <p class="card-kicker">${escapeHtml(item.organization || '组织待补充')} · ${escapeHtml(item.role || '职务待补充')}</p>
+        <h3>${escapeHtml(item.title || '学工经历待补充')}</h3>
+        <p><strong>范围：</strong>${escapeHtml(item.scope || '待补充')}</p>
+        <p><strong>工作：</strong>${escapeHtml(item.work || '待补充')}</p>
+        <p><strong>材料：</strong>${escapeHtml(item.evidence || '待补充')}</p>
+        <div class="project-meta">${(item.tags || []).map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}</div>
+      </div>
+      <span class="tag">${escapeHtml(item.status || '待补充')}</span>
+    </article>
+  `;
+}
+
+function awardCard(item) {
+  return `
+    <article class="project-card project-strip">
+      <div class="project-time">${escapeHtml(item.time || '时间待补充')}</div>
+      <div class="project-content">
+        <p class="card-kicker">${escapeHtml(item.issuer || '颁发单位待补充')} · ${escapeHtml(item.level || '级别待补充')}</p>
+        <h3>${escapeHtml(item.title || '奖项待补充')}</h3>
+        <p><strong>说明：</strong>${escapeHtml(item.description || '待补充')}</p>
+        <p><strong>对应材料：</strong>${escapeHtml(item.evidence || '待补充')}</p>
+        <div class="project-meta">${(item.tags || []).map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}</div>
+      </div>
+      <span class="tag">${escapeHtml(item.status || '待补充')}</span>
     </article>
   `;
 }

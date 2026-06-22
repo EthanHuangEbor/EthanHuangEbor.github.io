@@ -5,9 +5,6 @@
     "avatarText": "",
     "avatarImage": "assets/img/dog-avatar.png",
     "avatarAlt": "小狗头像",
-    "photo": "assets/img/dog-avatar.png",
-    "photoAlt": "小狗头像",
-    "photoCaption": "小狗值班中。",
     "title": "北航 · 飞行器动力工程 · 大二",
     "tagline": "项目经历、学习笔记、生活记录。",
     "location": "Beijing / BUAA",
@@ -138,11 +135,54 @@
       "repo": "https://github.com/EthanHuangEbor/Dual_LSTM_SoftRobot"
     }
   ],
+  "studentWork": [
+    {
+      "time": "待补充",
+      "organization": "组织名称待补充",
+      "role": "职务待补充",
+      "title": "学工经历记录模板",
+      "scope": "任期、服务对象、所属部门和工作范围。",
+      "work": "负责事项、活动组织、沟通协调、材料整理或长期机制建设。",
+      "evidence": "可补充任命文件、活动照片、推送链接、总结材料或证明文件。",
+      "status": "待补充",
+      "tags": [
+        "学生工作",
+        "组织协调",
+        "材料归档"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "time": "待补充",
+      "title": "奖项 / 证书记录模板",
+      "issuer": "颁发单位待补充",
+      "level": "级别 / 类别待补充",
+      "description": "奖项说明、获奖原因、对应课程、项目或竞赛。",
+      "evidence": "可补充证书图片、证书编号、官网链接或扫描件路径。",
+      "status": "待补充",
+      "tags": [
+        "证书",
+        "荣誉",
+        "材料归档"
+      ]
+    }
+  ],
   "candidateSections": [
     {
       "title": "科研经历",
       "reason": "记录清楚的问题、方法、结果和项目边界。",
       "implementation": "继续把 GitHub 仓库、README、实验图表和复盘文字互相连接。"
+    },
+    {
+      "title": "学工经历",
+      "reason": "整理学生工作、组织服务和长期负责事项。",
+      "implementation": "记录任期、组织、职责、代表活动、结果和证明材料。"
+    },
+    {
+      "title": "所获奖项",
+      "reason": "集中保存奖项、荣誉和证书材料。",
+      "implementation": "记录获奖时间、颁发单位、级别、对应项目和证书链接。"
     },
     {
       "title": "知识花园",
@@ -190,23 +230,6 @@
       "stage": "04 Publish",
       "title": "按周整理一小批正式内容",
       "detail": "每周挑 1-3 张最清楚的卡片发布到主页：删掉私密过程，保留问题、方法、结论和可复用代码/图表。"
-    }
-  ],
-  "timeline": [
-    {
-      "time": "2025 Autumn",
-      "title": "建立工程计算基础",
-      "detail": "把热力学、流体力学和数学建模相关练习沉淀为可复用的计算与复盘习惯。"
-    },
-    {
-      "time": "2026 Spring",
-      "title": "展开机器学习与机器人控制 baseline 复现",
-      "detail": "整理视觉 SLAM 对比框架与 Dual LSTM 软体机器人控制复现，强调边界、误差和对照。"
-    },
-    {
-      "time": "2026 Summer",
-      "title": "整理航发概念设计与公开主页",
-      "detail": "把变循环混合电推进概念设计、知识花园和个人项目卡片合并成公开主页。"
     }
   ]
 }
