@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-22T15:58:03.206Z",
+  "generatedAt": "2026-06-23T06:00:50.631Z",
   "stats": {
-    "nodes": 8,
-    "links": 18,
+    "nodes": 9,
+    "links": 20,
     "unresolved": 1,
     "domains": 5,
-    "tags": 22
+    "tags": 25
   },
   "records": [
     {
@@ -339,6 +339,63 @@
         "长期主义与反馈回路"
       ],
       "wordCount": 207
+    },
+    {
+      "path": "content/knowledge/阅读/LLM-Wiki与个人知识图谱.md",
+      "folderPath": "阅读",
+      "fileName": "LLM-Wiki与个人知识图谱.md",
+      "slug": "阅读/llm-wiki与个人知识图谱",
+      "title": "LLM-Wiki 与个人知识图谱",
+      "date": "2026-06-23",
+      "updated": "",
+      "status": "active",
+      "domain": "阅读",
+      "tags": [
+        "LLM-Wiki",
+        "PKM",
+        "知识图谱",
+        "LLM"
+      ],
+      "summary": "借鉴 Karpathy 提出的 LLM-Wiki 范式，把个人笔记整理成可检索、可双链、可被 LLM 读取和纠错的结构化 Wiki。",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "LLM-Wiki 与个人知识图谱"
+        },
+        {
+          "depth": 2,
+          "text": "核心概念"
+        },
+        {
+          "depth": 2,
+          "text": "对我的主页意味着什么"
+        },
+        {
+          "depth": 2,
+          "text": "Wiki 页模板"
+        },
+        {
+          "depth": 2,
+          "text": "手写笔记进入 LLM-Wiki 的路径"
+        },
+        {
+          "depth": 2,
+          "text": "错题和刷题网页"
+        },
+        {
+          "depth": 2,
+          "text": "与已有流程的关系"
+        },
+        {
+          "depth": 2,
+          "text": "参考"
+        }
+      ],
+      "wikilinks": [
+        "概率统计前9章刷题记录",
+        "学习笔记沉淀流程"
+      ],
+      "wordCount": 1134
     }
   ],
   "links": [
@@ -431,6 +488,16 @@
       "source": "content/knowledge/阅读/刻意练习.md",
       "target": "content/knowledge/个人成长/长期主义与反馈回路.md",
       "label": "长期主义与反馈回路"
+    },
+    {
+      "source": "content/knowledge/阅读/LLM-Wiki与个人知识图谱.md",
+      "target": "content/knowledge/课程/概率统计前9章刷题记录.md",
+      "label": "概率统计前9章刷题记录"
+    },
+    {
+      "source": "content/knowledge/阅读/LLM-Wiki与个人知识图谱.md",
+      "target": "content/knowledge/个人成长/学习笔记沉淀流程.md",
+      "label": "学习笔记沉淀流程"
     }
   ],
   "unresolved": [
@@ -567,6 +634,19 @@
               "方法论"
             ],
             "domain": "阅读"
+          },
+          {
+            "type": "file",
+            "name": "LLM-Wiki与个人知识图谱.md",
+            "title": "LLM-Wiki 与个人知识图谱",
+            "path": "content/knowledge/阅读/LLM-Wiki与个人知识图谱.md",
+            "tags": [
+              "LLM-Wiki",
+              "PKM",
+              "知识图谱",
+              "LLM"
+            ],
+            "domain": "阅读"
           }
         ]
       }
@@ -583,6 +663,10 @@
     },
     {
       "name": "航空发动机",
+      "count": 2
+    },
+    {
+      "name": "PKM",
       "count": 2
     },
     {
@@ -642,10 +726,6 @@
       "count": 1
     },
     {
-      "name": "PKM",
-      "count": 1
-    },
-    {
       "name": "课程",
       "count": 1
     },
@@ -659,6 +739,18 @@
     },
     {
       "name": "方法论",
+      "count": 1
+    },
+    {
+      "name": "LLM-Wiki",
+      "count": 1
+    },
+    {
+      "name": "知识图谱",
+      "count": 1
+    },
+    {
+      "name": "LLM",
       "count": 1
     }
   ],
@@ -676,11 +768,11 @@
       "count": 2
     },
     {
-      "name": "工程工具",
-      "count": 1
+      "name": "阅读",
+      "count": 2
     },
     {
-      "name": "阅读",
+      "name": "工程工具",
       "count": 1
     }
   ]

@@ -452,6 +452,28 @@
       "detail": "公开主页只发布可展示节点；含课程作业、个人信息、未公开项目和原始扫描件的内容留在私有库或本地备份。"
     }
   ],
+  "llmWikiLayers": [
+    {
+      "stage": "Compile",
+      "title": "原始材料先编译成 Wiki 页",
+      "detail": "课堂、论文、刷题和项目调试记录不直接堆进仓库；先压缩成问题、结论、证据、边界和可复用链接。"
+    },
+    {
+      "stage": "Read",
+      "title": "让 LLM 能按页读取",
+      "detail": "每篇笔记开头写清 title、summary、tags、domain 和 source，使后续检索能直接拿到上下文。"
+    },
+    {
+      "stage": "Traverse",
+      "title": "双链变成推理路径",
+      "detail": "用 [[概念]]、[[项目]]、[[错题]] 连接节点，让一次回答可以沿着课程、论文和项目证据继续展开。"
+    },
+    {
+      "stage": "Error Book",
+      "title": "错题和误判进入 Error Book",
+      "detail": "把刷题错误、实验失败和概念误解记录为可复盘节点，后续用它们修正复习优先级和项目边界。"
+    }
+  ],
   "siteReflections": [
     {
       "title": "科研证据继续前置",

@@ -936,6 +936,81 @@ code {
   line-height: 1.72;
 }
 
+.llm-wiki-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  margin: 8px 0 12px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(135deg, rgba(34, 116, 124, 0.1), transparent 48%),
+    rgba(255, 255, 252, 0.94);
+  box-shadow: var(--shadow);
+}
+
+.llm-wiki-panel h2 {
+  margin: 8px 0 0;
+  color: var(--ink);
+  font-size: 26px;
+  line-height: 1.18;
+}
+
+.llm-wiki-panel p {
+  max-width: 760px;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+.llm-wiki-open {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fffdf8;
+  font: inherit;
+  font-weight: 760;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.llm-wiki-open:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.llm-wiki-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.llm-wiki-card {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 252, 0.92);
+}
+
+.llm-wiki-card h3 {
+  margin: 8px 0;
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.llm-wiki-card p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 13px;
+  line-height: 1.72;
+}
+
 .index-panel,
 .reader-panel,
 .graph-wrap {
@@ -1404,8 +1479,13 @@ code {
   .grid-3,
   .workflow-grid,
   .pkm-grid,
+  .llm-wiki-grid,
   .module-grid,
   .workshop-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .llm-wiki-panel {
     grid-template-columns: 1fr;
   }
 

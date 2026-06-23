@@ -430,6 +430,7 @@ function renderKnowledge() {
   const index = state.knowledge;
   const noteWorkflow = state.site.noteWorkflow || [];
   const pkmRoutes = state.site.pkmRoutes || [];
+  const llmWikiLayers = state.site.llmWikiLayers || [];
   const firstRecord = index.records.find(record => ['航空发动机', '工程工具', '课程'].includes(record.domain)) || index.records[0];
   app.innerHTML = `
     <section class="page">
@@ -481,6 +482,24 @@ function renderKnowledge() {
         `).join('')}
       </div>
 
+      <div class="llm-wiki-panel">
+        <div>
+          <p class="card-kicker">Karpathy LLM-Wiki Lens</p>
+          <h2>把知识图谱做成 LLM 可读的 Wiki</h2>
+          <p>借鉴 LLM-Wiki 的工作方式：原始材料先编译成结构化 Wiki 页，再让检索、双链、错题本和项目证据共同服务后续复盘。</p>
+        </div>
+        <button class="llm-wiki-open" type="button" data-llm-wiki-note="content/knowledge/阅读/LLM-Wiki与个人知识图谱.md">打开方法笔记</button>
+      </div>
+      <div class="llm-wiki-grid">
+        ${llmWikiLayers.map(item => `
+          <article class="llm-wiki-card">
+            <p class="card-kicker">${escapeHtml(item.stage)}</p>
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.detail)}</p>
+          </article>
+        `).join('')}
+      </div>
+
       <div class="knowledge-layout">
         <aside class="index-panel">
           <p class="card-kicker">Archive</p>
@@ -517,6 +536,10 @@ function renderKnowledge() {
       </div>
     </section>
   `;
+
+  document.querySelector('[data-llm-wiki-note]')?.addEventListener('click', event => {
+    openKnowledgeArticle(event.currentTarget.dataset.llmWikiNote);
+  });
 
   const tree = document.getElementById('knowledgeTree');
   tree.innerHTML = renderTree(index.tree, '');
