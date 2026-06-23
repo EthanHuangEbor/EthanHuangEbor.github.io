@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-23T06:00:50.631Z",
+  "generatedAt": "2026-06-23T13:33:58.217Z",
   "stats": {
-    "nodes": 9,
-    "links": 20,
-    "unresolved": 1,
+    "nodes": 11,
+    "links": 25,
+    "unresolved": 0,
     "domains": 5,
-    "tags": 25
+    "tags": 29
   },
   "records": [
     {
@@ -51,12 +51,11 @@
         }
       ],
       "wikilinks": [
-        "双链",
         "布雷顿循环",
         "标准大气模型",
         "工程热力学复盘"
       ],
-      "wordCount": 719
+      "wordCount": 720
     },
     {
       "path": "content/knowledge/个人成长/长期主义与反馈回路.md",
@@ -220,6 +219,87 @@
       "wordCount": 294
     },
     {
+      "path": "content/knowledge/课程/概率统计前9章考前整合复习.md",
+      "folderPath": "课程",
+      "fileName": "概率统计前9章考前整合复习.md",
+      "slug": "课程/概率统计前9章考前整合复习",
+      "title": "概率统计前9章考前整合复习",
+      "date": "2026-06-23",
+      "updated": "",
+      "status": "active",
+      "domain": "课程",
+      "tags": [
+        "概率统计",
+        "期末复习",
+        "公式速查",
+        "题型模板"
+      ],
+      "summary": "将前9章期末复习资料、考前背诵速记版和刷题网页合并成一份更适合考前冲刺的概率统计复习路线。",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "概率统计前9章考前整合复习"
+        },
+        {
+          "depth": 2,
+          "text": "资料入口"
+        },
+        {
+          "depth": 2,
+          "text": "考试结构与提分顺序"
+        },
+        {
+          "depth": 2,
+          "text": "每道计算题的固定流程"
+        },
+        {
+          "depth": 2,
+          "text": "先背 12 条"
+        },
+        {
+          "depth": 2,
+          "text": "第 1-2 章：事件与一维分布"
+        },
+        {
+          "depth": 2,
+          "text": "第 3-4 章：二维分布与函数分布"
+        },
+        {
+          "depth": 2,
+          "text": "第 5 章：数字特征"
+        },
+        {
+          "depth": 2,
+          "text": "第 6 章：大数、CLT 与样本量"
+        },
+        {
+          "depth": 2,
+          "text": "第 7 章：抽样分布"
+        },
+        {
+          "depth": 2,
+          "text": "第 8 章：参数估计与置信区间"
+        },
+        {
+          "depth": 2,
+          "text": "第 9 章：假设检验"
+        },
+        {
+          "depth": 2,
+          "text": "最后 30 分钟检查清单"
+        },
+        {
+          "depth": 2,
+          "text": "后续复盘"
+        }
+      ],
+      "wikilinks": [
+        "概率统计前9章刷题记录",
+        "学习笔记沉淀流程"
+      ],
+      "wordCount": 3945
+    },
+    {
       "path": "content/knowledge/课程/概率统计前9章刷题记录.md",
       "folderPath": "课程",
       "fileName": "概率统计前9章刷题记录.md",
@@ -259,10 +339,11 @@
         }
       ],
       "wikilinks": [
+        "概率统计前9章考前整合复习",
         "学习笔记沉淀流程",
         "工程热力学复盘"
       ],
-      "wordCount": 1084
+      "wordCount": 1298
     },
     {
       "path": "content/knowledge/课程/工程热力学复盘.md",
@@ -303,6 +384,46 @@
         "标准大气模型"
       ],
       "wordCount": 214
+    },
+    {
+      "path": "content/knowledge/课程/军事理论期末刷题记录.md",
+      "folderPath": "课程",
+      "fileName": "军事理论期末刷题记录.md",
+      "slug": "课程/军事理论期末刷题记录",
+      "title": "军事理论期末刷题记录",
+      "date": "2026-06-23",
+      "updated": "",
+      "status": "active",
+      "domain": "课程",
+      "tags": [
+        "军事理论",
+        "期末复习",
+        "刷题"
+      ],
+      "summary": "将军事理论期末提纲刷题网页归档到个人主页，保留刷题模式和复习模式入口。",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "军事理论期末刷题记录"
+        },
+        {
+          "depth": 2,
+          "text": "使用方式"
+        },
+        {
+          "depth": 2,
+          "text": "后续沉淀"
+        },
+        {
+          "depth": 2,
+          "text": "相关节点"
+        }
+      ],
+      "wikilinks": [
+        "学习笔记沉淀流程",
+        "LLM-Wiki 与个人知识图谱"
+      ],
+      "wordCount": 328
     },
     {
       "path": "content/knowledge/阅读/刻意练习.md",
@@ -460,6 +581,21 @@
       "label": "标准大气模型"
     },
     {
+      "source": "content/knowledge/课程/概率统计前9章考前整合复习.md",
+      "target": "content/knowledge/课程/概率统计前9章刷题记录.md",
+      "label": "概率统计前9章刷题记录"
+    },
+    {
+      "source": "content/knowledge/课程/概率统计前9章考前整合复习.md",
+      "target": "content/knowledge/个人成长/学习笔记沉淀流程.md",
+      "label": "学习笔记沉淀流程"
+    },
+    {
+      "source": "content/knowledge/课程/概率统计前9章刷题记录.md",
+      "target": "content/knowledge/课程/概率统计前9章考前整合复习.md",
+      "label": "概率统计前9章考前整合复习"
+    },
+    {
       "source": "content/knowledge/课程/概率统计前9章刷题记录.md",
       "target": "content/knowledge/个人成长/学习笔记沉淀流程.md",
       "label": "学习笔记沉淀流程"
@@ -478,6 +614,16 @@
       "source": "content/knowledge/课程/工程热力学复盘.md",
       "target": "content/knowledge/工程工具/标准大气模型.md",
       "label": "标准大气模型"
+    },
+    {
+      "source": "content/knowledge/课程/军事理论期末刷题记录.md",
+      "target": "content/knowledge/个人成长/学习笔记沉淀流程.md",
+      "label": "学习笔记沉淀流程"
+    },
+    {
+      "source": "content/knowledge/课程/军事理论期末刷题记录.md",
+      "target": "content/knowledge/阅读/LLM-Wiki与个人知识图谱.md",
+      "label": "LLM-Wiki 与个人知识图谱"
     },
     {
       "source": "content/knowledge/阅读/刻意练习.md",
@@ -500,12 +646,7 @@
       "label": "学习笔记沉淀流程"
     }
   ],
-  "unresolved": [
-    {
-      "source": "content/knowledge/个人成长/学习笔记沉淀流程.md",
-      "target": "双链"
-    }
-  ],
+  "unresolved": [],
   "tree": {
     "type": "folder",
     "name": "knowledge",
@@ -594,6 +735,19 @@
         "children": [
           {
             "type": "file",
+            "name": "概率统计前9章考前整合复习.md",
+            "title": "概率统计前9章考前整合复习",
+            "path": "content/knowledge/课程/概率统计前9章考前整合复习.md",
+            "tags": [
+              "概率统计",
+              "期末复习",
+              "公式速查",
+              "题型模板"
+            ],
+            "domain": "课程"
+          },
+          {
+            "type": "file",
             "name": "概率统计前9章刷题记录.md",
             "title": "概率统计前9章刷题记录",
             "path": "content/knowledge/课程/概率统计前9章刷题记录.md",
@@ -614,6 +768,18 @@
               "课程",
               "热力学",
               "复盘"
+            ],
+            "domain": "课程"
+          },
+          {
+            "type": "file",
+            "name": "军事理论期末刷题记录.md",
+            "title": "军事理论期末刷题记录",
+            "path": "content/knowledge/课程/军事理论期末刷题记录.md",
+            "tags": [
+              "军事理论",
+              "期末复习",
+              "刷题"
             ],
             "domain": "课程"
           }
@@ -666,6 +832,18 @@
       "count": 2
     },
     {
+      "name": "概率统计",
+      "count": 2
+    },
+    {
+      "name": "期末复习",
+      "count": 2
+    },
+    {
+      "name": "刷题",
+      "count": 2
+    },
+    {
       "name": "PKM",
       "count": 2
     },
@@ -714,11 +892,11 @@
       "count": 1
     },
     {
-      "name": "概率统计",
+      "name": "公式速查",
       "count": 1
     },
     {
-      "name": "刷题",
+      "name": "题型模板",
       "count": 1
     },
     {
@@ -727,6 +905,10 @@
     },
     {
       "name": "课程",
+      "count": 1
+    },
+    {
+      "name": "军事理论",
       "count": 1
     },
     {
@@ -756,15 +938,15 @@
   ],
   "domains": [
     {
+      "name": "课程",
+      "count": 4
+    },
+    {
       "name": "个人成长",
       "count": 2
     },
     {
       "name": "航空发动机",
-      "count": 2
-    },
-    {
-      "name": "课程",
       "count": 2
     },
     {

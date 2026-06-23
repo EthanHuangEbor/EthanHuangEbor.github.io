@@ -411,11 +411,18 @@
       "notePath": "content/knowledge/个人成长/学习笔记沉淀流程.md"
     },
     {
-      "type": "Quiz HTML",
-      "title": "概率统计前 9 章刷题页",
-      "detail": "已归档为 HTML；作答记录导出后，用于错题归因和掌握度评估。",
+      "type": "Course Pack",
+      "title": "概率统计前9章复习包",
+      "detail": "整合 PDF 资料、考前速记和刷题网页，形成一条冲刺复习线。",
       "href": "assets/quizzes/prob_stats_front9_quiz.html",
-      "notePath": "content/knowledge/课程/概率统计前9章刷题记录.md"
+      "notePath": "content/knowledge/课程/概率统计前9章考前整合复习.md"
+    },
+    {
+      "type": "Quiz HTML",
+      "title": "军事理论期末刷题页",
+      "detail": "归档军理期末提纲刷题网页，保留刷题和复习双模式。",
+      "href": "assets/quizzes/military-theory-final-review.html",
+      "notePath": "content/knowledge/课程/军事理论期末刷题记录.md"
     },
     {
       "type": "Method Note",

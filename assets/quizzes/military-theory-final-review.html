@@ -1,0 +1,1693 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>军理期末提纲刷题网页｜双模式版</title>
+  <style>
+    :root {
+      --bg: #f4f7fc;
+      --surface: #ffffff;
+      --surface-2: #edf3ff;
+      --surface-3: #f8fbff;
+      --text: #172033;
+      --muted: #667085;
+      --border: #dbe4f0;
+      --primary: #1f5eff;
+      --primary-2: #173fba;
+      --ok: #0f8a5f;
+      --ok-bg: #eaf8f1;
+      --bad: #c43a3a;
+      --bad-bg: #fff0f0;
+      --warn: #9a6400;
+      --warn-bg: #fff6df;
+      --shadow: 0 12px 30px rgba(25, 40, 75, .08);
+      --radius: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+      background: radial-gradient(circle at top left, #e8efff 0, var(--bg) 34rem) fixed;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    .app { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 22px 0 98px; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 26px;
+      padding: 26px;
+      color: #fff;
+      background: linear-gradient(135deg, #152c69 0%, #1f5eff 58%, #72a1ff 100%);
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      right: -120px;
+      top: -150px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+    }
+    .hero h1 { position: relative; z-index: 1; margin: 0 0 8px; font-size: clamp(1.55rem, 3vw, 2.45rem); line-height: 1.18; letter-spacing: .02em; }
+    .hero p { position: relative; z-index: 1; margin: 0; max-width: 840px; opacity: .93; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; position: relative; z-index: 1; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(255,255,255,.28);
+      background: rgba(255,255,255,.13);
+      color: inherit;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: .9rem;
+      white-space: nowrap;
+    }
+
+    .mode-tabs {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .mode-tab {
+      min-height: 88px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 18px;
+      padding: 15px;
+      text-align: left;
+      color: #fff;
+      background: rgba(255,255,255,.12);
+      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+      transition: transform .16s ease, background .16s ease, border-color .16s ease;
+    }
+    .mode-tab:hover { transform: translateY(-1px); background: rgba(255,255,255,.18); }
+    .mode-tab.active { background: rgba(255,255,255,.95); color: #17306d; border-color: rgba(255,255,255,.9); }
+    .mode-tab strong { display: block; font-size: 1.06rem; margin-bottom: 3px; }
+    .mode-tab span { display: block; font-size: .9rem; opacity: .9; }
+
+    .dashboard { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 18px 0; }
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .stat strong { display: block; font-size: 1.48rem; line-height: 1.1; margin-bottom: 4px; }
+    .stat span { color: var(--muted); font-size: .92rem; }
+
+    .hidden { display: none !important; }
+    .layout { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 18px; align-items: start; }
+    .panel, .toolbar, .question-card, .source-box, .review-card, .review-chapter {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .panel { padding: 16px; position: sticky; top: 16px; }
+    .panel h2, .toolbar h2 { margin: 0 0 8px; font-size: 1.08rem; }
+    .panel-note { margin: 0 0 12px; color: var(--muted); font-size: .92rem; }
+    .toolbar { padding: 16px; margin-bottom: 14px; }
+
+    .field-label { display: block; margin: 14px 0 6px; color: var(--muted); font-size: .9rem; }
+    .search-input, select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      padding: 11px 12px;
+      outline: none;
+    }
+    .search-input:focus, select:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(31,94,255,.12); }
+
+    .btn-row, .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .btn {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--text);
+      padding: 8px 12px;
+      min-height: 38px;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .btn:hover { transform: translateY(-1px); border-color: #b8c7dc; }
+    .btn.active { color: var(--primary-2); background: var(--surface-2); border-color: #a9c2ff; font-weight: 700; }
+    .btn.primary { color: #fff; background: var(--primary); border-color: var(--primary); }
+    .btn.warn { color: var(--warn); background: var(--warn-bg); border-color: #f1cf7c; }
+    .btn.ghost { color: var(--muted); background: transparent; }
+
+    .practice-summary {
+      margin-top: 14px;
+      padding: 12px;
+      border: 1px dashed #c9d5e6;
+      border-radius: 14px;
+      background: var(--surface-3);
+      color: var(--muted);
+      font-size: .92rem;
+    }
+    .practice-summary b { color: var(--text); }
+    .progress-wrap { margin-top: 12px; }
+    .progress-line { height: 10px; border-radius: 999px; overflow: hidden; background: #e5ebf4; }
+    .progress-line i { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), #7aa2ff); transition: width .2s ease; }
+    .progress-text { margin-top: 6px; color: var(--muted); font-size: .9rem; }
+
+    .question-card { padding: 18px; margin-bottom: 14px; }
+    .q-head { display: flex; gap: 12px; align-items: flex-start; justify-content: space-between; }
+    .q-main { flex: 1; min-width: 0; }
+    .q-index { display: inline-flex; align-items: center; justify-content: center; padding: 4px 9px; border-radius: 999px; color: #fff; background: var(--primary); font-size: .82rem; white-space: nowrap; }
+    .q-title { margin: 0 0 8px; font-size: 1.03rem; line-height: 1.55; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .badge { display: inline-flex; align-items: center; border: 1px solid var(--border); border-radius: 999px; padding: 3px 8px; color: var(--muted); background: #fff; font-size: .78rem; }
+    .badge.type { color: var(--primary-2); background: var(--surface-2); border-color: #bad0ff; }
+    .options { display: grid; gap: 9px; }
+    .option {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 11px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: #fff;
+    }
+    .option input { margin-top: 5px; }
+    .option.correct { border-color: rgba(15,138,95,.36); background: var(--ok-bg); }
+    .option.wrong { border-color: rgba(196,58,58,.36); background: var(--bad-bg); }
+    .feedback { margin-top: 12px; border-radius: 13px; border: 1px solid var(--border); background: var(--surface-3); padding: 11px; color: #344054; }
+    .feedback.ok { border-color: rgba(15,138,95,.35); background: var(--ok-bg); }
+    .feedback.bad { border-color: rgba(196,58,58,.35); background: var(--bad-bg); }
+    textarea {
+      width: 100%;
+      min-height: 132px;
+      resize: vertical;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      line-height: 1.7;
+      outline: none;
+      background: #fff;
+      color: var(--text);
+    }
+    .essay-points { margin: 12px 0 0; padding-left: 1.2em; }
+    .essay-points li { margin: 5px 0; }
+
+    .review-layout { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 18px; align-items: start; }
+    .review-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 14px; }
+    .mini-stat { border: 1px solid var(--border); border-radius: 16px; background: var(--surface); padding: 12px; }
+    .mini-stat strong { display: block; font-size: 1.16rem; }
+    .mini-stat span { color: var(--muted); font-size: .86rem; }
+    .review-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .todo-toggle {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      margin-top: 12px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--surface-3);
+      color: var(--muted);
+      font-size: .92rem;
+    }
+    .review-chapter { margin-bottom: 14px; overflow: hidden; }
+    .review-chapter > header {
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 16px;
+      background: linear-gradient(180deg, #ffffff, #f8fbff);
+      border-bottom: 1px solid var(--border);
+    }
+    .review-chapter h3 { margin: 0 0 4px; font-size: 1.08rem; }
+    .chapter-progress { color: var(--muted); font-size: .9rem; }
+    .section-block { padding: 14px 16px 4px; }
+    .section-title { margin: 0 0 10px; color: #3c4a62; font-size: .95rem; }
+    .point-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .point-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fff;
+      padding: 13px;
+      min-width: 0;
+    }
+    .point-card.mastered { border-color: rgba(15,138,95,.35); background: var(--ok-bg); }
+    .point-top { display: flex; gap: 10px; justify-content: space-between; align-items: flex-start; }
+    .point-title { margin: 0 0 6px; font-size: .98rem; line-height: 1.5; }
+    .point-meta { margin: 0 0 8px; color: var(--muted); font-size: .82rem; }
+    .master-check { display: inline-flex; gap: 5px; align-items: center; color: var(--muted); font-size: .82rem; white-space: nowrap; }
+    .point-body { color: #344054; font-size: .9rem; }
+    .point-body details { margin-top: 4px; }
+    .point-body summary { color: var(--primary-2); cursor: pointer; }
+    .point-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .empty {
+      padding: 26px;
+      border: 1px dashed #c9d5e6;
+      border-radius: var(--radius);
+      background: var(--surface-3);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .source-box { margin-top: 14px; padding: 16px; }
+    .source-box summary { cursor: pointer; font-weight: 700; }
+    .raw-text {
+      margin-top: 10px;
+      max-height: 360px;
+      overflow: auto;
+      white-space: pre-wrap;
+      font-family: var(--mono);
+      font-size: .82rem;
+      color: #344054;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .mobile-score {
+      display: none;
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 50;
+      border: 1px solid rgba(23,32,51,.12);
+      border-radius: 18px;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 16px 36px rgba(15, 23, 42, .18);
+      padding: 10px 12px;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+    .mobile-score strong { display: block; font-size: 1rem; }
+    .mobile-score span { color: var(--muted); font-size: .78rem; }
+
+    @media (max-width: 900px) {
+      .app { width: min(100% - 20px, 760px); padding-top: 10px; }
+      .dashboard { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .layout, .review-layout { grid-template-columns: 1fr; }
+      .panel { position: static; }
+      .point-grid { grid-template-columns: 1fr; }
+      .review-summary { grid-template-columns: 1fr; }
+      .mobile-score { display: flex; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 20px; border-radius: 20px; }
+      .mode-tabs { grid-template-columns: 1fr; }
+      .dashboard { gap: 10px; }
+      .stat { padding: 13px; }
+      .stat strong { font-size: 1.28rem; }
+      .tabs .btn, .btn-row .btn { flex: 1 1 auto; }
+      .q-head { display: block; }
+      .q-index { margin-bottom: 7px; }
+      .question-card { padding: 15px; border-radius: 16px; }
+      .review-chapter > header { display: block; }
+      .review-chapter > header .btn { margin-top: 8px; }
+    }
+    @media print {
+      body { background: #fff; }
+      .panel, .toolbar, .mode-tabs, .mobile-score, .source-box { display: none !important; }
+      .app { width: 100%; padding: 0; }
+      .hero { color: #000; background: #fff; border: 1px solid #ddd; box-shadow: none; }
+      .question-card, .review-chapter, .point-card { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <h1>军理期末提纲刷题网页</h1>
+      <p>已将页面逻辑拆成两个入口：刷题模式用于做题、评分和错题回看；复习模式用于按章节浏览自动拆解的知识点、标记掌握情况，并跳转到对应题目专项练习。</p>
+      <div class="hero-meta">
+        <span class="pill">来源：2026 年春季学期军理期末提纲</span>
+        <span class="pill">20 道选择题 · 10 道判断题 · 5 道论述题</span>
+        <span class="pill">客观题自动评分</span>
+        <span class="pill">手机 / 电脑自适应</span>
+      </div>
+      <nav class="mode-tabs" id="modeTabs" aria-label="学习模式切换">
+        <button class="mode-tab active" type="button" data-mode="practice">
+          <strong>刷题模式</strong>
+          <span>按题型、章节和错题筛选练习，提交后显示评分、答案和解析。</span>
+        </button>
+        <button class="mode-tab" type="button" data-mode="review">
+          <strong>复习模式</strong>
+          <span>按章节和知识点拆解复习，支持搜索、掌握标记和关联题跳转。</span>
+        </button>
+      </nav>
+    </header>
+
+    <section class="dashboard" id="dashboard" aria-label="学习统计"></section>
+
+    <section id="practiceView" class="mode-view" aria-label="刷题模式">
+      <div class="layout">
+        <aside class="panel" aria-label="刷题设置">
+          <h2>刷题模式</h2>
+          <p class="panel-note">适合考前自测。客观题会自动评分，论述题显示参考要点。</p>
+
+          <span class="field-label">题型筛选</span>
+          <div class="tabs" id="practiceFilters"></div>
+
+          <label class="field-label" for="qChapter">章节筛选</label>
+          <select id="qChapter"></select>
+
+          <span class="field-label">操作</span>
+          <div class="btn-row">
+            <button class="btn primary" type="button" data-action="check">提交评分</button>
+            <button class="btn" type="button" data-action="toggleAnswers">显示答案</button>
+            <button class="btn warn" type="button" data-action="resetPractice">重做</button>
+          </div>
+
+          <div class="practice-summary" id="practiceSummary"></div>
+        </aside>
+
+        <main class="main">
+          <section class="toolbar" aria-label="刷题工具栏">
+            <h2>题目区</h2>
+            <input class="search-input" id="questionSearch" type="search" placeholder="搜索题目、解析、章节或标签，例如：信息化战争" />
+            <div class="progress-wrap">
+              <div class="progress-line"><i id="progressBar"></i></div>
+              <div class="progress-text" id="progressText"></div>
+            </div>
+          </section>
+
+          <section id="questionList" aria-live="polite"></section>
+
+          <section class="source-box">
+            <details>
+              <summary>查看提纲原文摘录</summary>
+              <p class="panel-note">网页内置原文用于知识点拆解。遇到表述不确定时，以课程材料和教师要求为准。</p>
+              <div class="raw-text" id="rawTextPractice"></div>
+            </details>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <section id="reviewView" class="mode-view hidden" aria-label="复习模式">
+      <div class="review-layout">
+        <aside class="panel" aria-label="复习筛选">
+          <h2>复习模式</h2>
+          <p class="panel-note">适合系统过提纲。页面会按章、节、条目拆解知识点；勾选“已掌握”后可只看未掌握内容。</p>
+
+          <label class="field-label" for="reviewSearch">知识点搜索</label>
+          <input class="search-input" id="reviewSearch" type="search" placeholder="搜索知识点，如：国防动员、总体国家安全观" />
+
+          <span class="field-label">章节筛选</span>
+          <div class="review-chips" id="reviewChapterChips"></div>
+
+          <label class="todo-toggle">
+            <input type="checkbox" id="reviewTodoOnly" />
+            <span>只看未掌握知识点</span>
+          </label>
+
+          <span class="field-label">操作</span>
+          <div class="btn-row">
+            <button class="btn primary" type="button" data-action="practiceUnmastered">练未掌握</button>
+            <button class="btn warn" type="button" data-action="clearMastered">清空掌握标记</button>
+          </div>
+        </aside>
+
+        <main class="main">
+          <section class="review-summary" id="reviewSummary" aria-label="复习统计"></section>
+          <section id="reviewList" aria-live="polite"></section>
+
+          <section class="source-box">
+            <details>
+              <summary>查看提纲原文摘录</summary>
+              <p class="panel-note">复习卡片由下列提纲文本自动拆解生成。</p>
+              <div class="raw-text" id="rawTextReview"></div>
+            </details>
+          </section>
+        </main>
+      </div>
+    </section>
+  </div>
+
+  <div class="mobile-score" id="mobileScore"></div>
+
+  <script>
+    const SYLLABUS_TEXT = "2026 年春季学期军理期末提纲\n第一章 中国国防\n第一节 国防概述\n一、国防的定义(P2)\n1. 国防的定义：国防，是指国家为防备和抵抗侵略，制止武装颠覆和分裂，保\n卫国家的主权、统一、领土完整、安全和发展利益所进行的军事活动，以及与军\n事有关的政治、经济、外交、科技、教育等方面的活动。\n2. 国防的基本内容：国防的行为主体是国家，基本内容包括国防建设和国防斗\n争两个方面。\n二、国防的地位作用(P3)\n1. 国防是国家生存与发展的安全保障\n2. 国防是国家独立自主的前提\n3. 国防是国家繁荣富强的重要条件\n三、国防类型(P4)\n1. 扩张型国防：奉行霸权主义、强权政治和进攻型战略。\n2. 自卫型国防：以维护国家安全、防止和抵御外敌侵略为目的。\n四、国防历史与启示(P5)\n·中国古代最早的国防始于夏朝。\n·中国现代国防具有政治性、防御性、人民性和自主性等鲜明特点：政治性表现\n在中国现代国防和军队服从中国共产党的绝对领导，服从党和国家的总路线、总\n政策，限务于国家总体战略目标。\n·中国国防历史的启示：\n1. 政治昌明是国防巩固的根本\n2. 经济发展是国防强大的基础：经济是国防的物质基础\n3. 国家统一和民族团结是国防强大的前提\n五、中国国防时代内涵新变化(P9)\n现代国防是对传统国防的继承和发展，是一种全新的国防理念和实践活动。\n当前，我国奉行防御性国防政策的基本原则不会改变，但其时代内涵将随着安全\n形势和国防需求的变化而变化。这种新变化具体表现为：\n\n\f一是范围拓展，生存安全问题和发展安全问题、传统安全问题和非传统安全\n问题相互交织，发展中的安全问题日益突出，维护国家统一、维护领士完整、维\n护发展利益任务艰巨繁重。\n二是目标拓展，从打赢战争到遏制战争，从争取和平到维护和平，维护国家\n和平发展、维护世界和平成为国防的基本目标。\n三是任务拓展，实现巩固内部安全与防范外来威胁的统一，应对传统安全威\n胁和新型安全挑战的统一，提高军队应对各种安全威胁、完成多样化军事任务的\n能力。\n四是手段拓展，在立足打赢信息化局部战争的基础上，增强军事手段运用的\n积极性和主动性，密切配合政治、经济、外交、文化、法律等手段，实现国家的\n综合安全。\n第二节 国防法规\n一、国防法规体系的定义(P11)\n·国防法规体系，是指国家和军队现行国防法律规范按照层次和门类构成的有机\n整体\n二、主要国防法规介绍(P14)\n·《中华人民共利国国防法》：1997 年 3 月 14 日，第八届全国人民代表大会第 5\n次会议通过，是指导和规范我国国防活动的基本法律依据。\n·《中华人民共和国兵役法》、《中华人民共和国国防教育法》、《中华人民共和国\n国防动员法》、《中华人民共和国人民防空法》、《中华人民共和国军事设施保护\n法》、《中华人民共和国预备役人员法》、《中华人民解放军文职人员条例》\n三、公民的国防义务和权利(P16)\n（一）公民的国防义务\n1. 兵役义务\n·兵役，是公民依照国家法律规定履行的军事义务。《中华人民共和国兵役法》\n第一章第 5 条规定：“中华人民共和国公民，不分民族、种族、职业、家庭出身、\n宗教信仰和教育程度，都有义务依照本法的规定服兵役。”兵役分为现役和预备\n役两种。\n·按照《兵役法》的规定，年满 18 周岁的男性公民，应当被征集服现役。当年\n未被征集的，在 22 周罗以前仍可以被征集服现役，普通高等学校毕业生的征集\n\n\f年龄可以放宽至 24 周岁，研究生的征集年龄可以放宽至 26 周岁。\n2. 接受国防教育的义务\n·\n《国防教育法》第 15 条进一步规定：“高等学校、高级中学和相当于高级中学\n的学校应当将课堂教学与军事训练相结合，对学生进行国防教育。高等学校应当\n设置适当的国防教育课程。\n3. 保护国防设施的义务\n4. 保守国防秘密的义务\n5. 协助国防活动的义务\n（二）公民的国防权利\n1. 对国防建设提出建议的权利\n2. 对危害国防行为进行制止或检举的权利\n3. 获得经济损失补偿的权利\n四、国防义务和国防权利的关系(P20)\n·国防义务与国防权利是对立统一的关系。\n第三节 国防建设\n·依照宪法和有关法律，全国人大常委会决定全国总动员或者局部动员。国家主\n席根据全国人大常委会的决定，发布动员令。国务院、中央军委共同领导全国的\n国防动员工作。\n一、国防战略的定义(P30)\n·国防战略，是指筹划和指导国防建设与斗争全局的方略，是国家战略的组成部\n分。国防战略受国家战略的指导和制约，其任务是决定国防力量的建设和发展，\n指导国防斗争的实施，维护国家安全利益。通常是由国家最高决策机关依据国家\n安全利益和国防环境，在国家战略的指导下制定的。\n·我国社会主义性质和国家根本利益、走和平发展道路的客观要求，决定了我们\n必须毫不动摇地坚持积极防御战略思想。\n二、国防政策(P31)\n·国防政策，是国家制定的一定时期内指导国防活动的基本行动准则。由国家依\n据其军事、政治、经济、科技、文化、地理及国际环境等条件制定，是国家内外\n政策在国防安全领域的集中体现。\n·中国的社会主义国家性质，走和平发展道路的战略抉择，独立自主的和平外交\n\n\f政策，“和为贵”的中华文化传统，决定了中国始终不渝奉行防御性国防政策。\n·新时代军事战略方针，坚持防御、自卫、后发制人原则，实行积极防御，坚持\n“人不犯我，我不犯人，人若犯我、我必犯人”，强调遏制战争与打赢战争相统\n一，强调战略上防御与战役战斗上进攻相统一。\n第四节 武装力量\n·武装力量：是指国家或政治集团所拥有的各种武装组织的总称。\n·党的性质决定了这支军队的性质。\n·中国共产党是无产阶级的政党，是中国工人阶级、中国人民和中华民族的先锋\n队，是中国特色社会主义事业的领导核心，是各族人民根本利益的忠实代表。由\n这样的党缔造和领导的军队，必须始终不渝地保持人民军队的性质，忠于党，忠\n于社会主义，忠于祖国，忠于人民，确保绝对忠诚、绝对纯洁、绝对可靠。\n一、中国武装力量的使命任务(P38)\n·进人新时代，党和人民赋予中国军队的使命任务是：为巩固中国共产党领导和\n社会主义制度提供战略支撑，为捍卫国家主权、统一、领土完整提供战略支撑，\n为维护国家海外利益提供战略支撑，为促进世界和平与发展提供战略支撑\n1. 维护国家领土主权和海洋权益\n2. 保持常备不懈的战备状态\n3. 开展实战化军事训练\n4. 维护重大安全领域利益\n5. 遂行反恐维稳\n6. 维护海外权益\n7. 参加抢险救灾\n二、中国武装力量组成(P40)\n·中华人民共和国的武装力量，由中国人民解放军、中国人民武装警察部队、民\n兵组成。\n三、中国民兵(P46)\n·中国民兵是不脱离生产的群众武装组织，是中华人民共和国武装力量的组成部\n分，是中国人民解放军的助手和后备力量。\n第五节 国防动员\n一、国防动员的定义(P49)\n\n\f·国防动员，是指国家为应对战争或者其他安全威胁，使社会诸多领域的全部或\n者部分由平时状态转入战时状态或者紧急状态的活动。\n二、国防动员的内容(P51)\n·主要内容包括：武装力量动员、国民经济动员、人民防空动员、交通战备动员\n和政治动员\n·平时政治动员主要表现为国防教育；战时政治动员主要包括国内政治动员和外\n交舆论宣传。\n\n\f第二章 国家安全\n第一节 国家安全概述\n一、总体国家安全观(P63)\n·理解总体国家安全观，关键是要深刻把握“一个总体”和“十个坚持”。\n·总体国家安全观的关键是“总体”。\n·总体国家安全观的核心要义，集中体现为“十个坚持”：坚持党对国家安全工\n作的绝对领导，坚持中国特色国家安全道路，坚持以人民安全为宗旨，坚持统筹\n发展的安全，坚持把政治安全放在首要位置，坚持统筹推进各领域安全，坚持把\n防范化解国家安全风险摆在突出位置，坚持推进国际共同安全，坚持推进国家安\n全体系和能力现代化，坚持加强国家安全干部队伍建设。\n第二节 国家安全形势\n一、新兴领域国家安全(P80)\n1. 网络空间安全\n2. 外层空间安全\n3. 国际海底区域安全\n4. 极地安全\n5. 生物安全\n第三节 国际战略形势\n一、国际战略形势的总体表现(P88)\n·总体表现为：世界多极化进程加快，经济全球化进程出现波折，大国战略博弈\n更加激烈，全球性问题和挑战空前增多\n·大国战略博弈更加激烈：当今国际战略格局演变呈现西方与新兴大国消长竞合\n二、全球性问题和挑战(P92)\n1. 恐怖主义威胁不滅，恐怖活动呈现组织形态国家化、传播方式网络化以及实\n施方式“独狼化”、分散化趋势。\n2. 网络日益成为犯罪分子甚至恐怖组织的活动平台。\n3. 愈演愈烈的难民问题。\n4. 大国在战略军备与军控领域博弈加剧。\n\n\f第三章 中国国防\n第一节 军事思想概述\n一、军事思想的基本特征(P102)\n1. 政治性\n2. 实践性\n3. 时代性\n4. 民族性\n5. 继承性\n6. 创造性\n·《孙子兵法》作者为春秋时期伟大军事家孙武\n第二节 外国军事思想\n第三节 中国古代军事思想\n一、武经七书(P126) 没有划重点\n二、中国古代军事思想代表作(P130)\n1. 重战、慎战、备战思想\n2. “知彼知己，百战不殆”的战争指导思想\n3. 以谋略制胜为核心的用兵思想\n4. “文武兼施，恩威并用”的治军思想\n5. 朴素唯物论和原始辩证法思想\n第四节 毛泽东军事思想\n一、毛泽东军事思想的主要内容(P137)\n1. 战争观和军事方法论\n2. 人民军队思想\n3. 人民战争思想\n4. 人民战争的战略战术思想\n5. 国防建设思想\n·实行积极防御的战略方针\n第五节 改革开放以来党的军事指导思想\n第六节 习近平强军思想\n\n\f一、党在新时代的强军目标(P177)\n（一）明确强国必须强军，巩固国防和强大人民军队是新时代坚持和发展中国特\n色社会主义、实现中华民族伟大复兴的战略支撑。\n（二）明确党在新时代的强军目标是建设一支听党指挥、能打胜仗、作风优良的\n人民军队，必须同国家现代化进程相一致，力争到 2035 年基本实现国防和军队\n现代化，到本世纪中叶把人民军队全面建成世界一流军队。\n（三）明确党对军队绝对领导是人民军队建军之本、强军之魂，必须全面贯彻党\n领导军队的一系列根本原则和制度，确保部队绝对忠诚、绝对纯洁、绝对可靠。\n（四）明确军队是要准备打仗的，必须聚焦能打仗、打胜仗，创新发展军事战略\n指导，构建中国特色现代作战体系，全面提高新时代备战打仗能力，有效塑造态\n势、管控危机、遏制战争、打赢战争。\n（五）明确作风优良是我军鲜明特色和政治优势，必须加强作风建设、纪律建设，\n坚定不移正风肃纪、反腐惩恶，大力弘扬我党我军光荣传统和优良作风，永葆人\n民军队性质、宗旨、本色。\n（六）明确推进强军事业必须坚持政治建军、改革强军、科技强军、人才强军、\n依法治军，更加注重聚焦实战、更加注重创新驱动、更加注重体系建设、更加注\n重集约高效、更加注重军民融合，全面提高革命化现代化正规化水平。\n（七）明确改革是强军的必由之路，必须推进军队组织形态现代化，构建中国特\n色现代军事力量体系，完善中国特色社会主义军事制度。\n（十）明确军民融合发展是兴国之举、强军之策，必须坚持发展和安全兼顾、富\n国和强军统一，形成全要素、多领域、高效益军民融合深度发展格局，构建一体\n化的国家战略体系和能力。\n\n\f第四章 现代战争\n第一节 战争概述\n一、战争的本质(P185)\n·战争的本质，可以从政治、经济、军事等不同层面去考察和认识。从政治的层\n面看，无论战争现象如何纷繁复杂，都离不开政治，都是政治的继续，是社会政\n治矛盾极端尖锐化而爆发的暴力斗争；从经济的层面看，战争是政治的继续，而\n政治又是经济的集中体现，任何战争无不同一定的经济基础和条件密切联系，体\n现出战争与经济之间的本质联系；从军事的层面看，各种类型、各种规模的战争\n的本质都是保存自己消灭敌人。\n二、战争的基本特点(P186)\n·激烈的暴力对抗，快速地流动变化，充满盖然性或偶然性\n第二节 新军事革命\n一、新军事革命的定义和主要标志(P192)\n·新军事革命，是 20 世纪末期以来在世界范围内发生的一场以信息化为核心的\n全面而深刻的军事革命。\n·其主要标志是：信息化武器系统逐渐主宰战场，出现知识密集型的信息化军队，\n一体化联合作战成为基本作战形式，军事理论及其体系彻底革新，信息化战争最\n终取代机械化战争。\n二、中国特色军事变革的主要方面(P201)\n1. 中国特色军事变革的发展方向是信息化。\n2. 中国特色军事变革的基本目标是建设信息化军队。\n3. 中国特色军事变革的基本途径是机械化与信息化的复合发展。\n4. 中国特色军事变革的发展步骤与国家发展战略相适应。\n5. 中国特色军事变革的根本动力是改革创新。\n6. 中国特色军事变革的根本保证是坚持中国共产党的绝对领导。\n第三节 机械化战争\n一、机械化战争基本特征(P208)\n1. 机动速度快\n2. 火力毁伤重\n\n\f3. 战场范围广\n4. 战争消耗大\n第四节 信息化战争\n一、信息化战争概念(P223)\n·依托网络化信息系统，使用信息化武器装备及相应作战方法，在陆海空天和网\n络电磁等空间及认知领域进行的以体系对抗为主要形式的战争。是信息时代战争\n的基本形态。\n二、信息化战争的基本特征(P228)\n1．信息化武器装备系统成为战场主导\n2．信息成为战斗力的倍增器\n3．战场网络化、一体化\n4．一体化联合作战成为基本作战形式\n5．制信息权成为争夺的制高点\n\n\f第五章 信息化装备\n第一节 信息化装备概述\n一、信息化装备的分类(P257)\n·信息化装备的分类，按功能可分为信息化主战武器系统和信息系统两大类。从\n作战体系的角度，可进一步细分为：信息化作战平台、指挥信息系统和信息化杀\n伤武器。\n第二节 信息化作战平台\n一、信息化作战平台分类(P263)\n·主要包括：陆战武器平台、海战武器平台、空战武器平台。\n二、空战武器平台组成(P272)\n·战斗机、轰炸机、电子战飞机、运输机\n第三节 指挥信息系统\n·指挥信息系统，是“以计算机网络为核心，由指挥控制、情报、通信、信息对\n抗、综合保障等分系统组成，可对作战信息进行实时获取、传输、处理，用于保\n障各级指挥机构对所属部队和武器实施科学高效指挥控制的军事信息系统。”在\n构成指挥信息系统的诸多分系统中，指挥控制系统情报系统、通信系统和导航定\n位系统具有十分重要的作用。\n一、指挥信息系统的分系统类型(P276-P288)\n1. 指挥控制系统\n2. 情报系统\n3. 通信系统\n4. 导航定位系统\n第四节 信息化杀伤武器\n一、新概念武器种类(P289-P298)\n1. 激光技术和激光武器\n2. 微波武器\n3. 粒子束武器\n4. 动能武器\n5. 非致命武器\n\n\f";
+    const QUESTIONS = [
+  {
+    "id": "mcq01",
+    "type": "choice",
+    "chapter": "第一章 中国国防",
+    "point": "国防的定义",
+    "prompt": "根据提纲，国防的行为主体是什么？",
+    "options": [
+      "国家",
+      "军队",
+      "公民个人",
+      "国际组织"
+    ],
+    "answer": 0,
+    "explanation": "提纲明确：国防的行为主体是国家；基本内容包括国防建设和国防斗争两个方面。",
+    "tags": [
+      "国防定义",
+      "行为主体",
+      "国防建设",
+      "国防斗争"
+    ]
+  },
+  {
+    "id": "mcq02",
+    "type": "choice",
+    "chapter": "第一章 中国国防",
+    "point": "国防的基本内容",
+    "prompt": "国防的基本内容包括哪两个方面？",
+    "options": [
+      "国防建设和国防斗争",
+      "军事训练和军事科研",
+      "外交谈判和经济建设",
+      "国家安全和社会治理"
+    ],
+    "answer": 0,
+    "explanation": "提纲将国防基本内容概括为国防建设和国防斗争。",
+    "tags": [
+      "国防基本内容",
+      "国防建设",
+      "国防斗争"
+    ]
+  },
+  {
+    "id": "mcq03",
+    "type": "choice",
+    "chapter": "第一章 中国国防",
+    "point": "国防类型",
+    "prompt": "“以维护国家安全、防止和抵御外敌侵略为目的”的国防类型是？",
+    "options": [
+      "自卫型国防",
+      "扩张型国防",
+      "联盟型国防",
+      "中立型国防"
+    ],
+    "answer": 0,
+    "explanation": "自卫型国防以维护国家安全、防止和抵御外敌侵略为目的。扩张型国防则奉行霸权主义、强权政治和进攻型战略。",
+    "tags": [
+      "国防类型",
+      "自卫型国防",
+      "扩张型国防"
+    ]
+  },
+  {
+    "id": "mcq04",
+    "type": "choice",
+    "chapter": "第一章 中国国防",
+    "point": "国防历史与启示",
+    "prompt": "中国古代最早的国防始于哪个朝代？",
+    "options": [
+      "夏朝",
+      "商朝",
+      "周朝",
+      "秦朝"
+    ],
+    "answer": 0,
+    "explanation": "提纲列明：中国古代最早的国防始于夏朝。",
+    "tags": [
+      "国防历史",
+      "夏朝"
+    ]
+  },
+  {
+    "id": "mcq05",
+    "type": "choice",
+    "chapter": "第一章 中国国防",
+    "point": "国防历史的启示",
+    "prompt": "下列哪一项属于中国国防历史的启示？",
+    "options": [
+      "政治昌明是国防巩固的根本",
+      "扩大军费是国防巩固的唯一条件",
+      "地理屏障是国防强大的决定因素",
+      "技术领先可以替代国家统一"
+    ],
+    "answer": 0,
+    "explanation": "提纲列出三条启示：政治昌明是根本，经济发展是基础，国家统一和民族团结是前提。",
+    "tags": [
+      "国防历史启示",
+      "政治昌明",
+      "经济发展",
+      "国家统一"
+    ]
+  },
+  {
+    "id": "mcq06",
+    "type": "choice",
+    "chapter": "第一章 中国国防",
+    "point": "中国国防时代内涵新变化",
+    "prompt": "中国国防时代内涵的新变化不包括哪一项？",
+    "options": [
+      "目标缩小为单纯打赢战争",
+      "范围拓展",
+      "任务拓展",
+      "手段拓展"
+    ],
+    "answer": 0,
+    "explanation": "提纲强调目标拓展：从打赢战争到遏制战争，从争取和平到维护和平，而不是目标缩小。",
+    "tags": [
+      "时代内涵",
+      "范围拓展",
+      "目标拓展",
+      "任务拓展",
+      "手段拓展"
+    ]
+  },
+  {
+    "id": "mcq07",
+    "type": "choice",
+    "chapter": "第一章 中国国防",
+    "point": "国防法规体系",
+    "prompt": "国防法规体系是指什么？",
+    "options": [
+      "国家和军队现行国防法律规范按层次和门类构成的有机整体",
+      "军队内部训练制度的总称",
+      "各地征兵公告组成的制度集合",
+      "国际军事条约的全部内容"
+    ],
+    "answer": 0,
+    "explanation": "提纲给出的定义是：国家和军队现行国防法律规范按照层次和门类构成的有机整体。",
+    "tags": [
+      "国防法规体系",
+      "国防法规"
+    ]
+  },
+  {
+    "id": "mcq08",
+    "type": "choice",
+    "chapter": "第一章 中国国防",
+    "point": "主要国防法规",
+    "prompt": "《中华人民共和国国防法》在我国国防法规中的定位是？",
+    "options": [
+      "指导和规范我国国防活动的基本法律依据",
+      "只用于规范高校军事训练",
+      "专门规定人民防空工程建设",
+      "只规定预备役人员管理"
+    ],
+    "answer": 0,
+    "explanation": "提纲指出：《中华人民共和国国防法》是指导和规范我国国防活动的基本法律依据。",
+    "tags": [
+      "中华人民共和国国防法",
+      "国防法规"
+    ]
+  },
+  {
+    "id": "mcq09",
+    "type": "choice",
+    "chapter": "第一章 中国国防",
+    "point": "兵役义务",
+    "prompt": "根据提纲，兵役分为哪两种？",
+    "options": [
+      "现役和预备役",
+      "陆军和海军",
+      "征兵和募兵",
+      "义务兵和民兵"
+    ],
+    "answer": 0,
+    "explanation": "兵役是公民依法履行的军事义务，提纲明确兵役分为现役和预备役。",
+    "tags": [
+      "兵役义务",
+      "现役",
+      "预备役"
+    ]
+  },
+  {
+    "id": "mcq10",
+    "type": "choice",
+    "chapter": "第一章 中国国防",
+    "point": "公民国防义务",
+    "prompt": "下列哪一项不属于提纲列出的公民国防义务？",
+    "options": [
+      "获得经济损失补偿",
+      "接受国防教育",
+      "保护国防设施",
+      "保守国防秘密"
+    ],
+    "answer": 0,
+    "explanation": "获得经济损失补偿属于公民的国防权利，不属于国防义务。",
+    "tags": [
+      "国防义务",
+      "国防权利",
+      "国防教育",
+      "国防设施"
+    ]
+  },
+  {
+    "id": "mcq11",
+    "type": "choice",
+    "chapter": "第一章 中国国防",
+    "point": "国防战略与国防政策",
+    "prompt": "我国必须毫不动摇坚持的战略思想是？",
+    "options": [
+      "积极防御战略思想",
+      "先发制人战略思想",
+      "全球扩张战略思想",
+      "军事同盟优先战略思想"
+    ],
+    "answer": 0,
+    "explanation": "提纲说明我国社会主义性质、国家根本利益和走和平发展道路的要求，决定必须坚持积极防御战略思想。",
+    "tags": [
+      "国防战略",
+      "积极防御",
+      "防御性国防政策"
+    ]
+  },
+  {
+    "id": "mcq12",
+    "type": "choice",
+    "chapter": "第一章 中国国防",
+    "point": "武装力量组成",
+    "prompt": "中华人民共和国武装力量由哪些部分组成？",
+    "options": [
+      "中国人民解放军、中国人民武装警察部队、民兵",
+      "陆军、海军、空军",
+      "常备军、雇佣军、地方警察",
+      "解放军、预备役、国际维和部队"
+    ],
+    "answer": 0,
+    "explanation": "提纲明确：中华人民共和国的武装力量由中国人民解放军、中国人民武装警察部队、民兵组成。",
+    "tags": [
+      "武装力量",
+      "解放军",
+      "武警",
+      "民兵"
+    ]
+  },
+  {
+    "id": "mcq13",
+    "type": "choice",
+    "chapter": "第一章 中国国防",
+    "point": "国防动员",
+    "prompt": "国防动员的主要内容不包括下列哪一项？",
+    "options": [
+      "商业营销动员",
+      "武装力量动员",
+      "国民经济动员",
+      "人民防空动员"
+    ],
+    "answer": 0,
+    "explanation": "提纲列出的国防动员主要内容包括武装力量动员、国民经济动员、人民防空动员、交通战备动员和政治动员。",
+    "tags": [
+      "国防动员",
+      "武装力量动员",
+      "国民经济动员",
+      "人民防空动员"
+    ]
+  },
+  {
+    "id": "mcq14",
+    "type": "choice",
+    "chapter": "第二章 国家安全",
+    "point": "总体国家安全观",
+    "prompt": "理解总体国家安全观，关键是深刻把握什么？",
+    "options": [
+      "一个总体和十个坚持",
+      "一个中心和两个基本点",
+      "三个代表和四个全面",
+      "五位一体和六个必须"
+    ],
+    "answer": 0,
+    "explanation": "提纲明确：理解总体国家安全观，关键是深刻把握“一个总体”和“十个坚持”。",
+    "tags": [
+      "总体国家安全观",
+      "一个总体",
+      "十个坚持"
+    ]
+  },
+  {
+    "id": "mcq15",
+    "type": "choice",
+    "chapter": "第二章 国家安全",
+    "point": "新兴领域国家安全",
+    "prompt": "下列哪组全部属于提纲列出的新兴领域国家安全？",
+    "options": [
+      "网络空间安全、外层空间安全、国际海底区域安全、极地安全、生物安全",
+      "粮食安全、能源安全、文化安全、社区安全、交通安全",
+      "金融安全、人口安全、旅游安全、矿产安全、教育安全",
+      "海关安全、边检安全、司法安全、消防安全、校园安全"
+    ],
+    "answer": 0,
+    "explanation": "提纲在新兴领域国家安全中列出网络空间、外层空间、国际海底区域、极地和生物安全。",
+    "tags": [
+      "新兴领域国家安全",
+      "网络空间安全",
+      "外层空间安全",
+      "生物安全"
+    ]
+  },
+  {
+    "id": "mcq16",
+    "type": "choice",
+    "chapter": "第二章 国家安全",
+    "point": "国际战略形势",
+    "prompt": "国际战略形势的总体表现不包括哪一项？",
+    "options": [
+      "全球性问题和挑战明显减少",
+      "世界多极化进程加快",
+      "经济全球化进程出现波折",
+      "大国战略博弈更加激烈"
+    ],
+    "answer": 0,
+    "explanation": "提纲表述为：全球性问题和挑战空前增多，而不是明显减少。",
+    "tags": [
+      "国际战略形势",
+      "世界多极化",
+      "经济全球化",
+      "大国战略博弈"
+    ]
+  },
+  {
+    "id": "mcq17",
+    "type": "choice",
+    "chapter": "第三章 军事思想",
+    "point": "军事思想基本特征",
+    "prompt": "下列哪项不是提纲列出的军事思想基本特征？",
+    "options": [
+      "娱乐性",
+      "政治性",
+      "实践性",
+      "时代性"
+    ],
+    "answer": 0,
+    "explanation": "军事思想基本特征包括政治性、实践性、时代性、民族性、继承性、创造性。",
+    "tags": [
+      "军事思想",
+      "基本特征",
+      "政治性",
+      "实践性"
+    ]
+  },
+  {
+    "id": "mcq18",
+    "type": "choice",
+    "chapter": "第三章 军事思想",
+    "point": "中国古代军事思想",
+    "prompt": "《孙子兵法》的作者是？",
+    "options": [
+      "孙武",
+      "孙膑",
+      "吴起",
+      "司马穰苴"
+    ],
+    "answer": 0,
+    "explanation": "提纲列明：《孙子兵法》作者为春秋时期伟大军事家孙武。",
+    "tags": [
+      "孙子兵法",
+      "孙武",
+      "中国古代军事思想"
+    ]
+  },
+  {
+    "id": "mcq19",
+    "type": "choice",
+    "chapter": "第四章 现代战争",
+    "point": "新军事革命",
+    "prompt": "20 世纪末期以来的新军事革命以什么为核心？",
+    "options": [
+      "信息化",
+      "机械化",
+      "火药化",
+      "冷兵器化"
+    ],
+    "answer": 0,
+    "explanation": "提纲定义：新军事革命是以信息化为核心的全面而深刻的军事革命。",
+    "tags": [
+      "新军事革命",
+      "信息化"
+    ]
+  },
+  {
+    "id": "mcq20",
+    "type": "choice",
+    "chapter": "第五章 信息化装备",
+    "point": "信息化装备分类",
+    "prompt": "从作战体系角度，信息化装备可进一步细分为哪三类？",
+    "options": [
+      "信息化作战平台、指挥信息系统、信息化杀伤武器",
+      "陆军装备、海军装备、空军装备",
+      "通信设备、运输设备、后勤设备",
+      "常规武器、战略武器、训练器材"
+    ],
+    "answer": 0,
+    "explanation": "提纲指出，从作战体系角度可进一步细分为信息化作战平台、指挥信息系统和信息化杀伤武器。",
+    "tags": [
+      "信息化装备",
+      "信息化作战平台",
+      "指挥信息系统",
+      "信息化杀伤武器"
+    ]
+  },
+  {
+    "id": "tf01",
+    "type": "judge",
+    "chapter": "第一章 中国国防",
+    "point": "国防定义",
+    "prompt": "国防既包括军事活动，也包括与军事有关的政治、经济、外交、科技、教育等方面的活动。",
+    "answer": true,
+    "explanation": "提纲中的国防定义明确包含军事活动及与军事有关的政治、经济、外交、科技、教育等方面活动。",
+    "tags": [
+      "国防定义",
+      "军事活动",
+      "综合性"
+    ]
+  },
+  {
+    "id": "tf02",
+    "type": "judge",
+    "chapter": "第一章 中国国防",
+    "point": "国防类型",
+    "prompt": "扩张型国防以维护国家安全、防止和抵御外敌侵略为目的。",
+    "answer": false,
+    "explanation": "该表述属于自卫型国防；扩张型国防奉行霸权主义、强权政治和进攻型战略。",
+    "tags": [
+      "扩张型国防",
+      "自卫型国防"
+    ]
+  },
+  {
+    "id": "tf03",
+    "type": "judge",
+    "chapter": "第一章 中国国防",
+    "point": "国防历史启示",
+    "prompt": "经济发展是国防强大的基础，经济是国防的物质基础。",
+    "answer": true,
+    "explanation": "这是提纲列出的中国国防历史启示之一。",
+    "tags": [
+      "国防历史启示",
+      "经济发展"
+    ]
+  },
+  {
+    "id": "tf04",
+    "type": "judge",
+    "chapter": "第一章 中国国防",
+    "point": "国防义务与权利",
+    "prompt": "国防义务与国防权利之间是相互排斥、完全割裂的关系。",
+    "answer": false,
+    "explanation": "提纲指出国防义务与国防权利是对立统一的关系。",
+    "tags": [
+      "国防义务",
+      "国防权利",
+      "对立统一"
+    ]
+  },
+  {
+    "id": "tf05",
+    "type": "judge",
+    "chapter": "第一章 中国国防",
+    "point": "国防动员领导",
+    "prompt": "全国总动员或局部动员由全国人大常委会决定，国家主席根据决定发布动员令。",
+    "answer": true,
+    "explanation": "提纲中关于国防建设部分列明：全国人大常委会决定全国总动员或局部动员，国家主席发布动员令。",
+    "tags": [
+      "国防动员",
+      "动员令",
+      "全国人大常委会",
+      "国家主席"
+    ]
+  },
+  {
+    "id": "tf06",
+    "type": "judge",
+    "chapter": "第一章 中国国防",
+    "point": "武装力量组成",
+    "prompt": "中华人民共和国武装力量由中国人民解放军、中国人民武装警察部队、民兵组成。",
+    "answer": true,
+    "explanation": "这是提纲对中国武装力量组成的直接表述。",
+    "tags": [
+      "武装力量",
+      "解放军",
+      "武警",
+      "民兵"
+    ]
+  },
+  {
+    "id": "tf07",
+    "type": "judge",
+    "chapter": "第二章 国家安全",
+    "point": "总体国家安全观",
+    "prompt": "总体国家安全观的关键是“总体”。",
+    "answer": true,
+    "explanation": "提纲明确指出：总体国家安全观的关键是“总体”。",
+    "tags": [
+      "总体国家安全观",
+      "总体"
+    ]
+  },
+  {
+    "id": "tf08",
+    "type": "judge",
+    "chapter": "第三章 军事思想",
+    "point": "毛泽东军事思想",
+    "prompt": "毛泽东军事思想的主要内容不包括人民战争思想。",
+    "answer": false,
+    "explanation": "提纲列出的毛泽东军事思想主要内容包括人民战争思想。",
+    "tags": [
+      "毛泽东军事思想",
+      "人民战争思想"
+    ]
+  },
+  {
+    "id": "tf09",
+    "type": "judge",
+    "chapter": "第四章 现代战争",
+    "point": "信息化战争",
+    "prompt": "信息化战争是信息时代战争的基本形态。",
+    "answer": true,
+    "explanation": "提纲的信息化战争概念结尾明确说明：它是信息时代战争的基本形态。",
+    "tags": [
+      "信息化战争",
+      "信息时代"
+    ]
+  },
+  {
+    "id": "tf10",
+    "type": "judge",
+    "chapter": "第五章 信息化装备",
+    "point": "新概念武器",
+    "prompt": "提纲列出的新概念武器种类包括激光武器、微波武器、粒子束武器、动能武器和非致命武器。",
+    "answer": true,
+    "explanation": "这些均属于提纲列出的信息化杀伤武器部分的新概念武器种类。",
+    "tags": [
+      "新概念武器",
+      "激光武器",
+      "微波武器",
+      "粒子束武器",
+      "动能武器"
+    ]
+  },
+  {
+    "id": "essay01",
+    "type": "essay",
+    "chapter": "第一章 中国国防",
+    "point": "国防概述综合",
+    "prompt": "结合提纲，论述国防的定义、地位作用以及中国国防历史给出的主要启示。",
+    "points": [
+      "先给出国防定义：防备和抵抗侵略、制止武装颠覆和分裂、保卫主权统一领土完整安全和发展利益的军事及相关活动。",
+      "说明国防地位作用：国家生存与发展的安全保障、独立自主的前提、繁荣富强的重要条件。",
+      "展开历史启示：政治昌明是根本，经济发展是基础，国家统一和民族团结是前提。",
+      "结尾可联系现代国防的综合性和防御性。"
+    ],
+    "tags": [
+      "国防定义",
+      "国防地位",
+      "国防历史启示"
+    ]
+  },
+  {
+    "id": "essay02",
+    "type": "essay",
+    "chapter": "第一章 中国国防",
+    "point": "公民国防义务与权利",
+    "prompt": "试述公民的主要国防义务和国防权利，并说明二者关系。",
+    "points": [
+      "义务包括兵役义务、接受国防教育、保护国防设施、保守国防秘密、协助国防活动。",
+      "权利包括对国防建设提出建议、对危害国防行为进行制止或检举、获得经济损失补偿。",
+      "说明国防义务与国防权利是对立统一关系。",
+      "可补充高校国防教育和适龄公民服兵役的相关要求。"
+    ],
+    "tags": [
+      "国防义务",
+      "国防权利",
+      "兵役义务",
+      "国防教育"
+    ]
+  },
+  {
+    "id": "essay03",
+    "type": "essay",
+    "chapter": "第二章 国家安全",
+    "point": "总体国家安全观",
+    "prompt": "围绕“总体国家安全观”，说明其关键、核心要义以及新兴领域国家安全的主要内容。",
+    "points": [
+      "指出理解总体国家安全观的关键在于“一个总体”和“十个坚持”，关键是“总体”。",
+      "概述核心要义：坚持党对国家安全工作的绝对领导、以人民安全为宗旨、把政治安全放在首要位置、统筹各领域安全等。",
+      "列举新兴领域：网络空间安全、外层空间安全、国际海底区域安全、极地安全、生物安全。",
+      "可结合国际战略形势中大国博弈和全球性挑战增加分析层次。"
+    ],
+    "tags": [
+      "总体国家安全观",
+      "新兴领域国家安全",
+      "十个坚持"
+    ]
+  },
+  {
+    "id": "essay04",
+    "type": "essay",
+    "chapter": "第四章 现代战争",
+    "point": "新军事革命与中国特色军事变革",
+    "prompt": "论述新军事革命的内涵、主要标志，并分析中国特色军事变革的主要方面。",
+    "points": [
+      "说明新军事革命是20世纪末以来以信息化为核心的全面而深刻的军事革命。",
+      "主要标志包括信息化武器系统主宰战场、知识密集型信息化军队、一体化联合作战、军事理论体系革新、信息化战争取代机械化战争。",
+      "中国特色军事变革方向是信息化，目标是建设信息化军队，途径是机械化与信息化复合发展。",
+      "补充发展步骤与国家战略相适应，动力是改革创新，保证是坚持党的绝对领导。"
+    ],
+    "tags": [
+      "新军事革命",
+      "中国特色军事变革",
+      "信息化",
+      "一体化联合作战"
+    ]
+  },
+  {
+    "id": "essay05",
+    "type": "essay",
+    "chapter": "第四章 现代战争 / 第五章 信息化装备",
+    "point": "信息化战争与信息化装备",
+    "prompt": "结合信息化战争概念，说明信息化战争的基本特征及信息化装备的分类。",
+    "points": [
+      "先界定信息化战争：依托网络化信息系统，使用信息化武器装备和相应作战方法，在多维空间及认知领域进行的体系对抗。",
+      "说明特征：信息化武器装备系统成为战场主导，信息成为战斗力倍增器，战场网络化、一体化，一体化联合作战成为基本作战形式，制信息权成为制高点。",
+      "说明信息化装备按功能可分为信息化主战武器系统和信息系统；从作战体系角度细分为信息化作战平台、指挥信息系统、信息化杀伤武器。",
+      "可补充作战平台包括陆战、海战、空战武器平台，指挥信息系统包括指挥控制、情报、通信、导航定位等。"
+    ],
+    "tags": [
+      "信息化战争",
+      "信息化装备",
+      "制信息权",
+      "指挥信息系统"
+    ]
+  }
+];
+
+    const STORAGE_KEY = "junli-dual-mode-v2";
+    const letters = ["A", "B", "C", "D", "E"];
+    const typeName = { choice: "选择题", judge: "判断题", essay: "论述题" };
+    const typeShort = { choice: "选择", judge: "判断", essay: "论述" };
+
+    const defaultState = {
+      mode: "practice",
+      filter: "all",
+      qSearch: "",
+      qChapter: "all",
+      checked: false,
+      showAnswers: false,
+      answers: {},
+      essays: {},
+      reviewSearch: "",
+      reviewChapter: "all",
+      reviewTodoOnly: false,
+      mastered: {}
+    };
+
+    let state = loadState();
+    const KNOWLEDGE = parseKnowledge(SYLLABUS_TEXT);
+    const ALL_POINTS = flattenKnowledge(KNOWLEDGE);
+
+    function loadState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+        return Object.assign({}, defaultState, saved, {
+          answers: Object.assign({}, saved.answers || {}),
+          essays: Object.assign({}, saved.essays || {}),
+          mastered: Object.assign({}, saved.mastered || {})
+        });
+      } catch (error) {
+        return Object.assign({}, defaultState);
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function parseKnowledge(text) {
+      const prepared = String(text || "")
+        .replace(/\r/g, "")
+        .replace(/\f/g, "\n")
+        .replace(/·\s*\n\s*(?=《|[\u4e00-\u9fa5])/g, "·");
+      const lines = prepared.split("\n").map(line => line.trim()).filter(Boolean);
+      const chapters = [];
+      let currentChapter = null;
+      let currentSection = null;
+      let lastPoint = null;
+      let serial = 0;
+
+      function ensureChapter(name) {
+        let found = chapters.find(ch => ch.name === name);
+        if (!found) {
+          found = { name, sections: [] };
+          chapters.push(found);
+        }
+        currentChapter = found;
+        return found;
+      }
+
+      function ensureSection(name) {
+        if (!currentChapter) ensureChapter("总览");
+        let found = currentChapter.sections.find(sec => sec.name === name);
+        if (!found) {
+          found = { name, points: [] };
+          currentChapter.sections.push(found);
+        }
+        currentSection = found;
+        return found;
+      }
+
+      function isPointLine(line) {
+        return /^[一二三四五六七八九十]+、/.test(line) || /^\d+[.．]\s*/.test(line) || /^·/.test(line) || /^（[一二三四五六七八九十]+）/.test(line);
+      }
+
+      function makeTitle(line) {
+        let title = line.replace(/^·+/, "").trim();
+        title = title.replace(/^\d+[.．]\s*/, "").replace(/^[一二三四五六七八九十]+、\s*/, "").replace(/^（[一二三四五六七八九十]+）\s*/, "");
+        title = title.replace(/\(P[\d\-—]+\)/g, "").trim();
+        const quoted = title.match(/^《[^》]+》/);
+        if (quoted) title = quoted[0];
+        const colon = title.search(/[：:]/);
+        if (colon > 0 && colon < 30 && !quoted) title = title.slice(0, colon).trim();
+        title = title.replace(/[。；;，,]$/, "").trim();
+        if (!title) title = "提纲要点";
+        if (title.length > 34) title = title.slice(0, 34) + "…";
+        return title;
+      }
+
+      lines.forEach(line => {
+        if (/^第[一二三四五六七八九十]+章\s+/.test(line)) {
+          ensureChapter(line);
+          ensureSection("本章概览");
+          lastPoint = null;
+          return;
+        }
+        if (/^第[一二三四五六七八九十]+节\s+/.test(line)) {
+          ensureSection(line);
+          lastPoint = null;
+          return;
+        }
+        if (!currentChapter) return;
+        if (isPointLine(line)) {
+          const section = currentSection || ensureSection("本章概览");
+          lastPoint = {
+            key: "kp" + (++serial),
+            title: makeTitle(line),
+            body: line,
+            chapter: currentChapter.name,
+            section: section.name
+          };
+          section.points.push(lastPoint);
+        } else if (lastPoint && line.length > 4) {
+          lastPoint.body += " " + line;
+        }
+      });
+
+      chapters.forEach(chapter => {
+        chapter.sections.forEach(section => {
+          section.points = section.points.filter(point => point.title && point.body && point.body.length > 5);
+        });
+        chapter.sections = chapter.sections.filter(section => section.points.length > 0);
+      });
+      return chapters.filter(chapter => chapter.sections.length > 0);
+    }
+
+    function flattenKnowledge(chapters) {
+      const points = [];
+      chapters.forEach(chapter => {
+        chapter.sections.forEach(section => {
+          section.points.forEach(point => points.push(point));
+        });
+      });
+      return points;
+    }
+
+    function normalize(value) {
+      return String(value || "").toLowerCase().replace(/\s+/g, "");
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char]));
+    }
+
+    function isObjective(q) {
+      return q.type === "choice" || q.type === "judge";
+    }
+
+    function hasAnswer(q) {
+      if (isObjective(q)) return Object.prototype.hasOwnProperty.call(state.answers, q.id);
+      return Boolean((state.essays[q.id] || "").trim());
+    }
+
+    function isCorrect(q) {
+      if (!hasAnswer(q)) return false;
+      if (q.type === "choice") return Number(state.answers[q.id]) === Number(q.answer);
+      if (q.type === "judge") return Boolean(state.answers[q.id]) === Boolean(q.answer);
+      return false;
+    }
+
+    function getCounts() {
+      const objective = QUESTIONS.filter(isObjective);
+      const choices = QUESTIONS.filter(q => q.type === "choice");
+      const judges = QUESTIONS.filter(q => q.type === "judge");
+      const essays = QUESTIONS.filter(q => q.type === "essay");
+      const totalAnswered = QUESTIONS.filter(hasAnswer).length;
+      const objectiveAnswered = objective.filter(hasAnswer).length;
+      const correct = objective.filter(isCorrect).length;
+      const wrongOrBlank = state.checked ? objective.filter(q => !isCorrect(q)).length : 0;
+      const essayAnswered = essays.filter(hasAnswer).length;
+      const masteredCount = ALL_POINTS.filter(point => state.mastered[point.key]).length;
+      return { objective, choices, judges, essays, totalAnswered, objectiveAnswered, correct, wrongOrBlank, essayAnswered, masteredCount, knowledgeCount: ALL_POINTS.length };
+    }
+
+    function unique(values) {
+      return Array.from(new Set(values.filter(Boolean)));
+    }
+
+    function render() {
+      renderMode();
+      renderDashboard();
+      renderPracticeControls();
+      renderPractice();
+      renderReviewControls();
+      renderReview();
+      document.getElementById("rawTextPractice").textContent = SYLLABUS_TEXT;
+      document.getElementById("rawTextReview").textContent = SYLLABUS_TEXT;
+      saveState();
+    }
+
+    function renderMode() {
+      document.querySelectorAll("#modeTabs .mode-tab").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.mode === state.mode);
+      });
+      document.getElementById("practiceView").classList.toggle("hidden", state.mode !== "practice");
+      document.getElementById("reviewView").classList.toggle("hidden", state.mode !== "review");
+    }
+
+    function renderDashboard() {
+      const c = getCounts();
+      if (state.mode === "review") {
+        const percent = c.knowledgeCount ? Math.round(c.masteredCount / c.knowledgeCount * 100) : 0;
+        document.getElementById("dashboard").innerHTML = [
+          statHtml(c.knowledgeCount, "自动拆解知识点"),
+          statHtml(c.masteredCount + " / " + c.knowledgeCount, "已掌握"),
+          statHtml(KNOWLEDGE.length, "章节覆盖"),
+          statHtml(percent + "%", "复习完成度")
+        ].join("");
+        document.getElementById("mobileScore").innerHTML = `<div><strong>复习 ${escapeHtml(String(percent))}%</strong><span>已掌握 ${escapeHtml(String(c.masteredCount))} / ${escapeHtml(String(c.knowledgeCount))}</span></div><button class="btn primary" type="button" data-mode="practice">去刷题</button>`;
+        return;
+      }
+
+      const scoreText = state.checked ? `${c.correct} / ${c.objective.length}` : `${c.objectiveAnswered} / ${c.objective.length}`;
+      const scoreLabel = state.checked ? "客观题得分" : "客观题已答";
+      document.getElementById("dashboard").innerHTML = [
+        statHtml(scoreText, scoreLabel),
+        statHtml(`${c.choices.length} / ${c.judges.length} / ${c.essays.length}`, "选择 / 判断 / 论述"),
+        statHtml(`${c.essayAnswered} / ${c.essays.length}`, "论述题已写"),
+        statHtml(state.checked ? c.wrongOrBlank : "未评分", "错题 / 未答")
+      ].join("");
+      const percent = Math.round(c.totalAnswered / QUESTIONS.length * 100);
+      const progressBar = document.getElementById("progressBar");
+      const progressText = document.getElementById("progressText");
+      if (progressBar) progressBar.style.width = percent + "%";
+      if (progressText) progressText.textContent = `总进度 ${c.totalAnswered} / ${QUESTIONS.length}；客观题 ${c.objectiveAnswered} / ${c.objective.length}${state.checked ? `；得分 ${c.correct} / ${c.objective.length}` : ""}`;
+      document.getElementById("mobileScore").innerHTML = `<div><strong>${escapeHtml(scoreText)}</strong><span>${escapeHtml(scoreLabel)} · 总进度 ${escapeHtml(String(percent))}%</span></div><button class="btn primary" type="button" data-mode="review">去复习</button>`;
+    }
+
+    function statHtml(value, label) {
+      return `<div class="stat"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`;
+    }
+
+    function renderPracticeControls() {
+      const filters = [
+        ["all", "全部"],
+        ["choice", "选择题"],
+        ["judge", "判断题"],
+        ["essay", "论述题"],
+        ["wrong", "错题/未答"]
+      ];
+      document.getElementById("practiceFilters").innerHTML = filters.map(([value, label]) => {
+        return `<button class="btn ${state.filter === value ? "active" : ""}" type="button" data-action="setFilter" data-filter="${value}">${escapeHtml(label)}</button>`;
+      }).join("");
+
+      const chapters = unique(QUESTIONS.map(q => q.chapter));
+      document.getElementById("qChapter").innerHTML = `<option value="all">全部章节</option>` + chapters.map(chapter => {
+        return `<option value="${escapeHtml(chapter)}" ${state.qChapter === chapter ? "selected" : ""}>${escapeHtml(chapter)}</option>`;
+      }).join("");
+      const toggleBtn = document.querySelector("[data-action='toggleAnswers']");
+      if (toggleBtn) toggleBtn.textContent = state.showAnswers ? "隐藏答案" : "显示答案";
+
+      const c = getCounts();
+      const score = state.checked ? `客观题得分：<b>${escapeHtml(c.correct)} / ${escapeHtml(c.objective.length)}</b>` : `客观题已答：<b>${escapeHtml(c.objectiveAnswered)} / ${escapeHtml(c.objective.length)}</b>`;
+      const wrong = state.checked ? `错题/未答：<b>${escapeHtml(c.wrongOrBlank)}</b>` : "提交评分后可查看错题/未答。";
+      document.getElementById("practiceSummary").innerHTML = `${score}<br>${wrong}<br>论述题：<b>${escapeHtml(c.essayAnswered)} / ${escapeHtml(c.essays.length)}</b>`;
+      document.getElementById("questionSearch").value = state.qSearch;
+    }
+
+    function renderPractice() {
+      const query = normalize(state.qSearch);
+      let list = QUESTIONS.filter(q => {
+        if (state.qChapter !== "all" && q.chapter !== state.qChapter) return false;
+        if (state.filter === "wrong") {
+          if (!state.checked || !isObjective(q) || isCorrect(q)) return false;
+        } else if (state.filter !== "all" && q.type !== state.filter) {
+          return false;
+        }
+        if (!query) return true;
+        const haystack = normalize([q.prompt, q.chapter, q.point, q.explanation, (q.options || []).join(" "), (q.tags || []).join(" ")].join(" "));
+        return haystack.includes(query);
+      });
+
+      document.getElementById("questionList").innerHTML = list.length ? list.map(renderQuestion).join("") : emptyHtml(state.filter === "wrong" && !state.checked ? "先点击“提交评分”，再查看错题/未答。" : "当前筛选条件下没有题目。");
+    }
+
+    function questionLabel(q) {
+      const index = QUESTIONS.filter(item => item.type === q.type).findIndex(item => item.id === q.id) + 1;
+      return `${typeShort[q.type]} ${index}`;
+    }
+
+    function renderQuestion(q) {
+      const badges = [
+        `<span class="badge type">${escapeHtml(typeName[q.type])}</span>`,
+        `<span class="badge">${escapeHtml(q.chapter)}</span>`,
+        `<span class="badge">${escapeHtml(q.point || "综合")}</span>`
+      ].concat((q.tags || []).slice(0, 4).map(tag => `<span class="badge">#${escapeHtml(tag)}</span>`)).join("");
+      let body = "";
+      if (q.type === "choice") body = renderChoice(q);
+      if (q.type === "judge") body = renderJudge(q);
+      if (q.type === "essay") body = renderEssay(q);
+      return `<article class="question-card" id="${escapeHtml(q.id)}">
+        <div class="q-head">
+          <span class="q-index">${escapeHtml(questionLabel(q))}</span>
+          <div class="q-main">
+            <h3 class="q-title">${escapeHtml(q.prompt)}</h3>
+            <div class="badges">${badges}</div>
+            ${body}
+          </div>
+        </div>
+      </article>`;
+    }
+
+    function renderChoice(q) {
+      const selected = state.answers[q.id];
+      const options = (q.options || []).map((option, index) => {
+        let cls = "option";
+        if (state.checked || state.showAnswers) {
+          if (index === Number(q.answer)) cls += " correct";
+          else if (hasAnswer(q) && Number(selected) === index) cls += " wrong";
+        }
+        const checked = hasAnswer(q) && Number(selected) === index ? "checked" : "";
+        return `<label class="${cls}"><input type="radio" name="${escapeHtml(q.id)}" value="${index}" ${checked}><span><b>${letters[index]}.</b> ${escapeHtml(option)}</span></label>`;
+      }).join("");
+      return `<div class="options">${options}</div>${feedbackHtml(q)}`;
+    }
+
+    function renderJudge(q) {
+      const selected = state.answers[q.id];
+      const choices = [
+        { value: "true", label: "正确", bool: true },
+        { value: "false", label: "错误", bool: false }
+      ].map(item => {
+        let cls = "option";
+        if (state.checked || state.showAnswers) {
+          if (item.bool === Boolean(q.answer)) cls += " correct";
+          else if (hasAnswer(q) && Boolean(selected) === item.bool) cls += " wrong";
+        }
+        const checked = hasAnswer(q) && Boolean(selected) === item.bool ? "checked" : "";
+        return `<label class="${cls}"><input type="radio" name="${escapeHtml(q.id)}" value="${item.value}" ${checked}><span>${escapeHtml(item.label)}</span></label>`;
+      }).join("");
+      return `<div class="options">${choices}</div>${feedbackHtml(q)}`;
+    }
+
+    function feedbackHtml(q) {
+      if (!isObjective(q) || (!state.checked && !state.showAnswers)) return "";
+      const answered = hasAnswer(q);
+      const correct = isCorrect(q);
+      const answerText = q.type === "choice" ? `${letters[q.answer]}. ${q.options[q.answer]}` : (q.answer ? "正确" : "错误");
+      let cls = "feedback";
+      let status = "参考答案：";
+      if (state.checked) {
+        cls += correct ? " ok" : " bad";
+        status = answered ? (correct ? "作答正确。" : "作答错误。") : "未作答。";
+      }
+      return `<div class="${cls}"><b>${escapeHtml(status)}</b> 答案：${escapeHtml(answerText)}<br>解析：${escapeHtml(q.explanation || "")}</div>`;
+    }
+
+    function renderEssay(q) {
+      const value = state.essays[q.id] || "";
+      const points = (state.checked || state.showAnswers) ? `<div class="feedback"><b>参考要点：</b><ol class="essay-points">${(q.points || []).map(point => `<li>${escapeHtml(point)}</li>`).join("")}</ol></div>` : "";
+      return `<textarea data-essay-id="${escapeHtml(q.id)}" placeholder="在这里写作答要点。论述题不自动判分，提交后显示参考要点。">${escapeHtml(value)}</textarea>${points}`;
+    }
+
+    function renderReviewControls() {
+      document.getElementById("reviewSearch").value = state.reviewSearch;
+      document.getElementById("reviewTodoOnly").checked = Boolean(state.reviewTodoOnly);
+      const chips = [`<button class="btn ${state.reviewChapter === "all" ? "active" : ""}" type="button" data-action="setReviewChapter" data-chapter="all">全部</button>`]
+        .concat(KNOWLEDGE.map(chapter => `<button class="btn ${state.reviewChapter === chapter.name ? "active" : ""}" type="button" data-action="setReviewChapter" data-chapter="${escapeHtml(chapter.name)}">${escapeHtml(chapter.name.replace(/^第[一二三四五六七八九十]+章\s*/, "第" + (KNOWLEDGE.indexOf(chapter) + 1) + "章 "))}</button>`));
+      document.getElementById("reviewChapterChips").innerHTML = chips.join("");
+    }
+
+    function renderReview() {
+      const c = getCounts();
+      const visible = getVisibleReviewPoints();
+      const linked = visible.reduce((sum, point) => sum + linkedQuestions(point).length, 0);
+      document.getElementById("reviewSummary").innerHTML = [
+        miniStatHtml(`${visible.length} / ${c.knowledgeCount}`, "当前显示知识点"),
+        miniStatHtml(`${c.masteredCount} / ${c.knowledgeCount}`, "已掌握"),
+        miniStatHtml(linked, "当前显示知识点关联题数")
+      ].join("");
+
+      const query = normalize(state.reviewSearch);
+      const html = KNOWLEDGE.map(chapter => renderReviewChapter(chapter, query)).filter(Boolean).join("");
+      document.getElementById("reviewList").innerHTML = html || emptyHtml("没有匹配的知识点。可以清空搜索词或取消“只看未掌握”。");
+    }
+
+    function miniStatHtml(value, label) {
+      return `<div class="mini-stat"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`;
+    }
+
+    function getVisibleReviewPoints() {
+      const query = normalize(state.reviewSearch);
+      return ALL_POINTS.filter(point => {
+        if (state.reviewChapter !== "all" && point.chapter !== state.reviewChapter) return false;
+        if (state.reviewTodoOnly && state.mastered[point.key]) return false;
+        if (!query) return true;
+        return normalize([point.title, point.body, point.chapter, point.section].join(" ")).includes(query);
+      });
+    }
+
+    function renderReviewChapter(chapter, query) {
+      if (state.reviewChapter !== "all" && state.reviewChapter !== chapter.name) return "";
+      const totalPoints = chapter.sections.reduce((sum, section) => sum + section.points.length, 0);
+      const mastered = chapter.sections.reduce((sum, section) => sum + section.points.filter(point => state.mastered[point.key]).length, 0);
+      const sectionsHtml = chapter.sections.map(section => {
+        const points = section.points.filter(point => {
+          if (state.reviewTodoOnly && state.mastered[point.key]) return false;
+          if (!query) return true;
+          return normalize([point.title, point.body, point.chapter, point.section].join(" ")).includes(query);
+        });
+        if (!points.length) return "";
+        return `<div class="section-block"><h4 class="section-title">${escapeHtml(section.name)}</h4><div class="point-grid">${points.map(renderPointCard).join("")}</div></div>`;
+      }).join("");
+      if (!sectionsHtml) return "";
+      return `<article class="review-chapter">
+        <header>
+          <div>
+            <h3>${escapeHtml(chapter.name)}</h3>
+            <div class="chapter-progress">已掌握 ${escapeHtml(mastered)} / ${escapeHtml(totalPoints)} 个知识点</div>
+          </div>
+          <button class="btn primary" type="button" data-action="practiceChapter" data-chapter="${escapeHtml(chapter.name)}">练本章题</button>
+        </header>
+        ${sectionsHtml}
+      </article>`;
+    }
+
+    function renderPointCard(point) {
+      const linked = linkedQuestions(point);
+      const mastered = Boolean(state.mastered[point.key]);
+      return `<article class="point-card ${mastered ? "mastered" : ""}">
+        <div class="point-top">
+          <div>
+            <h4 class="point-title">${escapeHtml(point.title)}</h4>
+            <p class="point-meta">${escapeHtml(point.section)} · 关联题 ${escapeHtml(linked.length)}</p>
+          </div>
+          <label class="master-check"><input type="checkbox" data-master-key="${escapeHtml(point.key)}" ${mastered ? "checked" : ""}>已掌握</label>
+        </div>
+        <div class="point-body"><details><summary>原文要点</summary><div>${formatPointBody(point.body)}</div></details></div>
+        <div class="point-actions">
+          <button class="btn primary" type="button" data-action="practicePoint" data-term="${escapeHtml(point.title)}">练这个知识点</button>
+          <button class="btn" type="button" data-action="searchPoint" data-term="${escapeHtml(point.title)}">题库搜索</button>
+        </div>
+      </article>`;
+    }
+
+    function linkedQuestions(point) {
+      const title = normalize(point.title);
+      const body = normalize(point.body);
+      return QUESTIONS.filter(q => {
+        const haystack = normalize([q.point, q.prompt, q.explanation, (q.tags || []).join(" "), (q.options || []).join(" ")].join(" "));
+        if (title && haystack.includes(title)) return true;
+        if (q.point && body.includes(normalize(q.point))) return true;
+        const tags = (q.tags || []).map(normalize).filter(tag => tag.length >= 2);
+        return tags.some(tag => body.includes(tag) || title.includes(tag));
+      });
+    }
+
+    function formatPointBody(body) {
+      const compact = String(body || "").replace(/\s+/g, " ").trim();
+      return escapeHtml(compact).replace(/([。；;])\s*/g, "$1<br>");
+    }
+
+    function emptyHtml(message) {
+      return `<div class="empty">${escapeHtml(message)}</div>`;
+    }
+
+    function setMode(mode) {
+      state.mode = mode === "review" ? "review" : "practice";
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function resetPractice() {
+      if (!confirm("确认清空本套题作答记录并重做？复习模式中的掌握标记不会被清空。")) return;
+      state.answers = {};
+      state.essays = {};
+      state.checked = false;
+      state.showAnswers = false;
+      state.filter = "all";
+      state.qSearch = "";
+      state.qChapter = "all";
+      render();
+    }
+
+    function practicePoint(term) {
+      state.mode = "practice";
+      state.filter = "all";
+      state.qChapter = "all";
+      state.qSearch = term || "";
+      render();
+      document.getElementById("questionSearch").focus();
+    }
+
+    function practiceChapter(chapterName) {
+      state.mode = "practice";
+      state.filter = "all";
+      state.qSearch = "";
+      const matched = unique(QUESTIONS.map(q => q.chapter)).find(ch => normalize(ch).includes(normalize(chapterName)) || normalize(chapterName).includes(normalize(ch)));
+      state.qChapter = matched || "all";
+      render();
+    }
+
+    function practiceUnmastered() {
+      const firstTodo = ALL_POINTS.find(point => !state.mastered[point.key]);
+      if (!firstTodo) {
+        alert("当前没有未掌握知识点。可以清空掌握标记后重新复习。或者直接进入刷题模式完整练习。");
+        state.mode = "practice";
+        render();
+        return;
+      }
+      practicePoint(firstTodo.title);
+    }
+
+    document.addEventListener("click", event => {
+      const modeButton = event.target.closest("[data-mode]");
+      if (modeButton) {
+        setMode(modeButton.dataset.mode);
+        return;
+      }
+
+      const actionEl = event.target.closest("[data-action]");
+      if (!actionEl) return;
+      const action = actionEl.dataset.action;
+      if (action === "setFilter") {
+        state.filter = actionEl.dataset.filter || "all";
+        render();
+      }
+      if (action === "check") {
+        state.checked = true;
+        state.showAnswers = true;
+        render();
+      }
+      if (action === "toggleAnswers") {
+        state.showAnswers = !state.showAnswers;
+        render();
+      }
+      if (action === "resetPractice") resetPractice();
+      if (action === "setReviewChapter") {
+        state.reviewChapter = actionEl.dataset.chapter || "all";
+        render();
+      }
+      if (action === "practicePoint" || action === "searchPoint") practicePoint(actionEl.dataset.term || "");
+      if (action === "practiceChapter") practiceChapter(actionEl.dataset.chapter || "");
+      if (action === "practiceUnmastered") practiceUnmastered();
+      if (action === "clearMastered") {
+        if (!confirm("确认清空复习模式中的全部掌握标记？刷题答案不会被清空。")) return;
+        state.mastered = {};
+        render();
+      }
+    });
+
+    document.addEventListener("input", event => {
+      const target = event.target;
+      if (target.id === "questionSearch") {
+        state.qSearch = target.value;
+        renderDashboard();
+        renderPractice();
+        saveState();
+      }
+      if (target.id === "reviewSearch") {
+        state.reviewSearch = target.value;
+        renderDashboard();
+        renderReview();
+        saveState();
+      }
+      if (target.dataset.essayId) {
+        state.essays[target.dataset.essayId] = target.value;
+        renderDashboard();
+        renderPracticeControls();
+        saveState();
+      }
+    });
+
+    document.addEventListener("change", event => {
+      const target = event.target;
+      if (target.id === "qChapter") {
+        state.qChapter = target.value;
+        render();
+        return;
+      }
+      if (target.id === "reviewTodoOnly") {
+        state.reviewTodoOnly = target.checked;
+        render();
+        return;
+      }
+      if (target.dataset.masterKey) {
+        state.mastered[target.dataset.masterKey] = target.checked;
+        if (!target.checked) delete state.mastered[target.dataset.masterKey];
+        render();
+        return;
+      }
+      if (target.matches("input[type='radio']")) {
+        const q = QUESTIONS.find(item => item.id === target.name);
+        if (!q) return;
+        state.answers[q.id] = q.type === "choice" ? Number(target.value) : target.value === "true";
+        renderDashboard();
+        renderPracticeControls();
+        if (state.checked || state.showAnswers) renderPractice();
+        saveState();
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>
