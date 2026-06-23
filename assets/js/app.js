@@ -428,9 +428,9 @@ function renderLifeHub() {
 
 function renderKnowledge() {
   const index = state.knowledge;
-  const noteWorkflow = state.site.noteWorkflow || [];
-  const pkmRoutes = state.site.pkmRoutes || [];
-  const llmWikiLayers = state.site.llmWikiLayers || [];
+  const knowledgeAssets = state.site.knowledgeAssets || [];
+  const knowledgeUpdateRules = state.site.knowledgeUpdateRules || [];
+  const domainText = index.domains.map(domain => `${domain.name} ${domain.count}`).join(' / ');
   const firstRecord = index.records.find(record => ['航空发动机', '工程工具', '课程'].includes(record.domain)) || index.records[0];
   app.innerHTML = `
     <section class="page">
@@ -438,7 +438,7 @@ function renderKnowledge() {
         <div>
           <p class="eyebrow">Knowledge Graph</p>
           <h1>知识图谱</h1>
-          <p>Markdown 文件按领域保存；构建脚本抽取标题、标签、摘要和 <code>[[双链]]</code>，形成可搜索的目录、阅读器和轻量图谱。</p>
+          <p>展示已整理的笔记、刷题网页和方法入口；私密材料不放入公开页。</p>
         </div>
         <div class="action-row">
           <span class="pill">${index.stats.nodes} nodes</span>
@@ -447,57 +447,41 @@ function renderKnowledge() {
         </div>
       </div>
 
-      <div class="workflow-panel">
+      <div class="knowledge-brief">
         <div>
-          <p class="card-kicker">Study Note Pipeline</p>
-          <h2>学习笔记沉淀路线</h2>
-          <p>先把课堂、论文、项目调试和手写材料收进 inbox，再按“可转写 / 难转写 / 只保留影像”分流，最后用双链和项目页面连接起来。</p>
+          <p class="card-kicker">Current Materials</p>
+          <h2>已有素材</h2>
+          <p>当前归档 ${index.stats.nodes} 篇笔记、${index.stats.links} 条双链，覆盖 ${escapeHtml(domainText)}。新增内容按规则进入图谱。</p>
         </div>
-        <img src="assets/img/pet-companions.svg" alt="猫猫狗狗陪读小插画" />
       </div>
-      <div class="workflow-grid">
-        ${noteWorkflow.map(step => `
-          <article class="workflow-step">
-            <p class="card-kicker">${escapeHtml(step.stage)}</p>
-            <h3>${escapeHtml(step.title)}</h3>
-            <p>${escapeHtml(step.detail)}</p>
+
+      <div class="knowledge-assets-grid">
+        ${knowledgeAssets.map(asset => `
+          <article class="knowledge-asset-card">
+            <p class="card-kicker">${escapeHtml(asset.type)}</p>
+            <h3>${escapeHtml(asset.title)}</h3>
+            <p>${escapeHtml(asset.detail)}</p>
+            <div class="knowledge-card-actions">
+              ${asset.notePath ? `<button class="text-action" type="button" data-open-knowledge-note="${escapeAttr(asset.notePath)}">打开笔记</button>` : ''}
+              ${asset.href ? `<a class="text-action" href="${escapeAttr(asset.href)}" target="_blank" rel="noreferrer">打开素材</a>` : ''}
+            </div>
           </article>
         `).join('')}
       </div>
 
-      <div class="section-header compact-header">
+      <div class="knowledge-update-card">
         <div>
-          <p class="eyebrow">PKM Cloud Path</p>
-          <h2>笔记上云路径</h2>
-          <p>手写笔记不强行一刀切：能转文字的变成可检索卡片，不方便转文字的保留影像证据，再用索引页和双链连接。</p>
+          <p class="card-kicker">Update Rules</p>
+          <h2>以后怎么更新</h2>
         </div>
-      </div>
-      <div class="pkm-grid">
-        ${pkmRoutes.map(route => `
-          <article class="pkm-card">
-            <p class="card-kicker">${escapeHtml(route.stage)}</p>
-            <h3>${escapeHtml(route.title)}</h3>
-            <p>${escapeHtml(route.detail)}</p>
-          </article>
-        `).join('')}
-      </div>
-
-      <div class="llm-wiki-panel">
-        <div>
-          <p class="card-kicker">Karpathy LLM-Wiki Lens</p>
-          <h2>把知识图谱做成 LLM 可读的 Wiki</h2>
-          <p>借鉴 LLM-Wiki 的工作方式：原始材料先编译成结构化 Wiki 页，再让检索、双链、错题本和项目证据共同服务后续复盘。</p>
-        </div>
-        <button class="llm-wiki-open" type="button" data-llm-wiki-note="content/knowledge/阅读/LLM-Wiki与个人知识图谱.md">打开方法笔记</button>
-      </div>
-      <div class="llm-wiki-grid">
-        ${llmWikiLayers.map(item => `
-          <article class="llm-wiki-card">
-            <p class="card-kicker">${escapeHtml(item.stage)}</p>
-            <h3>${escapeHtml(item.title)}</h3>
-            <p>${escapeHtml(item.detail)}</p>
-          </article>
-        `).join('')}
+        <ol>
+          ${knowledgeUpdateRules.map(rule => `
+            <li>
+              <strong>${escapeHtml(rule.title)}</strong>
+              <span>${escapeHtml(rule.detail)}</span>
+            </li>
+          `).join('')}
+        </ol>
       </div>
 
       <div class="knowledge-layout">
@@ -537,8 +521,10 @@ function renderKnowledge() {
     </section>
   `;
 
-  document.querySelector('[data-llm-wiki-note]')?.addEventListener('click', event => {
-    openKnowledgeArticle(event.currentTarget.dataset.llmWikiNote);
+  document.querySelectorAll('[data-open-knowledge-note]').forEach(button => {
+    button.addEventListener('click', event => {
+      openKnowledgeArticle(event.currentTarget.dataset.openKnowledgeNote);
+    });
   });
 
   const tree = document.getElementById('knowledgeTree');

@@ -403,75 +403,43 @@
       "implementation": "分成好吃的和好喝的，记录地点、风味、价格和复访意愿。"
     }
   ],
-  "noteWorkflow": [
+  "knowledgeAssets": [
     {
-      "stage": "01 Capture",
-      "title": "所有材料先进入 inbox",
-      "detail": "课堂板书、手写推导、论文批注、项目调试记录先统一收集，标明来源、日期、课程或项目，不在采集阶段追求完美排版。"
+      "type": "Markdown Archive",
+      "title": "结构化知识笔记",
+      "detail": "课程、阅读、工程工具等内容按领域保存。",
+      "notePath": "content/knowledge/个人成长/学习笔记沉淀流程.md"
     },
     {
-      "stage": "02 Distill",
-      "title": "按可检索性分流",
-      "detail": "文字材料直接整理成 Markdown；清晰手写页先 OCR 后人工校对；不方便转文字的推导、草图和图纸保留图片原件，并写一段摘要索引。"
+      "type": "Quiz HTML",
+      "title": "概率统计前 9 章刷题页",
+      "detail": "已归档为 HTML；作答记录导出后，用于错题归因和掌握度评估。",
+      "href": "assets/quizzes/prob_stats_front9_quiz.html",
+      "notePath": "content/knowledge/课程/概率统计前9章刷题记录.md"
     },
     {
-      "stage": "03 Link",
-      "title": "变成知识图谱节点",
-      "detail": "每张卡片只解决一个问题：概念、公式、实验现象、代码片段或论文结论，并用双链连接课程、项目和论文节点。"
-    },
-    {
-      "stage": "04 Publish",
-      "title": "每周发布小批量节点",
-      "detail": "每周挑 1-3 张最清楚的卡片发布到主页：删除私密过程，保留问题、方法、结论、边界和可复用图表。"
+      "type": "Method Note",
+      "title": "LLM-Wiki 与个人知识图谱",
+      "detail": "笔记上云、双链、Error Book 和 LLM 可读 Wiki 的方法入口。",
+      "notePath": "content/knowledge/阅读/LLM-Wiki与个人知识图谱.md"
     }
   ],
-  "pkmRoutes": [
+  "knowledgeUpdateRules": [
     {
-      "stage": "Path 01",
-      "title": "电子笔记：直接 Markdown 化",
-      "detail": "课程总结、论文阅读和项目复盘优先写成 Markdown，保留标题、摘要、标签、领域和双链，自动进入知识图谱。"
+      "title": "新增笔记",
+      "detail": "在知识目录中新建 Markdown，补齐标题、日期、领域、摘要和标签。"
     },
     {
-      "stage": "Path 02",
-      "title": "清晰手写：OCR 后人工校对",
-      "detail": "公式推导和课堂手写页先拍照或扫描，再用 OCR 转成初稿；最终以人工校对后的文字为主，原图作为证据附件保留。"
+      "title": "接入素材",
+      "detail": "刷题网页、图片、扫描件和实验图表都由一篇笔记承接入口。"
     },
     {
-      "stage": "Path 03",
-      "title": "难转写手写：图片加摘要",
-      "detail": "草图、复杂公式链和临时演算不强行全文转写，只保存图片、写 3-5 行摘要、提取关键词，并链接到相关概念节点。"
+      "title": "建立连接",
+      "detail": "每篇正式笔记至少连接 2 个已有节点；错题、误判和实验失败单独写入可复盘的 Error Book 段落。"
     },
     {
-      "stage": "Path 04",
-      "title": "论文资料：Zotero 管引用",
-      "detail": "PDF、批注和参考文献进入 Zotero；主页只沉淀论文解决的问题、关键方法、可复用公式和与你项目的连接。"
-    },
-    {
-      "stage": "Path 05",
-      "title": "上云发布：公开与私密分层",
-      "detail": "公开主页只发布可展示节点；含课程作业、个人信息、未公开项目和原始扫描件的内容留在私有库或本地备份。"
-    }
-  ],
-  "llmWikiLayers": [
-    {
-      "stage": "Compile",
-      "title": "原始材料先编译成 Wiki 页",
-      "detail": "课堂、论文、刷题和项目调试记录不直接堆进仓库；先压缩成问题、结论、证据、边界和可复用链接。"
-    },
-    {
-      "stage": "Read",
-      "title": "让 LLM 能按页读取",
-      "detail": "每篇笔记开头写清 title、summary、tags、domain 和 source，使后续检索能直接拿到上下文。"
-    },
-    {
-      "stage": "Traverse",
-      "title": "双链变成推理路径",
-      "detail": "用 [[概念]]、[[项目]]、[[错题]] 连接节点，让一次回答可以沿着课程、论文和项目证据继续展开。"
-    },
-    {
-      "stage": "Error Book",
-      "title": "错题和误判进入 Error Book",
-      "detail": "把刷题错误、实验失败和概念误解记录为可复盘节点，后续用它们修正复习优先级和项目边界。"
+      "title": "发布前检查",
+      "detail": "运行 node scripts/build-index.mjs，确认新节点、双链和公开边界，再提交推送。"
     }
   ],
   "siteReflections": [

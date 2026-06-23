@@ -842,173 +842,128 @@ code {
   overflow-wrap: anywhere;
 }
 
-.workflow-panel {
+.knowledge-brief {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 220px;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 18px;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   padding: 20px;
+  max-width: 100%;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 252, 0.92);
   box-shadow: var(--shadow);
 }
 
-.workflow-panel h2 {
+.knowledge-brief h2 {
   margin: 8px 0 0;
   color: var(--ink);
   font-size: 28px;
   line-height: 1.15;
 }
 
-.workflow-panel p {
-  max-width: 720px;
-  color: var(--text-soft);
-  line-height: 1.8;
-}
-
-.workflow-panel img {
-  width: 100%;
-  height: auto;
-}
-
-.workflow-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-  margin-bottom: 18px;
-}
-
-.workflow-step {
-  min-width: 0;
-  padding: 16px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: rgba(255, 255, 252, 0.92);
-}
-
-.workflow-step h3 {
-  margin: 8px 0;
-  color: var(--ink);
-  font-size: 17px;
-  line-height: 1.35;
-}
-
-.workflow-step p {
-  margin: 0;
-  color: var(--text-soft);
-  font-size: 13px;
-  line-height: 1.72;
-}
-
-.compact-header {
-  margin-top: 24px;
-}
-
-.pkm-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.pkm-card {
-  min-width: 0;
-  padding: 16px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: rgba(255, 255, 252, 0.92);
-  box-shadow: var(--shadow);
-}
-
-.pkm-card h3 {
-  margin: 8px 0;
-  color: var(--ink);
-  font-size: 17px;
-  line-height: 1.35;
-}
-
-.pkm-card p {
-  margin: 0;
-  color: var(--text-soft);
-  font-size: 13px;
-  line-height: 1.72;
-}
-
-.llm-wiki-panel {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 18px;
-  margin: 8px 0 12px;
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background:
-    linear-gradient(135deg, rgba(34, 116, 124, 0.1), transparent 48%),
-    rgba(255, 255, 252, 0.94);
-  box-shadow: var(--shadow);
-}
-
-.llm-wiki-panel h2 {
-  margin: 8px 0 0;
-  color: var(--ink);
-  font-size: 26px;
-  line-height: 1.18;
-}
-
-.llm-wiki-panel p {
+.knowledge-brief p {
   max-width: 760px;
   color: var(--text-soft);
   line-height: 1.8;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
-.llm-wiki-open {
-  min-height: 42px;
-  padding: 0 16px;
-  border: 1px solid var(--accent);
-  border-radius: var(--radius-sm);
-  background: var(--accent);
-  color: #fffdf8;
-  font: inherit;
-  font-weight: 760;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.llm-wiki-open:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow);
-}
-
-.llm-wiki-grid {
+.knowledge-assets-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
+  max-width: 100%;
 }
 
-.llm-wiki-card {
+.knowledge-asset-card,
+.knowledge-update-card {
   min-width: 0;
+  max-width: 100%;
   padding: 16px;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 252, 0.92);
+  box-shadow: var(--shadow);
+  overflow: hidden;
 }
 
-.llm-wiki-card h3 {
+.knowledge-asset-card h3 {
   margin: 8px 0;
   color: var(--ink);
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.35;
 }
 
-.llm-wiki-card p {
+.knowledge-asset-card p {
   margin: 0;
   color: var(--text-soft);
   font-size: 13px;
   line-height: 1.72;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.knowledge-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.text-action {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 760;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.knowledge-update-card {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
+  max-width: 100%;
+}
+
+.knowledge-update-card h2 {
+  margin: 8px 0 0;
+  color: var(--ink);
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.knowledge-update-card ol {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 20px;
+  color: var(--text-soft);
+}
+
+.knowledge-update-card li {
+  padding-left: 4px;
+  line-height: 1.65;
+}
+
+.knowledge-update-card strong {
+  color: var(--ink);
+}
+
+.knowledge-update-card span {
+  display: block;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .index-panel,
@@ -1383,6 +1338,17 @@ code {
 @media (max-width: 1120px) {
   :root { --sidebar: 0px; }
 
+  .app-shell {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .page {
+    width: 100%;
+    max-width: calc(100vw - 32px);
+  }
+
   .mobile-bar {
     position: sticky;
     top: 0;
@@ -1460,7 +1426,8 @@ code {
   .cv-intro,
   .knowledge-layout,
   .guestbook-layout,
-  .workflow-panel,
+  .knowledge-brief,
+  .knowledge-update-card,
   .grid-2 {
     grid-template-columns: 1fr;
   }
@@ -1477,15 +1444,9 @@ code {
   .project-grid,
   .life-grid,
   .grid-3,
-  .workflow-grid,
-  .pkm-grid,
-  .llm-wiki-grid,
+  .knowledge-assets-grid,
   .module-grid,
   .workshop-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .llm-wiki-panel {
     grid-template-columns: 1fr;
   }
 
@@ -1554,6 +1515,23 @@ code {
   .action-row {
     max-width: calc(100vw - 28px);
     overflow-wrap: anywhere;
+    word-break: break-all;
+  }
+
+  .knowledge-brief,
+  .knowledge-asset-card,
+  .knowledge-update-card {
+    padding: 16px;
+  }
+
+  .knowledge-update-card ol {
+    padding-left: 18px;
+  }
+
+  .knowledge-brief p,
+  .knowledge-asset-card p,
+  .knowledge-update-card span {
+    word-break: break-all;
   }
 
   .profile-row {
