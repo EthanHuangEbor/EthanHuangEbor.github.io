@@ -751,6 +751,97 @@ code {
   align-items: start;
 }
 
+.guestbook-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.36fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.guestbook-guide,
+.guestbook-panel {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 252, 0.92);
+  box-shadow: var(--shadow);
+}
+
+.guestbook-guide h2,
+.guestbook-panel h2 {
+  margin: 8px 0 0;
+  color: var(--ink);
+  font-size: 28px;
+  line-height: 1.15;
+}
+
+.guestbook-guide p {
+  color: var(--text-soft);
+  line-height: 1.82;
+}
+
+.guestbook-steps {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.guestbook-steps span {
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--text-soft);
+  background: var(--surface-soft);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.guestbook-panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.giscus-thread {
+  min-height: 360px;
+}
+
+.guestbook-placeholder {
+  text-align: left;
+}
+
+.config-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.config-list div {
+  display: grid;
+  grid-template-columns: 108px minmax(0, 1fr);
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.config-list div:last-child {
+  border-bottom: 0;
+}
+
+.config-list span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.config-list strong {
+  min-width: 0;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
 .workflow-panel {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 220px;
@@ -1293,6 +1384,7 @@ code {
   .hero,
   .cv-intro,
   .knowledge-layout,
+  .guestbook-layout,
   .workflow-panel,
   .grid-2 {
     grid-template-columns: 1fr;
@@ -1377,6 +1469,13 @@ code {
     display: block;
   }
 
+  .section-header,
+  .section-header p,
+  .action-row {
+    max-width: calc(100vw - 28px);
+    overflow-wrap: anywhere;
+  }
+
   .profile-row {
     grid-template-columns: 1fr;
     gap: 4px;
@@ -1386,6 +1485,32 @@ code {
   .profile-row a {
     display: block;
     width: 100%;
+  }
+
+  .guestbook-guide,
+  .guestbook-panel,
+  .guestbook-placeholder,
+  .guestbook-steps span {
+    max-width: calc(100vw - 28px);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .guestbook-guide h2,
+  .guestbook-panel h2,
+  .guestbook-placeholder h3 {
+    font-size: 24px;
+    overflow-wrap: anywhere;
+  }
+
+  .guestbook-panel-head {
+    display: grid;
+    gap: 10px;
+  }
+
+  .config-list div {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 
   .project-strip {

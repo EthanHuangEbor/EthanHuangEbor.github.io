@@ -14,6 +14,20 @@
     "cvPdf": "#",
     "status": "飞行动力 / ML / Robotics"
   },
+  "guestbook": {
+    "provider": "giscus",
+    "repo": "EthanHuangEbor/EthanHuangEbor.github.io",
+    "repoId": "R_kgDOQmpJlw",
+    "category": "General",
+    "categoryId": "",
+    "mapping": "pathname",
+    "strict": "0",
+    "reactionsEnabled": "1",
+    "emitMetadata": "0",
+    "inputPosition": "bottom",
+    "theme": "light",
+    "lang": "zh-CN"
+  },
   "heroStats": [
     {
       "label": "Project Repos",

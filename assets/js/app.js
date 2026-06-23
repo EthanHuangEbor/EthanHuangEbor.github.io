@@ -13,6 +13,7 @@ const routes = {
   awards: { label: '所获奖项' },
   knowledge: { label: '知识图谱' },
   life: { label: '生活' },
+  guestbook: { label: '留言' },
   play: { label: '见天地' },
   people: { label: '见众生' },
   diary: { label: '见自己' },
@@ -142,6 +143,7 @@ function renderCurrentRoute() {
   else if (route === 'awards') renderAwards();
   else if (route === 'knowledge') renderKnowledge();
   else if (route === 'life') renderLifeHub();
+  else if (route === 'guestbook') renderGuestbook();
   else if (['play', 'people', 'diary', 'eat', 'drink'].includes(route)) renderLife(route);
   else if (route === 'workshop') renderWorkshop();
   else if (route === 'about') renderAbout();
@@ -648,6 +650,103 @@ function renderAbout() {
       </div>
     </section>
   `;
+}
+
+function renderGuestbook() {
+  const profile = state.site.profile || {};
+  const config = state.site.guestbook || {};
+  const discussionUrl = `${profile.repo || 'https://github.com/EthanHuangEbor/EthanHuangEbor.github.io'}/discussions`;
+  const isConfigured = Boolean(config.repo && config.repoId && config.category && config.categoryId);
+
+  app.innerHTML = `
+    <section class="page">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Guestbook</p>
+          <h1>留言板</h1>
+          <p>这里留给朋友、同学和路过的人。评论由 GitHub Discussions 托管，登录 GitHub 后即可留言。</p>
+        </div>
+        <div class="action-row">
+          <a class="button primary" href="${escapeAttr(discussionUrl)}" target="_blank" rel="noreferrer">GitHub Discussions</a>
+          <a class="button ghost" href="#/home">回到首页</a>
+        </div>
+      </div>
+
+      <div class="guestbook-layout">
+        <aside class="guestbook-guide">
+          <p class="card-kicker">${isConfigured ? 'Ready' : 'Setup'}</p>
+          <h2>${isConfigured ? '修勾把门，留言开放' : '等待 GitHub Discussions 启用'}</h2>
+          <p>${isConfigured
+            ? 'giscus 已连接到主页仓库的 Discussions。留言会沉淀在 GitHub 中，便于长期保存和管理。'
+            : '当前仓库尚未启用 Discussions，或还缺少 giscus category id。完成右侧配置后，这里会自动变成真实留言区。'}</p>
+          <div class="guestbook-steps">
+            <span>1. Settings → Features → Discussions</span>
+            <span>2. 安装 giscus app 到主页仓库</span>
+            <span>3. 在 giscus.app 选择分类并复制 category id</span>
+          </div>
+        </aside>
+
+        <section class="guestbook-panel">
+          <div class="guestbook-panel-head">
+            <div>
+              <p class="card-kicker">Giscus Thread</p>
+              <h2>公开留言</h2>
+            </div>
+            <span class="pill">${isConfigured ? '已配置' : '待配置'}</span>
+          </div>
+          ${isConfigured ? '<div id="giscusThread" class="giscus-thread"></div>' : guestbookSetupCard(config)}
+        </section>
+      </div>
+    </section>
+  `;
+
+  if (isConfigured) mountGiscus(config);
+}
+
+function guestbookSetupCard(config) {
+  const lines = [
+    ['repo', config.repo],
+    ['repoId', config.repoId],
+    ['category', config.category],
+    ['categoryId', config.categoryId || '待从 giscus.app 复制']
+  ];
+  return `
+    <div class="blank-slate guestbook-placeholder">
+      <h3>giscus 尚未连接</h3>
+      <p>GitHub API 显示当前仓库 Discussions 未启用。启用后，在 <code>data/site.json</code> 的 <code>guestbook.categoryId</code> 中填入分类 ID。</p>
+      <div class="config-list">
+        ${lines.map(([key, value]) => `
+          <div>
+            <span>${escapeHtml(key)}</span>
+            <strong>${escapeHtml(value || '待补充')}</strong>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function mountGiscus(config) {
+  const container = document.getElementById('giscusThread');
+  if (!container) return;
+  container.innerHTML = '';
+  const script = document.createElement('script');
+  script.src = 'https://giscus.app/client.js';
+  script.async = true;
+  script.crossOrigin = 'anonymous';
+  script.setAttribute('data-repo', config.repo);
+  script.setAttribute('data-repo-id', config.repoId);
+  script.setAttribute('data-category', config.category);
+  script.setAttribute('data-category-id', config.categoryId);
+  script.setAttribute('data-mapping', config.mapping || 'pathname');
+  script.setAttribute('data-strict', config.strict || '0');
+  script.setAttribute('data-reactions-enabled', config.reactionsEnabled || '1');
+  script.setAttribute('data-emit-metadata', config.emitMetadata || '0');
+  script.setAttribute('data-input-position', config.inputPosition || 'bottom');
+  script.setAttribute('data-theme', config.theme || 'light');
+  script.setAttribute('data-lang', config.lang || 'zh-CN');
+  script.setAttribute('data-loading', 'lazy');
+  container.appendChild(script);
 }
 
 function profileRow(label, value, raw = false) {
