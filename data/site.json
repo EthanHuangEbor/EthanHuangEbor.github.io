@@ -412,10 +412,16 @@
     },
     {
       "type": "Course Pack",
-      "title": "概率统计前9章复习包",
-      "detail": "整合 PDF 资料、考前速记和刷题网页，形成一条冲刺复习线。",
+      "title": "概率统计",
+      "detail": "整合复习资料、考前速记、刷题网页和错题复盘，作为概率统计课程的唯一知识入口。",
       "href": "assets/quizzes/prob_stats_front9_quiz.html",
-      "notePath": "content/knowledge/课程/概率统计前9章考前整合复习.md"
+      "notePath": "content/knowledge/课程/概率统计.md"
+    },
+    {
+      "type": "Course Knowledge Base",
+      "title": "工程热力学",
+      "detail": "根据 20 次课件整理系统边界、能量方程、工质性质、热力过程、第二定律和动力循环。",
+      "notePath": "content/knowledge/课程/工程热力学.md"
     },
     {
       "type": "Quiz HTML",

@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-24T14:30:20.261Z",
+  "generatedAt": "2026-06-24T16:52:44.626Z",
   "stats": {
-    "nodes": 11,
-    "links": 25,
+    "nodes": 10,
+    "links": 24,
     "unresolved": 0,
     "domains": 5,
-    "tags": 29
+    "tags": 30
   },
   "records": [
     {
@@ -53,9 +53,9 @@
       "wikilinks": [
         "布雷顿循环",
         "标准大气模型",
-        "工程热力学复盘"
+        "工程热力学"
       ],
-      "wordCount": 720
+      "wordCount": 718
     },
     {
       "path": "content/knowledge/个人成长/长期主义与反馈回路.md",
@@ -89,9 +89,9 @@
       ],
       "wikilinks": [
         "刻意练习",
-        "工程热力学复盘"
+        "工程热力学"
       ],
-      "wordCount": 264
+      "wordCount": 262
     },
     {
       "path": "content/knowledge/工程工具/标准大气模型.md",
@@ -129,9 +129,9 @@
       ],
       "wikilinks": [
         "布雷顿循环",
-        "工程热力学复盘"
+        "工程热力学"
       ],
-      "wordCount": 222
+      "wordCount": 220
     },
     {
       "path": "content/knowledge/航空发动机/布雷顿循环.md",
@@ -172,11 +172,11 @@
         }
       ],
       "wikilinks": [
-        "工程热力学复盘",
+        "工程热力学",
         "标准大气模型",
         "压气机喘振"
       ],
-      "wordCount": 354
+      "wordCount": 352
     },
     {
       "path": "content/knowledge/航空发动机/压气机喘振.md",
@@ -219,26 +219,27 @@
       "wordCount": 294
     },
     {
-      "path": "content/knowledge/课程/概率统计前9章考前整合复习.md",
+      "path": "content/knowledge/课程/概率统计.md",
       "folderPath": "课程",
-      "fileName": "概率统计前9章考前整合复习.md",
-      "slug": "课程/概率统计前9章考前整合复习",
-      "title": "概率统计前9章考前整合复习",
-      "date": "2026-06-23",
+      "fileName": "概率统计.md",
+      "slug": "课程/概率统计",
+      "title": "概率统计",
+      "date": "2026-06-25",
       "updated": "",
       "status": "active",
       "domain": "课程",
       "tags": [
         "概率统计",
         "期末复习",
+        "刷题",
         "公式速查",
-        "题型模板"
+        "错题复盘"
       ],
-      "summary": "将前9章期末复习资料、考前背诵速记版和刷题网页合并成一份更适合考前冲刺的概率统计复习路线。",
+      "summary": "将概率统计前9章复习资料、刷题网页、错题导出和考前主线合并成一个知识块。",
       "headings": [
         {
           "depth": 1,
-          "text": "概率统计前9章考前整合复习"
+          "text": "概率统计"
         },
         {
           "depth": 2,
@@ -255,6 +256,10 @@
         {
           "depth": 2,
           "text": "先背 12 条"
+        },
+        {
+          "depth": 2,
+          "text": "章节主线"
         },
         {
           "depth": 2,
@@ -286,6 +291,10 @@
         },
         {
           "depth": 2,
+          "text": "刷题记录与掌握度"
+        },
+        {
+          "depth": 2,
           "text": "最后 30 分钟检查清单"
         },
         {
@@ -294,96 +303,190 @@
         }
       ],
       "wikilinks": [
-        "概率统计前9章刷题记录",
-        "学习笔记沉淀流程"
-      ],
-      "wordCount": 3945
-    },
-    {
-      "path": "content/knowledge/课程/概率统计前9章刷题记录.md",
-      "folderPath": "课程",
-      "fileName": "概率统计前9章刷题记录.md",
-      "slug": "课程/概率统计前9章刷题记录",
-      "title": "概率统计前9章刷题记录",
-      "date": "2026-06-22",
-      "updated": "",
-      "status": "active",
-      "domain": "课程",
-      "tags": [
-        "概率统计",
-        "刷题",
-        "错题复盘",
-        "PKM"
-      ],
-      "summary": "将概率统计前9章刷题 HTML 归档到个人主页，并建立后续错题分析与知识掌握度评估入口。",
-      "headings": [
-        {
-          "depth": 1,
-          "text": "概率统计前9章刷题记录"
-        },
-        {
-          "depth": 2,
-          "text": "当前数据状态"
-        },
-        {
-          "depth": 2,
-          "text": "题库覆盖"
-        },
-        {
-          "depth": 2,
-          "text": "掌握度评分规则"
-        },
-        {
-          "depth": 2,
-          "text": "后续连接"
-        }
-      ],
-      "wikilinks": [
-        "概率统计前9章考前整合复习",
         "学习笔记沉淀流程",
-        "工程热力学复盘"
+        "工程热力学",
+        "LLM-Wiki 与个人知识图谱"
       ],
-      "wordCount": 1298
+      "wordCount": 4683
     },
     {
-      "path": "content/knowledge/课程/工程热力学复盘.md",
+      "path": "content/knowledge/课程/工程热力学.md",
       "folderPath": "课程",
-      "fileName": "工程热力学复盘.md",
-      "slug": "课程/工程热力学复盘",
-      "title": "工程热力学复盘",
-      "date": "2026-06-08",
+      "fileName": "工程热力学.md",
+      "slug": "课程/工程热力学",
+      "title": "工程热力学",
+      "date": "2026-06-25",
       "updated": "",
       "status": "active",
       "domain": "课程",
       "tags": [
-        "课程",
+        "工程热力学",
         "热力学",
-        "复盘"
+        "能量方程",
+        "热机循环",
+        "航空发动机"
       ],
-      "summary": "把热力学从公式记忆转化为状态量、过程、边界和能量账本。",
+      "summary": "根据工程热力学 20 次课件整理出的课程知识库，围绕系统边界、能量方程、工质性质、过程、第二定律和动力循环建立复习主线。",
       "headings": [
         {
           "depth": 1,
-          "text": "工程热力学复盘"
+          "text": "工程热力学"
         },
         {
           "depth": 2,
-          "text": "复习框架"
+          "text": "材料状态"
         },
         {
           "depth": 2,
-          "text": "和航空发动机的关系"
+          "text": "课程地图"
         },
         {
           "depth": 2,
-          "text": "期末复盘问题"
+          "text": "总框架"
+        },
+        {
+          "depth": 2,
+          "text": "第一章：基本概念"
+        },
+        {
+          "depth": 3,
+          "text": "系统与边界"
+        },
+        {
+          "depth": 3,
+          "text": "状态参数与过程量"
+        },
+        {
+          "depth": 3,
+          "text": "平衡、准静态与可逆"
+        },
+        {
+          "depth": 3,
+          "text": "功、热和循环"
+        },
+        {
+          "depth": 2,
+          "text": "第二章：热力学第一定律"
+        },
+        {
+          "depth": 3,
+          "text": "热力学能、总能与焓"
+        },
+        {
+          "depth": 3,
+          "text": "闭口系能量方程"
+        },
+        {
+          "depth": 3,
+          "text": "稳定流动能量方程"
+        },
+        {
+          "depth": 2,
+          "text": "第三章：气体和蒸汽性质"
+        },
+        {
+          "depth": 3,
+          "text": "理想气体状态方程"
+        },
+        {
+          "depth": 3,
+          "text": "理想气体比热容"
+        },
+        {
+          "depth": 3,
+          "text": "水蒸气"
+        },
+        {
+          "depth": 2,
+          "text": "第四章：气体和蒸汽基本热力过程"
+        },
+        {
+          "depth": 3,
+          "text": "四个基本过程"
+        },
+        {
+          "depth": 3,
+          "text": "多变过程"
+        },
+        {
+          "depth": 3,
+          "text": "水蒸气基本过程"
+        },
+        {
+          "depth": 2,
+          "text": "第五章：热力学第二定律"
+        },
+        {
+          "depth": 3,
+          "text": "卡诺循环与卡诺定理"
+        },
+        {
+          "depth": 3,
+          "text": "克劳修斯不等式与熵"
+        },
+        {
+          "depth": 3,
+          "text": "熵方程与熵增原理"
+        },
+        {
+          "depth": 3,
+          "text": "㶲与损失"
+        },
+        {
+          "depth": 2,
+          "text": "第九章：气体动力循环"
+        },
+        {
+          "depth": 3,
+          "text": "活塞内燃机理想循环"
+        },
+        {
+          "depth": 3,
+          "text": "布雷顿循环"
+        },
+        {
+          "depth": 2,
+          "text": "第十章：蒸汽动力循环"
+        },
+        {
+          "depth": 2,
+          "text": "理想气体混合物与湿空气"
+        },
+        {
+          "depth": 2,
+          "text": "作图题清单"
+        },
+        {
+          "depth": 2,
+          "text": "计算题模板"
+        },
+        {
+          "depth": 3,
+          "text": "闭口系"
+        },
+        {
+          "depth": 3,
+          "text": "开口稳流"
+        },
+        {
+          "depth": 3,
+          "text": "第二定律"
+        },
+        {
+          "depth": 2,
+          "text": "最后 30 分钟检查清单"
+        },
+        {
+          "depth": 2,
+          "text": "和项目能力的连接"
         }
       ],
       "wikilinks": [
         "布雷顿循环",
-        "标准大气模型"
+        "标准大气模型",
+        "压气机喘振"
       ],
-      "wordCount": 214
+      "wordCount": 6347
     },
     {
       "path": "content/knowledge/课程/军事理论期末刷题记录.md",
@@ -456,10 +559,10 @@
         }
       ],
       "wikilinks": [
-        "工程热力学复盘",
+        "工程热力学",
         "长期主义与反馈回路"
       ],
-      "wordCount": 207
+      "wordCount": 205
     },
     {
       "path": "content/knowledge/阅读/LLM-Wiki与个人知识图谱.md",
@@ -513,10 +616,10 @@
         }
       ],
       "wikilinks": [
-        "概率统计前9章刷题记录",
+        "概率统计",
         "学习笔记沉淀流程"
       ],
-      "wordCount": 1134
+      "wordCount": 1127
     }
   ],
   "links": [
@@ -532,8 +635,8 @@
     },
     {
       "source": "content/knowledge/个人成长/学习笔记沉淀流程.md",
-      "target": "content/knowledge/课程/工程热力学复盘.md",
-      "label": "工程热力学复盘"
+      "target": "content/knowledge/课程/工程热力学.md",
+      "label": "工程热力学"
     },
     {
       "source": "content/knowledge/个人成长/长期主义与反馈回路.md",
@@ -542,8 +645,8 @@
     },
     {
       "source": "content/knowledge/个人成长/长期主义与反馈回路.md",
-      "target": "content/knowledge/课程/工程热力学复盘.md",
-      "label": "工程热力学复盘"
+      "target": "content/knowledge/课程/工程热力学.md",
+      "label": "工程热力学"
     },
     {
       "source": "content/knowledge/工程工具/标准大气模型.md",
@@ -552,13 +655,13 @@
     },
     {
       "source": "content/knowledge/工程工具/标准大气模型.md",
-      "target": "content/knowledge/课程/工程热力学复盘.md",
-      "label": "工程热力学复盘"
+      "target": "content/knowledge/课程/工程热力学.md",
+      "label": "工程热力学"
     },
     {
       "source": "content/knowledge/航空发动机/布雷顿循环.md",
-      "target": "content/knowledge/课程/工程热力学复盘.md",
-      "label": "工程热力学复盘"
+      "target": "content/knowledge/课程/工程热力学.md",
+      "label": "工程热力学"
     },
     {
       "source": "content/knowledge/航空发动机/布雷顿循环.md",
@@ -581,39 +684,34 @@
       "label": "标准大气模型"
     },
     {
-      "source": "content/knowledge/课程/概率统计前9章考前整合复习.md",
-      "target": "content/knowledge/课程/概率统计前9章刷题记录.md",
-      "label": "概率统计前9章刷题记录"
-    },
-    {
-      "source": "content/knowledge/课程/概率统计前9章考前整合复习.md",
+      "source": "content/knowledge/课程/概率统计.md",
       "target": "content/knowledge/个人成长/学习笔记沉淀流程.md",
       "label": "学习笔记沉淀流程"
     },
     {
-      "source": "content/knowledge/课程/概率统计前9章刷题记录.md",
-      "target": "content/knowledge/课程/概率统计前9章考前整合复习.md",
-      "label": "概率统计前9章考前整合复习"
+      "source": "content/knowledge/课程/概率统计.md",
+      "target": "content/knowledge/课程/工程热力学.md",
+      "label": "工程热力学"
     },
     {
-      "source": "content/knowledge/课程/概率统计前9章刷题记录.md",
-      "target": "content/knowledge/个人成长/学习笔记沉淀流程.md",
-      "label": "学习笔记沉淀流程"
+      "source": "content/knowledge/课程/概率统计.md",
+      "target": "content/knowledge/阅读/LLM-Wiki与个人知识图谱.md",
+      "label": "LLM-Wiki 与个人知识图谱"
     },
     {
-      "source": "content/knowledge/课程/概率统计前9章刷题记录.md",
-      "target": "content/knowledge/课程/工程热力学复盘.md",
-      "label": "工程热力学复盘"
-    },
-    {
-      "source": "content/knowledge/课程/工程热力学复盘.md",
+      "source": "content/knowledge/课程/工程热力学.md",
       "target": "content/knowledge/航空发动机/布雷顿循环.md",
       "label": "布雷顿循环"
     },
     {
-      "source": "content/knowledge/课程/工程热力学复盘.md",
+      "source": "content/knowledge/课程/工程热力学.md",
       "target": "content/knowledge/工程工具/标准大气模型.md",
       "label": "标准大气模型"
+    },
+    {
+      "source": "content/knowledge/课程/工程热力学.md",
+      "target": "content/knowledge/航空发动机/压气机喘振.md",
+      "label": "压气机喘振"
     },
     {
       "source": "content/knowledge/课程/军事理论期末刷题记录.md",
@@ -627,8 +725,8 @@
     },
     {
       "source": "content/knowledge/阅读/刻意练习.md",
-      "target": "content/knowledge/课程/工程热力学复盘.md",
-      "label": "工程热力学复盘"
+      "target": "content/knowledge/课程/工程热力学.md",
+      "label": "工程热力学"
     },
     {
       "source": "content/knowledge/阅读/刻意练习.md",
@@ -637,8 +735,8 @@
     },
     {
       "source": "content/knowledge/阅读/LLM-Wiki与个人知识图谱.md",
-      "target": "content/knowledge/课程/概率统计前9章刷题记录.md",
-      "label": "概率统计前9章刷题记录"
+      "target": "content/knowledge/课程/概率统计.md",
+      "label": "概率统计"
     },
     {
       "source": "content/knowledge/阅读/LLM-Wiki与个人知识图谱.md",
@@ -735,39 +833,29 @@
         "children": [
           {
             "type": "file",
-            "name": "概率统计前9章考前整合复习.md",
-            "title": "概率统计前9章考前整合复习",
-            "path": "content/knowledge/课程/概率统计前9章考前整合复习.md",
+            "name": "概率统计.md",
+            "title": "概率统计",
+            "path": "content/knowledge/课程/概率统计.md",
             "tags": [
               "概率统计",
               "期末复习",
-              "公式速查",
-              "题型模板"
-            ],
-            "domain": "课程"
-          },
-          {
-            "type": "file",
-            "name": "概率统计前9章刷题记录.md",
-            "title": "概率统计前9章刷题记录",
-            "path": "content/knowledge/课程/概率统计前9章刷题记录.md",
-            "tags": [
-              "概率统计",
               "刷题",
-              "错题复盘",
-              "PKM"
+              "公式速查",
+              "错题复盘"
             ],
             "domain": "课程"
           },
           {
             "type": "file",
-            "name": "工程热力学复盘.md",
-            "title": "工程热力学复盘",
-            "path": "content/knowledge/课程/工程热力学复盘.md",
+            "name": "工程热力学.md",
+            "title": "工程热力学",
+            "path": "content/knowledge/课程/工程热力学.md",
             "tags": [
-              "课程",
+              "工程热力学",
               "热力学",
-              "复盘"
+              "能量方程",
+              "热机循环",
+              "航空发动机"
             ],
             "domain": "课程"
           },
@@ -820,19 +908,11 @@
   },
   "tags": [
     {
-      "name": "复盘",
-      "count": 2
+      "name": "航空发动机",
+      "count": 3
     },
     {
       "name": "热力学",
-      "count": 2
-    },
-    {
-      "name": "航空发动机",
-      "count": 2
-    },
-    {
-      "name": "概率统计",
       "count": 2
     },
     {
@@ -841,10 +921,6 @@
     },
     {
       "name": "刷题",
-      "count": 2
-    },
-    {
-      "name": "PKM",
       "count": 2
     },
     {
@@ -861,6 +937,10 @@
     },
     {
       "name": "个人成长",
+      "count": 1
+    },
+    {
+      "name": "复盘",
       "count": 1
     },
     {
@@ -892,11 +972,11 @@
       "count": 1
     },
     {
-      "name": "公式速查",
+      "name": "概率统计",
       "count": 1
     },
     {
-      "name": "题型模板",
+      "name": "公式速查",
       "count": 1
     },
     {
@@ -904,7 +984,15 @@
       "count": 1
     },
     {
-      "name": "课程",
+      "name": "工程热力学",
+      "count": 1
+    },
+    {
+      "name": "能量方程",
+      "count": 1
+    },
+    {
+      "name": "热机循环",
       "count": 1
     },
     {
@@ -928,6 +1016,10 @@
       "count": 1
     },
     {
+      "name": "PKM",
+      "count": 1
+    },
+    {
       "name": "知识图谱",
       "count": 1
     },
@@ -939,7 +1031,7 @@
   "domains": [
     {
       "name": "课程",
-      "count": 4
+      "count": 3
     },
     {
       "name": "个人成长",
