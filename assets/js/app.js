@@ -461,10 +461,11 @@ function renderKnowledge() {
             <p class="card-kicker">${escapeHtml(asset.type)}</p>
             <h3>${escapeHtml(asset.title)}</h3>
             <p>${escapeHtml(asset.detail)}</p>
-            <div class="knowledge-card-actions">
-              ${asset.notePath ? `<button class="text-action" type="button" data-open-knowledge-note="${escapeAttr(asset.notePath)}">打开笔记</button>` : ''}
-              ${asset.href ? `<a class="text-action" href="${escapeAttr(asset.href)}" target="_blank" rel="noreferrer">打开素材</a>` : ''}
-            </div>
+            ${asset.href ? `
+              <div class="knowledge-card-actions">
+                <a class="text-action" href="${escapeAttr(asset.href)}" target="_blank" rel="noreferrer">打开素材</a>
+              </div>
+            ` : ''}
           </article>
         `).join('')}
       </div>
@@ -492,40 +493,28 @@ function renderKnowledge() {
           <div class="tree" id="knowledgeTree"></div>
         </aside>
 
-        <div class="graph-reader-layout">
-          <section class="graph-wrap">
-            <div class="graph-toolbar">
-              <div>
-                <p class="card-kicker">Graph</p>
-                <h2>节点关系</h2>
-              </div>
-              <div class="action-row">
-                <input class="search-input" id="graphSearch" placeholder="筛选节点" />
-                <select class="select-input" id="domainFilter" aria-label="按领域筛选">
-                  <option value="">全部领域</option>
-                  ${index.domains.map(domain => `<option value="${escapeAttr(domain.name)}">${escapeHtml(domain.name)} · ${domain.count}</option>`).join('')}
-                </select>
-              </div>
+        <section class="graph-wrap">
+          <div class="graph-toolbar">
+            <div>
+              <p class="card-kicker">Graph</p>
+              <h2>节点关系</h2>
             </div>
-            <div class="graph-canvas-box">
-              <canvas id="knowledgeCanvas"></canvas>
-              <div class="graph-hint">点击节点打开笔记；连线来自 Markdown 双链。</div>
+            <div class="action-row">
+              <input class="search-input" id="graphSearch" placeholder="筛选节点" />
+              <select class="select-input" id="domainFilter" aria-label="按领域筛选">
+                <option value="">全部领域</option>
+                ${index.domains.map(domain => `<option value="${escapeAttr(domain.name)}">${escapeHtml(domain.name)} · ${domain.count}</option>`).join('')}
+              </select>
             </div>
-          </section>
-
-          <section class="reader-panel" id="readerPanel">
-            <div class="blank-slate"><h3>选择一篇笔记</h3><p>从目录或图谱打开。</p></div>
-          </section>
-        </div>
+          </div>
+          <div class="graph-canvas-box">
+            <canvas id="knowledgeCanvas"></canvas>
+            <div class="graph-hint">点击节点查看内容；连线来自 Markdown 双链。</div>
+          </div>
+        </section>
       </div>
     </section>
   `;
-
-  document.querySelectorAll('[data-open-knowledge-note]').forEach(button => {
-    button.addEventListener('click', event => {
-      openKnowledgeArticle(event.currentTarget.dataset.openKnowledgeNote);
-    });
-  });
 
   const tree = document.getElementById('knowledgeTree');
   tree.innerHTML = renderTree(index.tree, '');
@@ -859,18 +848,14 @@ function renderTree(node, query) {
 }
 
 async function openKnowledgeArticle(path) {
-  const panel = document.getElementById('readerPanel');
-  if (!panel) return;
   const record = state.knowledge.records.find(item => item.path === path);
-  panel.innerHTML = '<div class="blank-slate"><h3>正在读取卷轴</h3><p>Loading Markdown…</p></div>';
+  document.querySelectorAll('.tree-file').forEach(file => file.classList.toggle('active', file.dataset.path === path));
+  state.graph?.highlight(path);
   try {
     const raw = await loadText(path);
-    panel.innerHTML = renderArticle(raw, record);
-    bindWikiLinks(panel);
-    document.querySelectorAll('.tree-file').forEach(file => file.classList.toggle('active', file.dataset.path === path));
-    state.graph?.highlight(path);
+    openModal(renderArticle(raw, record));
   } catch (error) {
-    panel.innerHTML = `<div class="error-card"><h3>读取失败</h3><p>${escapeHtml(path)}</p><pre>${escapeHtml(error.message)}</pre></div>`;
+    openModal(`<div class="error-card"><h3>读取失败</h3><p>${escapeHtml(path)}</p><pre>${escapeHtml(error.message)}</pre></div>`);
   }
 }
 

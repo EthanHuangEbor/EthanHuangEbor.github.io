@@ -326,7 +326,6 @@ code {
 .blank-slate,
 .graph-wrap,
 .index-panel,
-.reader-panel,
 .module-card,
 .stat-card {
   border: 1px solid var(--line);
@@ -967,7 +966,6 @@ code {
 }
 
 .index-panel,
-.reader-panel,
 .graph-wrap {
   padding: 18px;
 }
@@ -1063,12 +1061,6 @@ code {
   border-color: var(--line);
 }
 
-.graph-reader-layout {
-  display: grid;
-  grid-template-rows: auto minmax(0, auto);
-  gap: 18px;
-}
-
 .graph-toolbar {
   display: flex;
   justify-content: space-between;
@@ -1107,10 +1099,6 @@ code {
   color: var(--muted);
   font-size: 12px;
   pointer-events: none;
-}
-
-.reader-panel {
-  min-height: 420px;
 }
 
 .article-panel {
@@ -1202,8 +1190,18 @@ code {
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  color: #eef7f3;
-  background: #17211d;
+  color: var(--ink);
+  background: #f7faf5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.prose pre code,
+.panel pre code {
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  white-space: inherit;
 }
 
 .life-toolbar {

@@ -420,8 +420,9 @@
     {
       "type": "Course Knowledge Base",
       "title": "工程热力学",
-      "detail": "根据 20 次课件整理系统边界、能量方程、工质性质、热力过程、第二定律和动力循环。",
-      "notePath": "content/knowledge/课程/工程热力学.md"
+      "detail": "分章整理系统边界、能量方程、工质性质、热力过程、第二定律和动力循环，并收录漫画热力学素材。",
+      "href": "assets/materials/engineering-thermodynamics/manga-thermodynamics.pdf",
+      "notePath": "content/knowledge/课程/工程热力学/工程热力学.md"
     },
     {
       "type": "Quiz HTML",
