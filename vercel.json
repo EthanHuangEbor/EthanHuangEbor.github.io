@@ -1,0 +1,25 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/military-theory",
+      "destination": "/assets/quizzes/military-theory-final-review.html"
+    },
+    {
+      "source": "/quiz/military-theory",
+      "destination": "/assets/quizzes/military-theory-final-review.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/quizzes/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}
