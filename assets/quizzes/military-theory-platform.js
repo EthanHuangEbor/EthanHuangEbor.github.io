@@ -15,7 +15,7 @@
   const CHAPTERS = BANK.chapters.map(ch => ch.name);
   const DIFFICULTIES = BANK.difficulties || ['基础', '易混', '综合'];
   const LETTERS = ['A', 'B', 'C', 'D', 'E'];
-  const TYPE_LABEL = { choice: '选择', judge: '判断', essay: '论述' };
+  const TYPE_LABEL = { choice: '选择', judge: '判断', fill: '填空', essay: '论述' };
   const KNOWLEDGE = parseOutline(BANK.outlineText || '');
 
   const defaultState = {
@@ -75,7 +75,7 @@
     const validViews = new Set(['practice', 'exam', 'review', 'errors']);
     if (!validViews.has(next.view)) next.view = defaultState.view;
     if (!CHAPTERS.includes(next.filters.chapter) && next.filters.chapter !== 'all') next.filters.chapter = 'all';
-    if (!['all', 'choice', 'judge', 'essay'].includes(next.filters.type)) next.filters.type = 'all';
+    if (!['all', 'choice', 'judge', 'fill', 'essay'].includes(next.filters.type)) next.filters.type = 'all';
     if (!DIFFICULTIES.includes(next.filters.difficulty) && next.filters.difficulty !== 'all') next.filters.difficulty = 'all';
     if (!['all', 'unanswered', 'wrong', 'starred'].includes(next.filters.scope)) next.filters.scope = 'all';
     if (!['sequential', 'random'].includes(next.strategy)) next.strategy = 'sequential';
@@ -141,9 +141,25 @@
   function answerLabel(q, value, fallback = '未记录') {
     if (value === undefined || value === null || value === '') return fallback;
     if (q.type === 'judge') return (value === true || value === 'true') ? '对' : '错';
+    if (q.type === 'fill') return String(value).trim() || fallback;
     const index = Number(value);
     if (Number.isNaN(index) || !q.options?.[index]) return fallback;
     return `${LETTERS[index] || ''} ${q.options[index]}`.trim();
+  }
+
+  function normalizeFill(value) {
+    return String(value || '')
+      .replace(/[，,、；;。.\s]/g, '')
+      .toLowerCase();
+  }
+
+  function fillAnswers(q) {
+    return Array.isArray(q.answer) ? q.answer : [q.answer];
+  }
+
+  function isFillCorrect(q, value) {
+    const normalized = normalizeFill(value);
+    return Boolean(normalized) && fillAnswers(q).some(item => normalizeFill(item) === normalized);
   }
 
   function filteredQuestions() {
@@ -264,7 +280,7 @@
           <div>
             <div class="micro-label">Question Bank</div>
             <div class="source-list">
-              <div class="source-item"><strong>${meta.questionCount} 题</strong><span>选择 ${meta.byType.choice || 0} / 判断 ${meta.byType.judge || 0} / 论述 ${meta.byType.essay || 0}</span></div>
+              <div class="source-item"><strong>${meta.questionCount} 题</strong><span>选择 ${meta.byType.choice || 0} / 判断 ${meta.byType.judge || 0} / 填空 ${meta.byType.fill || 0} / 论述 ${meta.byType.essay || 0}</span></div>
               <div class="source-item"><strong>${meta.objectiveCount} 道客观题</strong><span>自动判分，错题自动进入复盘视图。</span></div>
               <div class="source-item"><strong>${currentAffairsCount} 类时事</strong><span>对应国际战略形势、周边安全和智能化战争。</span></div>
             </div>
@@ -331,7 +347,7 @@
         <h2>${state.examMode ? '模拟卷设置' : '刷题设置'}</h2>
         <div class="form-grid">
           ${selectField('chapter', '章节', [['all', '全部章节'], ...CHAPTERS.map(ch => [ch, ch])], f.chapter)}
-          ${selectField('type', '题型', [['all', '全部题型'], ['choice', '选择题'], ['judge', '判断题'], ['essay', '论述题']], f.type)}
+          ${selectField('type', '题型', [['all', '全部题型'], ['choice', '选择题'], ['judge', '判断题'], ['fill', '填空题'], ['essay', '论述题']], f.type)}
           ${selectField('difficulty', '难度', [['all', '全部难度'], ...DIFFICULTIES.map(d => [d, d])], f.difficulty)}
           ${selectField('scope', '范围', [['all', '全部题目'], ['unanswered', '未答题'], ['wrong', '错题'], ['starred', '收藏题']], f.scope)}
           <div class="field"><label for="queryInput">搜索</label><input id="queryInput" type="search" value="${escapeHtml(f.query)}" placeholder="国防动员 / 信息化战争" data-filter="query" /></div>
@@ -372,7 +388,7 @@
           </div>
           <button class="button ${state.starred[q.id] ? 'warn' : 'ghost'}" type="button" data-action="toggle-star" data-id="${escapeHtml(q.id)}">${state.starred[q.id] ? '已收藏' : '收藏'}</button>
         </div>
-        ${q.type === 'essay' ? renderEssay(q, ans) : renderObjective(q, ans)}
+        ${q.type === 'essay' ? renderEssay(q, ans) : q.type === 'fill' ? renderFill(q, ans) : renderObjective(q, ans)}
         ${renderQuestionActions(q, ans)}
       </article>
     `;
@@ -406,13 +422,25 @@
     `;
   }
 
+  function renderFill(q, ans) {
+    const value = state.draft[q.id] ?? ans?.value ?? '';
+    return `
+      <div class="fill-answer">
+        <label for="fill-${escapeHtml(q.id)}">填空答案</label>
+        <input id="fill-${escapeHtml(q.id)}" class="fill-input" type="text" value="${escapeHtml(value)}" data-fill="${escapeHtml(q.id)}" placeholder="输入关键词或短语" autocomplete="off" />
+      </div>
+      ${ans?.checked ? renderFeedback(q, ans) : ''}
+    `;
+  }
+
   function renderFeedback(q, ans) {
     if (q.type === 'essay') {
       return `<div class="feedback"><strong>答案要点</strong><ol class="point-list">${(q.points || []).map(point => `<li>${escapeHtml(point)}</li>`).join('')}</ol></div>`;
     }
     const ok = ans.correct === true;
     const answerText = answerLabel(q, q.answer);
-    return `<div class="feedback ${ok ? 'good' : 'bad'}"><strong>${ok ? '回答正确' : '需要回看'}</strong><p>正确答案：${escapeHtml(answerText)}</p><p>${escapeHtml(q.explanation)}</p></div>`;
+    const fillAlt = q.type === 'fill' && fillAnswers(q).length > 1 ? `（可接受：${fillAnswers(q).map(escapeHtml).join(' / ')}）` : '';
+    return `<div class="feedback ${ok ? 'good' : 'bad'}"><strong>${ok ? '回答正确' : '需要回看'}</strong><p>正确答案：${escapeHtml(answerText)}${fillAlt}</p><p>${escapeHtml(q.explanation)}</p></div>`;
   }
 
   function renderQuestionActions(q, ans) {
@@ -443,11 +471,12 @@
         <aside class="panel sticky">
           <h2>模拟卷</h2>
           <p class="muted">当前题库按选择、判断、论述组合，适合做一轮限时自测。</p>
-          <div class="source-list">
-            <div class="source-item"><strong>${sample.choice} 道选择</strong><span>覆盖五章基础和易混点。</span></div>
-            <div class="source-item"><strong>${sample.judge} 道判断</strong><span>快速检查概念边界。</span></div>
-            <div class="source-item"><strong>${sample.essay} 道论述</strong><span>按要点自查，不自动判分。</span></div>
-          </div>
+            <div class="source-list">
+              <div class="source-item"><strong>${sample.choice} 道选择</strong><span>覆盖五章基础和易混点。</span></div>
+              <div class="source-item"><strong>${sample.judge} 道判断</strong><span>快速检查概念边界。</span></div>
+              <div class="source-item"><strong>${sample.fill} 道填空</strong><span>用关键词检查最后背诵。</span></div>
+              <div class="source-item"><strong>${sample.essay} 道论述</strong><span>按要点自查，不自动判分。</span></div>
+            </div>
           <div class="row-actions"><button class="button primary" type="button" data-action="start-mock">生成并开始</button></div>
         </aside>
         <div class="question-card">
@@ -566,6 +595,20 @@
       render();
       return;
     }
+    if (q.type === 'fill') {
+      const value = String(state.draft[q.id] || '').trim();
+      if (!value) {
+        showToast('先填写答案');
+        return;
+      }
+      const correct = isFillCorrect(q, value);
+      state.answers[q.id] = { value, checked: true, correct, at: new Date().toISOString() };
+      if (!correct) state.starred[q.id] = true;
+      pushHistory(q, correct);
+      saveState();
+      render();
+      return;
+    }
     const raw = state.draft[q.id];
     if (raw === undefined || raw === '') {
       showToast('先选择一个答案');
@@ -589,6 +632,7 @@
     return {
       choice: Math.min(24, QUESTIONS.filter(q => q.type === 'choice').length),
       judge: Math.min(10, QUESTIONS.filter(q => q.type === 'judge').length),
+      fill: Math.min(10, QUESTIONS.filter(q => q.type === 'fill').length),
       essay: Math.min(3, QUESTIONS.filter(q => q.type === 'essay').length)
     };
   }
@@ -597,8 +641,9 @@
     const plan = mockPlan();
     const choices = shuffle(QUESTIONS.filter(q => q.type === 'choice')).slice(0, plan.choice);
     const judges = shuffle(QUESTIONS.filter(q => q.type === 'judge')).slice(0, plan.judge);
+    const fills = shuffle(QUESTIONS.filter(q => q.type === 'fill')).slice(0, plan.fill);
     const essays = shuffle(QUESTIONS.filter(q => q.type === 'essay')).slice(0, plan.essay);
-    const ids = shuffle([...choices, ...judges, ...essays]).map(q => q.id);
+    const ids = shuffle([...choices, ...judges, ...fills, ...essays]).map(q => q.id);
     if (apply) {
       state.view = 'practice';
       state.examMode = true;
@@ -769,6 +814,10 @@
       state.draft[event.target.dataset.essay] = event.target.value;
       saveState();
     }
+    if (event.target.dataset.fill) {
+      state.draft[event.target.dataset.fill] = event.target.value;
+      saveState();
+    }
   });
 
   document.addEventListener('keydown', event => {
@@ -776,6 +825,11 @@
       event.preventDefault();
       clearTimeout(renderTimer);
       render();
+      return;
+    }
+    if (event.target.matches('[data-fill]') && event.key === 'Enter') {
+      event.preventDefault();
+      checkCurrent();
       return;
     }
     if (event.target.matches('input, textarea, select')) return;

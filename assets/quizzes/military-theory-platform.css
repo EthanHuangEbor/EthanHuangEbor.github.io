@@ -178,7 +178,7 @@ button { cursor: pointer; }
 .panel p, .muted { color: var(--text-soft); }
 .form-grid { display: grid; gap: 12px; }
 .field label, .field-label { display: block; margin: 0 0 6px; color: var(--text-soft); font-size: 0.88rem; }
-select, input[type="search"], textarea {
+select, input[type="search"], input[type="text"], textarea {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -225,6 +225,9 @@ select:focus, input:focus, textarea:focus { border-color: var(--accent); box-sha
 .feedback.bad { border-color: rgba(159, 79, 67, 0.35); background: var(--bad-soft); }
 .feedback strong { color: var(--ink); }
 textarea.answer-box { min-height: 152px; resize: vertical; margin-top: 12px; line-height: 1.7; }
+.fill-answer { margin-top: 14px; display: grid; gap: 8px; }
+.fill-answer label { color: var(--text-soft); font-size: 0.88rem; }
+.fill-input { min-height: 48px; }
 .point-list { margin: 10px 0 0; padding-left: 1.2rem; color: var(--text-soft); }
 .point-list li { margin: 5px 0; }
 
