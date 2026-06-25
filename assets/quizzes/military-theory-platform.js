@@ -5,10 +5,12 @@
     return;
   }
 
-  const STORAGE_KEY = 'hyb-military-theory-platform-v1';
+  const STORAGE_KEY = 'hyb-military-theory-platform-v2';
   const root = document.getElementById('appRoot');
   const toast = document.getElementById('toast');
   const QUESTIONS = BANK.questions;
+  const QUESTION_BY_ID = new Map(QUESTIONS.map(q => [q.id, q]));
+  const QUESTION_IDS = new Set(QUESTIONS.map(q => q.id));
   const OBJECTIVE = QUESTIONS.filter(q => q.type !== 'essay');
   const CHAPTERS = BANK.chapters.map(ch => ch.name);
   const DIFFICULTIES = BANK.difficulties || ['基础', '易混', '综合'];
@@ -36,14 +38,19 @@
   };
 
   let state = loadState();
+  let renderTimer = null;
   render();
+
+  function cloneDefaultState() {
+    return JSON.parse(JSON.stringify(defaultState));
+  }
 
   function loadState() {
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-      return mergeState(defaultState, saved);
+      return sanitizeState(mergeState(cloneDefaultState(), saved));
     } catch (error) {
-      return structuredClone(defaultState);
+      return cloneDefaultState();
     }
   }
 
@@ -58,6 +65,31 @@
       mastered: saved.mastered || {},
       history: saved.history || []
     };
+  }
+
+  function sanitizeQuestionMap(map) {
+    return Object.fromEntries(Object.entries(map || {}).filter(([id]) => QUESTION_IDS.has(id)));
+  }
+
+  function sanitizeState(next) {
+    const validViews = new Set(['practice', 'exam', 'review', 'errors']);
+    if (!validViews.has(next.view)) next.view = defaultState.view;
+    if (!CHAPTERS.includes(next.filters.chapter) && next.filters.chapter !== 'all') next.filters.chapter = 'all';
+    if (!['all', 'choice', 'judge', 'essay'].includes(next.filters.type)) next.filters.type = 'all';
+    if (!DIFFICULTIES.includes(next.filters.difficulty) && next.filters.difficulty !== 'all') next.filters.difficulty = 'all';
+    if (!['all', 'unanswered', 'wrong', 'starred'].includes(next.filters.scope)) next.filters.scope = 'all';
+    if (!['sequential', 'random'].includes(next.strategy)) next.strategy = 'sequential';
+    if (!['10', '20', '40', 'all'].includes(String(next.count))) next.count = '20';
+    next.deckIds = (next.deckIds || []).filter(id => QUESTION_IDS.has(id));
+    next.current = Math.min(Math.max(Number(next.current) || 0, 0), Math.max(next.deckIds.length - 1, 0));
+    next.draft = sanitizeQuestionMap(next.draft);
+    next.answers = sanitizeQuestionMap(next.answers);
+    next.starred = sanitizeQuestionMap(next.starred);
+    next.history = (next.history || []).filter(item => QUESTION_IDS.has(item.id)).slice(0, 160);
+    if (!CHAPTERS.includes(next.reviewChapter) && next.reviewChapter !== 'all') next.reviewChapter = 'all';
+    if (!CHAPTERS.includes(next.errorChapter) && next.errorChapter !== 'all') next.errorChapter = 'all';
+    if (next.examMode && next.deckIds.length) next.deckSig = examDeckSignature(next.deckIds);
+    return next;
   }
 
   function saveState() {
@@ -106,6 +138,14 @@
     return Boolean(ans && ans.checked && ans.correct === true);
   }
 
+  function answerLabel(q, value, fallback = '未记录') {
+    if (value === undefined || value === null || value === '') return fallback;
+    if (q.type === 'judge') return (value === true || value === 'true') ? '对' : '错';
+    const index = Number(value);
+    if (Number.isNaN(index) || !q.options?.[index]) return fallback;
+    return `${LETTERS[index] || ''} ${q.options[index]}`.trim();
+  }
+
   function filteredQuestions() {
     const f = state.filters;
     const query = normalize(f.query);
@@ -124,11 +164,28 @@
     });
   }
 
+  function examDeckSignature(ids = state.deckIds) {
+    return `exam:${ids.join('|')}`;
+  }
+
   function deckSignature() {
-    return JSON.stringify({ filters: state.filters, strategy: state.strategy, count: state.count, examMode: state.examMode });
+    if (state.examMode) return examDeckSignature();
+    return JSON.stringify({ filters: state.filters, strategy: state.strategy, count: state.count });
   }
 
   function buildDeck(force) {
+    if (state.examMode && state.deckIds.length && !force) {
+      state.deckIds = state.deckIds.filter(id => QUESTION_IDS.has(id));
+      if (!state.deckIds.length) {
+        state.examMode = false;
+        state.deckSig = '';
+        buildDeck(true);
+        return;
+      }
+      state.current = Math.min(state.current, Math.max(state.deckIds.length - 1, 0));
+      state.deckSig = examDeckSignature();
+      return;
+    }
     const sig = deckSignature();
     if (!force && state.deckSig === sig && state.deckIds.length) return;
     let deck = filteredQuestions();
@@ -143,7 +200,7 @@
   function currentQuestion() {
     buildDeck(false);
     const id = state.deckIds[Math.min(state.current, Math.max(0, state.deckIds.length - 1))];
-    return QUESTIONS.find(q => q.id === id) || null;
+    return QUESTION_BY_ID.get(id) || null;
   }
 
   function getStats() {
@@ -174,8 +231,23 @@
     updateProgressBar();
   }
 
+  function scheduleRenderAfterInput(target) {
+    const id = target.id;
+    const cursor = target.selectionStart ?? target.value.length;
+    clearTimeout(renderTimer);
+    renderTimer = setTimeout(() => {
+      render();
+      const next = id ? document.getElementById(id) : null;
+      if (next) {
+        next.focus();
+        try { next.setSelectionRange(cursor, cursor); } catch (error) { /* search inputs may not support ranges in every browser */ }
+      }
+    }, 180);
+  }
+
   function renderHero() {
     const meta = BANK.meta;
+    const currentAffairsCount = Array.isArray(meta.currentAffairs) ? meta.currentAffairs.length : 0;
     return `
       <section class="hero">
         <div class="hero-main">
@@ -194,7 +266,7 @@
             <div class="source-list">
               <div class="source-item"><strong>${meta.questionCount} 题</strong><span>选择 ${meta.byType.choice || 0} / 判断 ${meta.byType.judge || 0} / 论述 ${meta.byType.essay || 0}</span></div>
               <div class="source-item"><strong>${meta.objectiveCount} 道客观题</strong><span>自动判分，错题自动进入复盘视图。</span></div>
-              <div class="source-item"><strong>Vercel Ready</strong><span>静态资源拆分，支持 /military-theory 短路径。</span></div>
+              <div class="source-item"><strong>${currentAffairsCount} 类时事</strong><span>对应国际战略形势、周边安全和智能化战争。</span></div>
             </div>
           </div>
         </aside>
@@ -339,7 +411,7 @@
       return `<div class="feedback"><strong>答案要点</strong><ol class="point-list">${(q.points || []).map(point => `<li>${escapeHtml(point)}</li>`).join('')}</ol></div>`;
     }
     const ok = ans.correct === true;
-    const answerText = q.type === 'judge' ? (q.answer ? '对' : '错') : `${LETTERS[q.answer]} ${q.options[q.answer]}`;
+    const answerText = answerLabel(q, q.answer);
     return `<div class="feedback ${ok ? 'good' : 'bad'}"><strong>${ok ? '回答正确' : '需要回看'}</strong><p>正确答案：${escapeHtml(answerText)}</p><p>${escapeHtml(q.explanation)}</p></div>`;
   }
 
@@ -357,7 +429,7 @@
   function renderDeckStrip() {
     if (!state.deckIds.length) return '';
     return `<div class="deck-strip" aria-label="本轮题目导航">${state.deckIds.map((id, index) => {
-      const q = QUESTIONS.find(item => item.id === id);
+      const q = QUESTION_BY_ID.get(id);
       const ans = answerOf(id);
       const cls = index === state.current ? 'active' : ans?.correct === false ? 'wrong' : ans?.checked ? 'done' : '';
       return `<button class="deck-dot ${cls}" type="button" data-action="jump-question" data-index="${index}" title="${escapeHtml(q?.point || '')}">${index + 1}</button>`;
@@ -365,7 +437,7 @@
   }
 
   function renderExam() {
-    const sample = makeMockDeck(false);
+    const sample = mockPlan();
     return `
       <section class="workspace">
         <aside class="panel sticky">
@@ -464,8 +536,8 @@
 
   function renderErrorCard(q) {
     const ans = answerOf(q.id);
-    const your = q.type === 'judge' ? (ans?.value === true || ans?.value === 'true' ? '对' : '错') : q.options[Number(ans?.value)] || '未记录';
-    const right = q.type === 'judge' ? (q.answer ? '对' : '错') : `${LETTERS[q.answer]} ${q.options[q.answer]}`;
+    const your = answerLabel(q, ans?.value);
+    const right = answerLabel(q, q.answer);
     return `<article class="error-card"><h3>${escapeHtml(q.stem)}</h3><p>你的答案：${escapeHtml(your)}；正确答案：${escapeHtml(right)}</p><p>${escapeHtml(q.explanation)}</p><div class="badges"><span class="badge">${escapeHtml(q.chapter)}</span><span class="badge">${escapeHtml(q.point)}</span><span class="badge">${escapeHtml(q.difficulty)}</span></div></article>`;
   }
 
@@ -513,21 +585,31 @@
     state.history = state.history.slice(0, 160);
   }
 
+  function mockPlan() {
+    return {
+      choice: Math.min(24, QUESTIONS.filter(q => q.type === 'choice').length),
+      judge: Math.min(10, QUESTIONS.filter(q => q.type === 'judge').length),
+      essay: Math.min(3, QUESTIONS.filter(q => q.type === 'essay').length)
+    };
+  }
+
   function makeMockDeck(apply) {
-    const choices = shuffle(QUESTIONS.filter(q => q.type === 'choice')).slice(0, 24);
-    const judges = shuffle(QUESTIONS.filter(q => q.type === 'judge')).slice(0, 10);
-    const essays = shuffle(QUESTIONS.filter(q => q.type === 'essay')).slice(0, 3);
+    const plan = mockPlan();
+    const choices = shuffle(QUESTIONS.filter(q => q.type === 'choice')).slice(0, plan.choice);
+    const judges = shuffle(QUESTIONS.filter(q => q.type === 'judge')).slice(0, plan.judge);
+    const essays = shuffle(QUESTIONS.filter(q => q.type === 'essay')).slice(0, plan.essay);
     const ids = shuffle([...choices, ...judges, ...essays]).map(q => q.id);
     if (apply) {
       state.view = 'practice';
       state.examMode = true;
+      state.filters = { ...defaultState.filters };
       state.deckIds = ids;
       state.current = 0;
-      state.deckSig = deckSignature();
+      state.deckSig = examDeckSignature(ids);
       saveState();
       render();
     }
-    return { choice: choices.length, judge: judges.length, essay: essays.length, ids };
+    return { ...plan, ids };
   }
 
   function setFilter(name, value) {
@@ -592,8 +674,8 @@
     lines.push('', '## 错题列表', '');
     wrong.forEach((q, index) => {
       const ans = answerOf(q.id);
-      const your = q.type === 'judge' ? (ans.value === true || ans.value === 'true' ? '对' : '错') : q.options[Number(ans.value)] || '未记录';
-      const right = q.type === 'judge' ? (q.answer ? '对' : '错') : q.options[q.answer];
+      const your = answerLabel(q, ans?.value);
+      const right = answerLabel(q, q.answer);
       lines.push(`### ${index + 1}. ${q.point}`);
       lines.push(`- 章节：${q.chapter}`);
       lines.push(`- 题干：${q.stem}`);
@@ -658,7 +740,7 @@
     if (action === 'drill-chapter') { state.view = 'practice'; state.filters.chapter = actionBtn.dataset.chapter; state.filters.scope = 'all'; state.examMode = false; state.deckSig = ''; buildDeck(true); render(); }
     if (action === 'toggle-mastered') { const key = actionBtn.dataset.key; state.mastered[key] = !state.mastered[key]; saveState(); render(); }
     if (action === 'download-review') downloadMarkdown();
-    if (action === 'clear-progress') { if (confirm('确认清空军理刷题记录？')) { state = structuredClone(defaultState); saveState(); render(); } }
+    if (action === 'clear-progress') { if (confirm('确认清空军理刷题记录？')) { state = cloneDefaultState(); saveState(); render(); } }
   });
 
   document.addEventListener('change', event => {
@@ -676,12 +758,12 @@
       state.examMode = false;
       state.deckSig = '';
       saveState();
-      render();
+      scheduleRenderAfterInput(event.target);
     }
     if (event.target.dataset.reviewQuery !== undefined) {
       state.reviewQuery = event.target.value;
       saveState();
-      render();
+      scheduleRenderAfterInput(event.target);
     }
     if (event.target.dataset.essay) {
       state.draft[event.target.dataset.essay] = event.target.value;
@@ -690,6 +772,12 @@
   });
 
   document.addEventListener('keydown', event => {
+    if (event.target.matches('input[type="search"]') && event.key === 'Enter') {
+      event.preventDefault();
+      clearTimeout(renderTimer);
+      render();
+      return;
+    }
     if (event.target.matches('input, textarea, select')) return;
     const q = currentQuestion();
     if (!q) return;

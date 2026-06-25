@@ -427,7 +427,7 @@
     {
       "type": "Quiz Platform",
       "title": "军事理论刷题平台",
-      "detail": "基于军理期末提纲重做为静态刷题平台，支持题库筛选、模拟卷、复习地图、错题本和复盘导出。",
+      "detail": "整合军理提纲、复习重点、历年题库和 2026-06-25 时事补充；支持题库筛选、模拟卷、复习地图、错题本和复盘导出。",
       "href": "assets/quizzes/military-theory-final-review.html",
       "notePath": "content/knowledge/课程/军事理论期末刷题记录.md"
     },
