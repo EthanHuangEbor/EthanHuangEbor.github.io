@@ -81,23 +81,6 @@
   "projects": [
     {
       "time": "2026.06",
-      "name": "MTA-VHEP 变循环混合电推进概念设计",
-      "type": "航空发动机总体设计 / 概念仿真",
-      "status": "V0.2 completed",
-      "problem": "面向中型运输机任务，探索三涵道变循环涡扇与短时混合电推进组合的总体设计可行性，需要在概念设计阶段保持假设、物理趋势和输出表格可追溯。",
-      "solution": "搭建从构型、标准大气、燃油 / 气动、发动机代理模型、混合电系统、航程任务求解到约束检查和敏感性分析的 Python 仿真链路。",
-      "result": "完成端到端概念链和 225 组敏感性分析，可生成报告级表格与图像，用于说明设计变量对任务与推进指标的影响。",
-      "stack": [
-        "Python",
-        "YAML",
-        "Mission Solver",
-        "Propulsion",
-        "Sensitivity Study"
-      ],
-      "repo": "https://github.com/EthanHuangEbor/AeroEngineDesign_BasedOnAI"
-    },
-    {
-      "time": "2026.06",
       "name": "NASA C-MAPSS RUL Prediction",
       "type": "航空发动机健康管理 / 剩余寿命预测",
       "status": "research workflow",
@@ -113,6 +96,23 @@
         "Safety Metrics"
       ],
       "repo": "https://github.com/EthanHuangEbor/Cmaps_RULE"
+    },
+    {
+      "time": "2026.06",
+      "name": "MTA-VHEP 变循环混合电推进概念设计",
+      "type": "航空发动机总体设计 / 概念仿真",
+      "status": "V0.2 completed",
+      "problem": "面向中型运输机任务，探索三涵道变循环涡扇与短时混合电推进组合的总体设计可行性，需要在概念设计阶段保持假设、物理趋势和输出表格可追溯。",
+      "solution": "搭建从构型、标准大气、燃油 / 气动、发动机代理模型、混合电系统、航程任务求解到约束检查和敏感性分析的 Python 仿真链路。",
+      "result": "完成端到端概念链和 225 组敏感性分析，可生成报告级表格与图像，用于说明设计变量对任务与推进指标的影响。",
+      "stack": [
+        "Python",
+        "YAML",
+        "Mission Solver",
+        "Propulsion",
+        "Sensitivity Study"
+      ],
+      "repo": "https://github.com/EthanHuangEbor/AeroEngineDesign_BasedOnAI"
     },
     {
       "time": "2026.05",
