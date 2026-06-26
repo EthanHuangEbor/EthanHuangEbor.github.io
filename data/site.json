@@ -98,20 +98,21 @@
     },
     {
       "time": "2026.06",
-      "name": "AutoDoc 项目书自动填写系统",
-      "type": "工程工具 / 本地 Web 应用",
-      "status": "active",
-      "problem": "中文项目书、合作培养项目书和表格类文档存在大量重复填写、模板维护和历史信息复用问题，普通用户也不适合直接接触命令行或 JSON 配置。",
-      "solution": "实现本地 Web 工作台：以向导式流程采集项目信息，生成草稿，人工编辑字段，导出 Word，并把确认后的终稿内容沉淀到本地记忆库。",
-      "result": "支持模板管理、历史记录、Word 导出和本地安全边界；默认绑定 127.0.0.1，数据保存在用户本机，适合作为面向真实用户的工程工具项目展示。",
+      "name": "NASA C-MAPSS RUL Prediction",
+      "type": "航空发动机健康管理 / 剩余寿命预测",
+      "status": "research workflow",
+      "problem": "面向 NASA C-MAPSS 涡扇发动机退化数据集，单纯比较整体 RMSE 难以说明模型在临近失效阶段、跨子集迁移和维修触发决策中的可靠性。",
+      "solution": "搭建可复现实验框架，对 Ridge、Random Forest、Gradient Boosting、LSTM、GRU、1D-CNN 等模型进行基线对比，并加入 critical-zone RMSE、NASA S-score、过度乐观预测、不确定性、传感器鲁棒性和维修决策模拟评估。",
+      "result": "形成从数据预处理、模型训练、多种子实验、消融分析、图表生成到论文材料整理的研究流水线；当前定位为安全感知的 RUL benchmarking workflow，而不是声称提出新的 SOTA 架构。",
       "stack": [
         "Python",
-        "Streamlit",
-        "DOCX",
-        "Local Memory",
-        "Windows Launcher"
+        "PyTorch",
+        "scikit-learn",
+        "C-MAPSS",
+        "RUL Prediction",
+        "Safety Metrics"
       ],
-      "repo": "https://github.com/EthanHuangEbor/AutoDoc"
+      "repo": "https://github.com/EthanHuangEbor/Cmaps_RULE"
     },
     {
       "time": "2026.05",
