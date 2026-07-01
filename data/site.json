@@ -426,6 +426,13 @@
       "notePath": "content/knowledge/课程/工程热力学/工程热力学.md"
     },
     {
+      "type": "Course Pack",
+      "title": "数学物理",
+      "detail": "收录完整历年例题 PDF，作为数学物理复习资料入口，后续可继续拆成题型和方法节点。",
+      "href": "assets/materials/mathematical-physics/math-phys-review-full-past-examples.pdf",
+      "notePath": "content/knowledge/课程/数学物理.md"
+    },
+    {
       "type": "Quiz Platform",
       "title": "军事理论刷题平台",
       "detail": "整合军理提纲、复习重点、历年题库、2026 时事补充和 PDF 增强题库；支持选择、判断、填空、论述、模拟卷和错题复盘。",

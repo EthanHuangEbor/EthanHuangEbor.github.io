@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-25T09:25:39.590Z",
+  "generatedAt": "2026-07-01T01:52:40.602Z",
   "stats": {
-    "nodes": 19,
-    "links": 63,
+    "nodes": 20,
+    "links": 65,
     "unresolved": 0,
     "domains": 5,
-    "tags": 66
+    "tags": 69
   },
   "records": [
     {
@@ -1074,6 +1074,43 @@
       "wordCount": 1177
     },
     {
+      "path": "content/knowledge/课程/数学物理.md",
+      "folderPath": "课程",
+      "fileName": "数学物理.md",
+      "slug": "课程/数学物理",
+      "title": "数学物理",
+      "date": "2026-07-01",
+      "updated": "",
+      "status": "active",
+      "domain": "课程",
+      "tags": [
+        "数学物理",
+        "期末复习",
+        "历年例题",
+        "课程资料"
+      ],
+      "summary": "数学物理复习资料入口，先收录完整历年例题 PDF，后续可继续拆分为方程、特殊函数、积分变换和边值问题节点。",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "数学物理"
+        },
+        {
+          "depth": 2,
+          "text": "资料入口"
+        },
+        {
+          "depth": 2,
+          "text": "后续拆分方向"
+        }
+      ],
+      "wikilinks": [
+        "学习笔记沉淀流程",
+        "概率统计"
+      ],
+      "wordCount": 366
+    },
+    {
       "path": "content/knowledge/阅读/刻意练习.md",
       "folderPath": "阅读",
       "fileName": "刻意练习.md",
@@ -1464,6 +1501,16 @@
       "label": "LLM-Wiki 与个人知识图谱"
     },
     {
+      "source": "content/knowledge/课程/数学物理.md",
+      "target": "content/knowledge/个人成长/学习笔记沉淀流程.md",
+      "label": "学习笔记沉淀流程"
+    },
+    {
+      "source": "content/knowledge/课程/数学物理.md",
+      "target": "content/knowledge/课程/概率统计.md",
+      "label": "概率统计"
+    },
+    {
       "source": "content/knowledge/阅读/刻意练习.md",
       "target": "content/knowledge/课程/工程热力学/工程热力学.md",
       "label": "工程热力学"
@@ -1744,6 +1791,19 @@
               "时事"
             ],
             "domain": "课程"
+          },
+          {
+            "type": "file",
+            "name": "数学物理.md",
+            "title": "数学物理",
+            "path": "content/knowledge/课程/数学物理.md",
+            "tags": [
+              "数学物理",
+              "期末复习",
+              "历年例题",
+              "课程资料"
+            ],
+            "domain": "课程"
           }
         ]
       },
@@ -1786,11 +1846,11 @@
       "count": 10
     },
     {
-      "name": "航空发动机",
-      "count": 3
+      "name": "期末复习",
+      "count": 4
     },
     {
-      "name": "期末复习",
+      "name": "航空发动机",
       "count": 3
     },
     {
@@ -2018,6 +2078,18 @@
       "count": 1
     },
     {
+      "name": "数学物理",
+      "count": 1
+    },
+    {
+      "name": "历年例题",
+      "count": 1
+    },
+    {
+      "name": "课程资料",
+      "count": 1
+    },
+    {
       "name": "阅读",
       "count": 1
     },
@@ -2049,7 +2121,7 @@
   "domains": [
     {
       "name": "课程",
-      "count": 12
+      "count": 13
     },
     {
       "name": "个人成长",

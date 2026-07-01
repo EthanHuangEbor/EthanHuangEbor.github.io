@@ -67,14 +67,15 @@ function parseFrontmatter(raw) {
     const lines = match[1].split(/\r?\n/);
     let currentKey = null;
     for (const line of lines) {
-      if (!line.trim() || line.trim().startsWith('#')) continue;
-      const keyValue = line.match(/^([A-Za-z0-9_\-\u4e00-\u9fff]+):\s*(.*)$/);
+      const cleanLine = line.replace(/\r$/, '');
+      if (!cleanLine.trim() || cleanLine.trim().startsWith('#')) continue;
+      const keyValue = cleanLine.match(/^([A-Za-z0-9_\-\u4e00-\u9fff]+):\s*(.*)$/);
       if (keyValue) {
         currentKey = keyValue[1];
         meta[currentKey] = parseScalar(keyValue[2] ?? '');
         continue;
       }
-      const listItem = line.match(/^\s*-\s+(.*)$/);
+      const listItem = cleanLine.match(/^\s*-\s+(.*)$/);
       if (listItem && currentKey) {
         if (!Array.isArray(meta[currentKey])) meta[currentKey] = [];
         meta[currentKey].push(parseScalar(listItem[1]));
